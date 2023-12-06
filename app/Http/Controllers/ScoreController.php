@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Models\Score;
+use App\Models\Player;
 
 class ScoreController extends Controller
 {
@@ -24,9 +25,15 @@ class ScoreController extends Controller
         
         $totalScore = $totalScore->sortByDesc('total_score')->values();
 
+        $playerScores = Player::orderBy('score', 'desc')
+                    ->join('team', 'player.team', '=', 'team.id')
+                    ->select('player.*', 'team.logo AS team_logo', 'team.team_name AS team_name')
+                    ->get();
+
         return view ('scoreboard.main-score')->with([
             'games' => $games,
-            'totalScore' => $totalScore
+            'totalScore' => $totalScore,
+            'playerScores' => $playerScores
         ]);
     }
 
