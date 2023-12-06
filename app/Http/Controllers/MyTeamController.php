@@ -115,11 +115,12 @@ class MyTeamController extends Controller
         else if ($id == 1){
 
             $requestData = $request->all();
+            // return $requestData;
 
 
             // Check for null values in the request data
             foreach ($requestData as $key => $value) {
-                if ($value === null || $value === '+') {
+                if ($value === '+') {
                     // Return an error response indicating that a null value is not allowed
                     return back()->withError('There\'s an error to set your team. Please try again. If similar error occurs, contact admin.');
                 }
@@ -199,8 +200,30 @@ class MyTeamController extends Controller
 
             $game = Game::find($request->input('game_id'));
             $myTeam = MyTeam::find($request->input('myTeam_id'));
+            $players = Player::join('team', 'player.team', '=', 'team.id')
+                        ->select('player.*', 'team.team_name as team_name')
+                        ->get();
             $selectedPlayersCount = 0;
             
+            $requestData = $request->all();
+
+
+            // Check for null values in the request data
+            foreach ($requestData as $key => $value) {
+                if ($value === '+') {
+                    // Return an error response indicating that a null value is not allowed
+                    // return back()->withError('There\'s an error to set your team. Please try again. If similar error occurs, contact admin.');
+                    // return back()->withError('')->withInput();
+                    toastr()->error('Please select '. $game->reserve_limit .' reserves !');
+                    return view ("league.select-reserve")->with([
+                        'game' => $game,
+                        'players' => $players,
+                        'myTeam' => $myTeam
+                    ]);
+
+                }
+            }
+
             for ($reserveKey = 0; $reserveKey < 5; $reserveKey++) {
                 $inputKey = 'reserveID' . $reserveKey;
                 $inputValue = $request->input($inputKey);
@@ -225,9 +248,7 @@ class MyTeamController extends Controller
             // Save the changes to the $myTeam model
             $myTeam->save();
 
-            $players = Player::join('team', 'player.team', '=', 'team.id')
-                        ->select('player.*', 'team.team_name as team_name')
-                        ->get();
+            
             
             return view ("league.team-submission")->with([
                     'game' => $game,

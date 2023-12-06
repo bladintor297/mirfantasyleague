@@ -62,7 +62,7 @@
                                             style="background-image: url('{{ $myTeam->{$roleValue} ? $players->where('id', $myTeam->{$roleValue})->first()->picture : '' }}'); background-size: cover;">
                                                 <input name="playerName{{$roleKey}}" class="btn btn-link text-warning stretched-link openModalButton"
                                                 data-index="{{ $roleKey }}"
-                                                value="{{ isset($myTeam->{$roleValue}) ? $players->where('id', $myTeam->{$roleValue})->first()->name : '+' }}">
+                                                value="{{ isset($myTeam->{$roleValue}) ? $players->where('id', $myTeam->{$roleValue})->first()->name : '' }}" placeholder="+">
                                                 <input type="hidden" name="playerID{{$roleKey}}" id="playerID" value="{{ $myTeam->{$roleValue} ?? '+' }}">
                                                 <input
                                                     type="hidden"

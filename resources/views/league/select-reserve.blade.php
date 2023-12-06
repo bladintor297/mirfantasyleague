@@ -54,25 +54,9 @@
                                 @foreach($reserveRoles as $reserveKey => $reserveValue)
                                     <div class="col">
                                         <div class="card card-hover" style="height: 300px; width: 150px">
-                                            @php
-                                                $fileId = null;
-
-                                                if (isset($myTeam->{'Reserve_' . ($reserveKey + 1)})) {
-                                                    $linkEscaped = $players->where('id', $myTeam->{'Reserve_' . ($reserveKey + 1)})->first()->picture;
-
-                                                    // Extract file ID from the original link
-                                                    preg_match('/\/d\/([^\/]+)\//', $linkEscaped, $matches);
-                                                    $fileId = $matches[1];
-
-                                                    // Construct the direct access link
-                                                    $directAccessLink = "https://drive.google.com/uc?id=" . $fileId;
-
-                                                    
-                                                }
-                                            @endphp
 
                                             <div class="card-body d-grid align-items-center justify-content-center" id="cardBody{{ $reserveKey }}"
-                                            style="background-image: url('{{ $fileId ? $directAccessLink : '' }}'); background-size: cover;">
+                                            style="background-image: url('{{  isset($myTeam->{'Reserve_' . ($reserveKey + 1)}) ? $players->where('id', $myTeam->{'Reserve_' . ($reserveKey + 1)})->first()->picture : '' }}'); background-size: cover;">
                                                 <input name="reserveName{{$reserveKey}}" class="btn btn-link text-warning stretched-link openReserveModalButton" data-index="{{ $reserveKey }}"
                                                 value="{{ isset($myTeam->{'Reserve_' . ($reserveKey + 1)}) ? $players->where('id', $myTeam->{'Reserve_' . ($reserveKey + 1)})->first()->name : '+' }}">
 
@@ -180,19 +164,7 @@
                     const select = document.getElementById('reserveSelect' + index);
                     const selectedOption = select.options[select.selectedIndex];
                     const reserveIDInput = document.getElementById('reserveID' + index);
-                    const originalLink = selectedOption.getAttribute('data-card');
-                    // Function to convert the original link to direct access link
-                    function getDirectAccessLink(originalLink) {
-                        // Extract file ID from the original link
-                        var fileId = originalLink.match(/\/d\/([^\/]+)\//)[1];
-
-                        // Construct the direct access link
-                        var directAccessLink = "https://drive.google.com/uc?id=" + fileId;
-
-                        return directAccessLink;
-                    }
-
-                    
+                    const directAccessLink = selectedOption.getAttribute('data-card');
 
                     // Update the value of the linked input in the main form
                     const linkedInput = document.querySelector('input[name="reserveName' + index + '"]');
@@ -201,9 +173,6 @@
                     linkedInput.value = selectedOption.text.split(' (')[0];
                     reserveIDInput.value = selectedOption.value;
                     
-                    // Get the direct access link
-                    var directAccessLink = getDirectAccessLink(originalLink);
-
                     cardBody.style.backgroundImage = 'url("' + directAccessLink + '")';
 
                     // You might want to update other hidden fields as well (e.g., reserveID)
