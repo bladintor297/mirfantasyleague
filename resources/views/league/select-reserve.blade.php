@@ -63,7 +63,7 @@
                                                 <input type="hidden" name="reserveID{{$reserveKey}}" id="reserveID{{$reserveKey}}">
                                             </div>
                                             <div class="card-footer text-white text-center">
-                                                {{ $reserveValue }} {{ $reserveKey }}
+                                                {{ $reserveValue }} 
                                             </div>
                                         </div>
                                     </div>
@@ -73,10 +73,10 @@
                                             <span class="close" id="closeReserveModal{{$reserveKey}}">&times;</span>
                                             <p>-Please Select Your Reserve-</p>
                                             
-                                            <select name="reserve" id="reserveSelect{{$reserveKey}}" class="form-select">
+                                            <select name="reserveSelect" id="reserveSelect{{$reserveKey}}" class="form-select">
                                                 <option value="0" disabled selected> - Choose Reserve -</option>
                                                     @foreach($players as $reserve)
-                                                        @if ($reserve->status == 1)
+                                                        @if ( ($reserve->status == 1) && $reserve->role == $reserveKey)
                                                             <option value="{{ $reserve->id }}" data-role="{{ $reserve->role }}" data-card="{{ $reserve->picture }}"
                                                                 data-nationality="{{ $reserve->nationality }}" data-team="{{ $reserve->team }}">{{ $reserve->name }} ({{ $reserveRoles[$reserve->role] }}) -- <em>{{ $reserve->team_name }}</em>
                                                             </option>
@@ -116,7 +116,6 @@
         </div>
     </div>
 </section>
-
 <script>
     // Store scroll position before reload
     window.onbeforeunload = function () {
