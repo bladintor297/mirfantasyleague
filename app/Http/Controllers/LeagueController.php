@@ -90,10 +90,13 @@ class LeagueController extends Controller
         }
 
         else{
-            $scores = Score::selectRaw('*, (day1 + day2 + day3) as total_score')
+            $scores = Score::selectRaw('*, (day1 + day2 + day3 + day4 + day5 + day6) as total_score')
                     ->join('users', 'users.id', '=', 'score.user_id')
                     ->orderBy('total_score', 'desc')
-                    ->get(['score.*', 'users.username', 'users.team_name', 'users.id AS userid' ]);
+                    ->get(['score.*', 'users.username', 'users.team_name', 'users.id AS userid', 'users.team_logo']);
+        
+            $scores = $scores->sortByDesc('total_score')->values();
+
             $games = Game::leftJoin('league', 'game.league_id', '=', 'league.id')
                     ->select(['game.*', 'league.league_name as league_name'])
                     ->get();

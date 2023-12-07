@@ -8,6 +8,7 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ImportExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,11 +53,9 @@ use App\Http\Controllers\ProfileController;
         return view('prize.main-prize');
     });
 
-   
-    Route::post('/scores/upload-excel', [ScoreController::class, 'uploadExcel'])->name('scores.upload-excel');
+    Route::post('/scores-import', [ScoreController::class, 'import'])->name('scores.import');
     
     // Resource Controllers
-
     Route::resources([
         'league' => LeagueController::class,
         'team' => TeamController::class,
@@ -66,4 +65,9 @@ use App\Http\Controllers\ProfileController;
         'scoreboard' => ScoreController::class,
     ]);
 
+    Route::controller(ImportExportController::class)->group(function(){
+        Route::get('import_export', 'importExport');
+        Route::post('import', 'import')->name('import');
+        Route::get('export', 'export')->name('export');
+    });
     

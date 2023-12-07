@@ -7,6 +7,9 @@ use App\Models\Game;
 use App\Models\Score;
 use App\Models\Player;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ScoresImport;
+
 class ScoreController extends Controller
 {
     /**
@@ -139,5 +142,13 @@ class ScoreController extends Controller
         Excel::import(new ScoreImport, $file);
 
         return redirect()->route('your.route')->with('success', 'Excel file imported successfully.');
+    }
+
+
+    public function import()
+    {
+        Excel::import(new ScoresImport, request()->file('file'));
+        
+        return back();
     }
 }

@@ -15,13 +15,19 @@
                 </div>
             </div>
 
-            <form action="{{ route('scores.upload-excel')  }}" method="post" enctype="multipart/form-data">
+            
+            <form action="{{ route('import') }}" method="POST" name="importform" class="d-flex justify-content-end my-3" enctype="multipart/form-data">
                 @csrf
-                <div class="mb-3">
-                    <label for="excel_file" class="form-label">Upload Excel File</label>
-                    <input type="file" class="form-control" id="excel_file" name="excel_file" accept=".xlsx, .xls">
+                <div class="d-flex rounded bg-dark">
+                    <div class="form-group">
+                        <input id="file" type="file" name="file" class="form-control" >
+                    </div>
+                    <button class="btn btn-success">Import File</button>
                 </div>
-                <button type="submit" class="btn btn-primary">Import Excel</button>
+
+                {{-- <div class="form-group">
+                    <a class="btn btn-info" href="{{ route('export') }}">Export File</a>
+                </div>  --}}
             </form>
             <!-- Dark bordered table -->
             <div class="table-responsive">

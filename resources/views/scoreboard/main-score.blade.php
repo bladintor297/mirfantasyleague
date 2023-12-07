@@ -29,7 +29,8 @@
                             <a class="nav-link rounded-pill px-4" data-bs-toggle="tab" href="#players">Players</a>
                         </li>
                     </ul>
-                    <h2 class="display-2 mb-4">Scoreboard</h2>
+                    <h2 class="display-2">Scoreboard</h2>
+                    <p class="text-muted mb-4">Updated at: {{ date('F j, Y, G:i:s ', strtotime($totalScore[0]->updated_at )); }} MYT</p>
                     <div class="row d-flex justify-content-center my-2">
                         <div class="col-8">
                             <select name="" id="" class="form-select mb-3">
