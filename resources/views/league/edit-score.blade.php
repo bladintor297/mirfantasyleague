@@ -15,24 +15,36 @@
                 </div>
             </div>
 
-            
-            <form action="{{ route('import') }}" method="POST" name="importform" class="d-flex justify-content-end my-3" enctype="multipart/form-data">
-                @csrf
-                <div class="d-flex rounded bg-dark">
-                    <div class="form-group">
-                        <input id="file" type="file" name="file" class="form-control" >
+            <div class="d-flex justify-content-end my-3">
+                <form action="score/" id="filter-game"  >
+                    <select name="game" id="game" class="form-select bg-dark" >
+                        @foreach ($games as $game)
+                            <option class="text-white" value="{{ $game->id }}">{{ $game->name }}</option>
+                        @endforeach
+                    </select>
+                </form>
+                <form action="{{ route('import') }}" method="POST" name="importform" class="d-flex justify-content-end mx-1" enctype="multipart/form-data">
+                    @csrf
+                    <div class="d-flex rounded bg-dark">
+                        <div class="form-group">
+                            <input id="file" type="file" name="file" class="form-control" >
+                        </div>
+                        <button class="btn btn-success">Import File</button>
                     </div>
-                    <button class="btn btn-success">Import File</button>
-                </div>
+    
+                    {{-- <div class="form-group">
+                        <a class="btn btn-info" href="{{ route('export') }}">Export File</a>
+                    </div>  --}}
+                </form>
+                
 
-                {{-- <div class="form-group">
-                    <a class="btn btn-info" href="{{ route('export') }}">Export File</a>
-                </div>  --}}
-            </form>
+            </div>
+            
+            
             <!-- Dark bordered table -->
             <div class="table-responsive">
                 
-                <form action="{{ route('scoreboard.update', ['scoreboard' => 1]) }}" method="post">
+                <form action="{{ route('score.update', ['score' => 1]) }}" method="post">
                     @csrf
                     @method('PUT')
                     <table class="table table-dark table-bordered">
@@ -92,4 +104,15 @@
             </div>
         </div>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#game').change(function () {
+                var selectedGameId = $(this).val();
+                var newAction = selectedGameId;
+                $('#filter-game').attr('action', newAction);
+                window.location.href = newAction;
+            });
+        });
+    </script>
 @endsection

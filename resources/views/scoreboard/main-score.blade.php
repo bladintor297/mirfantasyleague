@@ -30,25 +30,28 @@
                         </li>
                     </ul>
                     <h2 class="display-2">Scoreboard</h2>
-                    <p class="text-muted mb-4">Updated at: {{ date('F j, Y, G:i:s ', strtotime($totalScore[0]->updated_at )); }} MYT</p>
+                    <p class="text-muted mb-4">Updated at:
+                        @if (count($totalScore)>0)
+                            {{ date('F j, Y, G:i:s ', strtotime($totalScore[0]->updated_at )); }}
+                        @endif
+                        MYT</p>
                     <div class="row d-flex justify-content-center my-2">
                         <div class="col-8">
-                            <select name="" id="" class="form-select mb-3">
-                                <option class="form-select" value="0" disabled>Select Option</option>
-
-                                @foreach ($games as $game)
-                                    <option class="form-select" value="{{ $game->id }}" {{ $game->id == 2 ? 'selected' : '' }} {{ $game->id == 1 ? '' : 'disabled' }}>
-                                        {{ $game->name }} -- <em>{{ $game->league_name }}</em>
-                                    </option>
-                                @endforeach
-
-                            </select>
+                            <form action="score/" id="filter-game">
+                                <select name="game" id="game" class="form-select mb-3">
+    
+                                    @foreach ($games as $game)
+                                        <option class="form-select" value="{{ $game->id }}"  >
+                                            {{ $game->name }} -- <em>{{ $game->league_name }}</em>
+                                        </option>
+                                    @endforeach
+    
+                                </select>
+                            </form>
                             <div class="input-group mt-5">
                                 <!-- Add this input field above your table -->
                                 <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by username">
                             </div>
-                            
-
                         </div>
                     </div>
 
@@ -79,93 +82,102 @@
                                         </tr>
                                     </thead>
                                     <tbody class="tbody">
-                                        <!-- Row 1 -->
-                                        <tr data-aos="flip-up" data-aos-anchor-placement="center-center" class="user-row">
-                                            <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4 mb-0 ps-3">#1</td>
-                                            <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
-                                                <div class="d-flex align-items-center">
-                                                    <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
-                                                        style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
-                                                    <div class="ps-3">
-                                                        <h3 class="h2 mb-0">{{ $totalScore[0]->total_score }}
-                                                            <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h2 user-username">
-                                                {{ $totalScore[0]->username }} </td>
-                                            <td class="d-lg-table-cell h2 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                                <img src="{{ asset('public/assets/img/profile/' . $totalScore[0]->team_logo) }}" class="rounded-circle ms-2 object-cover"
-                                                    style="width: 48px; height: 48px; object-fit: cover" alt="Bitcoin">
-                                                <span>{{ $totalScore[0]->team_name }}</span>
-                                            </td>
-                                            <td class="d-lg-table-cell text-lg-center border-bottom-lg pt-2 pb-3 py-lg-4">
-                                                <button type="button" class="btn btn-lg btn-outline-warning fs-sm w-100 w-lg-auto fs-3 py-1">View
-                                                    Profile</button>
-
-                                                    <!-- Default modal -->
-                                                    <div class="modal fade" id="modalId" tabindex="-1" role="dialog">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                ...
-                                                            </div>
-                                                        </div>
-                                                    </div>
-  
-                                            </td>
-                                        </tr>
-                            
-                                        <!-- Rows 2 and onwards -->
-                                        @for ($i = 1; $i < count($totalScore); ++$i)
-                                            <tr data-aos="fade-up" data-aos-anchor-placement="center-center" class="user-row">
-                                                <td class="d-lg-table-cell align-middle h4 border-bottom py-3 py-lg-4 mb-0 ps-3">#{{ $i+1 }}</td>
+                                        @if (count($totalScore)>0)
+                                            <!-- Row 1 -->
+                                            <tr data-aos="flip-up" data-aos-anchor-placement="center-center" class="user-row">
+                                                <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4 mb-0 ps-3">#1</td>
                                                 <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
                                                     <div class="d-flex align-items-center">
                                                         <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
                                                             style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
                                                         <div class="ps-3">
-                                                            <h3 class="h2 mb-0">{{ $totalScore[$i]->total_score }}
+                                                            <h3 class="h2 mb-0">{{ $totalScore[0]->total_score }}
                                                                 <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
                                                             </h3>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
-                                                    {{ $totalScore[$i]->username }} </td>
-                                                <td class="d-lg-table-cell h4 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                                    <img src="{{ asset('public/assets/img/profile/' . $totalScore[$i]->team_logo) }}" class="rounded-circle ms-2 object-cover"
-                                                        style="width: 32px; height: 32px; object-fit: cover" alt="{{ $totalScore[$i]->username }}">
-                                                    {{ $totalScore[$i]->team_name }}
+                                                <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h2 user-username">
+                                                    {{ $totalScore[0]->username }} </td>
+                                                <td class="d-lg-table-cell h2 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
+                                                    <img src="{{ asset('public/assets/img/profile/' . $totalScore[0]->team_logo) }}" class="rounded-circle ms-2 object-cover"
+                                                        style="width: 48px; height: 48px; object-fit: cover" alt="Bitcoin">
+                                                    <span>{{ $totalScore[0]->team_name }}</span>
                                                 </td>
-                                                <td class="d-lg-table-cell border-bottom-lg text-lg-center pt-2 pb-3 py-lg-4 my-auto">
-                                                    <button type="button" class="btn btn-sm btn-outline-warning fs-sm w-100 w-lg-auto">View
+                                                <td class="d-lg-table-cell text-lg-center border-bottom-lg pt-2 pb-3 py-lg-4">
+                                                    <button type="button" class="btn btn-lg btn-outline-warning fs-sm w-100 w-lg-auto fs-3 py-1">View
                                                         Profile</button>
+
+                                                        <!-- Default modal -->
+                                                        <div class="modal fade" id="modalId" tabindex="-1" role="dialog">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    ...
+                                                                </div>
+                                                            </div>
+                                                        </div>
+    
                                                 </td>
                                             </tr>
-
-                                            @if (Auth::check() && $totalScore[$i]->user_id == Auth::user()->id)
-
-                                            <div class="d-flex justify-content-end fixed-bottom fixed-right mb-4 me-3 my-rank">
-                                                <div class="card bg-white border border-warning border-3 px-4 shadow ">
-                                                    <div class="position-relative d-flex align-items-center py-2 my-1">
-                                                        <div class="position-relative flex-shrink-0 p-3">
-                                                            <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle bg-faded-warning"></span>
-                                                            <span class="position-relative d-flex zindex-2">
-                                                                <i class='bx bx-medal text-warning' style="font-size: 40px"></i>
-                                                            </span>
+                                
+                                            <!-- Rows 2 and onwards -->
+                                            @for ($i = 1; $i < count($totalScore); ++$i)
+                                                <tr data-aos="fade-up" data-aos-anchor-placement="center-center" class="user-row">
+                                                    <td class="d-lg-table-cell align-middle h4 border-bottom py-3 py-lg-4 mb-0 ps-3">#{{ $i+1 }}</td>
+                                                    <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
+                                                        <div class="d-flex align-items-center">
+                                                            <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
+                                                                style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
+                                                            <div class="ps-3">
+                                                                <h3 class="h2 mb-0">{{ $totalScore[$i]->total_score }}
+                                                                    <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
+                                                                </h3>
+                                                            </div>
                                                         </div>
-                                                        <div class="nav flex-column ps-3 text-start">
-                                                            <div class="nav-link p-0 text-muted">My Rank: <span class="text-warning fs-lg">#{{ $i+1 }}</span></div>
-                                                            <div class="h5 my-0 py-0"><span class="fw-bold">{{ $totalScore[$i]->username }} </span><em>({{ $totalScore[$i]->total_score }} pts)</em></div>
+                                                    </td>
+                                                    <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
+                                                        {{ $totalScore[$i]->username }} </td>
+                                                    <td class="d-lg-table-cell h4 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
+                                                        <img src="{{ asset('public/assets/img/profile/' . $totalScore[$i]->team_logo) }}" class="rounded-circle ms-2 object-cover"
+                                                            style="width: 32px; height: 32px; object-fit: cover" alt="{{ $totalScore[$i]->username }}">
+                                                        {{ $totalScore[$i]->team_name }}
+                                                    </td>
+                                                    <td class="d-lg-table-cell border-bottom-lg text-lg-center pt-2 pb-3 py-lg-4 my-auto">
+                                                        <button type="button" class="btn btn-sm btn-outline-warning fs-sm w-100 w-lg-auto">View
+                                                            Profile</button>
+                                                    </td>
+                                                </tr>
+
+                                                @if (Auth::check() && $totalScore[$i]->user_id == Auth::user()->id)
+
+                                                <div class="d-flex justify-content-end fixed-bottom fixed-right mb-4 me-3 my-rank">
+                                                    <div class="card bg-white border border-warning border-3 px-4 shadow ">
+                                                        <div class="position-relative d-flex align-items-center py-2 my-1">
+                                                            <div class="position-relative flex-shrink-0 p-3">
+                                                                <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle bg-faded-warning"></span>
+                                                                <span class="position-relative d-flex zindex-2">
+                                                                    <i class='bx bx-medal text-warning' style="font-size: 40px"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="nav flex-column ps-3 text-start">
+                                                                <div class="nav-link p-0 text-muted">My Rank: <span class="text-warning fs-lg">#{{ $i+1 }}</span></div>
+                                                                <div class="h5 my-0 py-0"><span class="fw-bold">{{ $totalScore[$i]->username }} </span><em>({{ $totalScore[$i]->total_score }} pts)</em></div>
+                                                            </div>
                                                         </div>
                                                     </div>
+                
                                                 </div>
-            
-                                            </div>
-                                                
-                                            @endif
-                                        @endfor
+                                                    
+                                                @endif
+                                            @endfor
+                                        @else
+                                            <tr data-aos="flip-up" data-aos-anchor-placement="center-center" class="user-row">
+                                                <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4 mb-0 ps-3" colspan="5">
+                                                    <p class="h6 text-muted">No record found</p>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        
                                     </tbody>
                                 </table>
                                 
@@ -263,28 +275,39 @@
 
         </div>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#game').change(function () {
+                var selectedGameId = $(this).val();
+                var newAction = selectedGameId;
+                $('#filter-game').attr('action', newAction);
+                window.location.href = newAction;
+            });
+        });
+    </script>
 
     <!-- Add this script section at the end of your HTML body -->
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Get the input field and table rows
-    var input = document.getElementById('searchInput');
-    var rows = document.querySelectorAll('.user-row');
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the input field and table rows
+        var input = document.getElementById('searchInput');
+        var rows = document.querySelectorAll('.user-row');
 
-    // Add event listener for the input field
-    input.addEventListener('input', function () {
-        var searchTerm = input.value.toLowerCase();
+        // Add event listener for the input field
+        input.addEventListener('input', function () {
+            var searchTerm = input.value.toLowerCase();
 
-        // Iterate through each row and toggle visibility based on the search term
-        rows.forEach(function (row) {
-            var username = row.querySelector('.user-username').innerText.toLowerCase();
-            var isVisible = username.includes(searchTerm);
+            // Iterate through each row and toggle visibility based on the search term
+            rows.forEach(function (row) {
+                var username = row.querySelector('.user-username').innerText.toLowerCase();
+                var isVisible = username.includes(searchTerm);
 
-            // Toggle the visibility of the row
-            row.style.display = isVisible ? '' : 'none';
+                // Toggle the visibility of the row
+                row.style.display = isVisible ? '' : 'none';
+            });
         });
     });
-});
     </script>
     
 

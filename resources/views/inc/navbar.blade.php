@@ -57,7 +57,7 @@
                         </li>
                         <li>
                             @if (Auth::user()->role == 1)
-                                <a href="/league/2/edit" class="dropdown-item d-flex align-items-center">
+                                <a href="/score/1" class="dropdown-item d-flex align-items-center">
                                     <i class="bx bx-group fs-base opacity-60 me-2"></i>
                                     Manage Score
                                     {{-- <span class="ms-auto fs-xs text-muted">5</span> --}}
@@ -116,7 +116,7 @@
                         <a href="/league" class="nav-link">League</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/scoreboard" class="nav-link">Scoreboard</a>
+                        <a href="/score/1" class="nav-link">Scoreboard</a>
                     </li>
                     <li class="nav-item">
                         <a href="/prize" class="nav-link">Prizes</a>

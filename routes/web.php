@@ -62,7 +62,7 @@ use App\Http\Controllers\ImportExportController;
         'myTeam' => MyTeamController::class,
         'player' => PlayerController::class,
         'profile' => ProfileController::class,
-        'scoreboard' => ScoreController::class,
+        'score' => ScoreController::class,
     ]);
 
     Route::controller(ImportExportController::class)->group(function(){

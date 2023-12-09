@@ -21,6 +21,6 @@ class ImportExportController extends Controller
     public function import()
     {
         Excel::import(new ScoresImport, request()->file('file'));
-        return back();
+        return back()->withSuccess('Marks Updated !');
     }
 }
