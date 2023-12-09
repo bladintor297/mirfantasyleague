@@ -59,7 +59,7 @@
                                         <div class="card card-hover" style="height: 300px; width: 150px">
 
                                             <div class="card-body d-grid align-items-center justify-content-center"
-                                            style="background-image: url('{{ $myTeam->{$roleValue} ? $players->where('id', $myTeam->{$roleValue})->first()->picture : '' }}'); background-size: cover;">
+                                            style="background-image: url('{{ isset($myTeam->{$roleValue}) ? $players->where('id', $myTeam->{$roleValue})->first()->picture : '' }}'); background-size: cover;">
                                                 <input name="playerName{{$roleKey}}" class="btn btn-link text-warning stretched-link openModalButton"
                                                 data-index="{{ $roleKey }}"
                                                 value="" placeholder="+">
@@ -68,7 +68,7 @@
                                                     type="hidden"
                                                     name="teamID{{$roleKey}}"
                                                     id="teamID"
-                                                    value="{{ isset($myTeam->{$roleValue}) ? $myTeam->{$roleValue} : '+' }}">
+                                                    value="{{ isset($myTeam->{$roleValue}) ? $players->where('id', $myTeam->{$roleValue})->first()->team : '' }}">
                                             </div>
                                             <div class="card-footer text-white text-center">
                                                 {{ $roleValue }}
@@ -114,8 +114,9 @@
                                 <!-- Add a hidden input field to store the current step index -->
                                 {{-- <input type="hidden" id="currentStep" name="currentStep" value="{{$step}}"> --}}
                                 <input type="hidden" value="{{ $game->id }}" name="game_id">
+                                <input type="hidden" value="{{ $game->player_limit}}" name="player_limit">
                                 <input type="hidden" value="{{ $myTeam->id }}" name="myTeam_id">
-                                <button id="submitBtn" type="submit" class="btn btn-danger rounded-pill px-5" >Confirm Players</button>
+                                <button id="submitBtn" type="submit" class="btn btn-success bg-gradient rounded-pill px-5" >Confirm Players</button>
                             </div>
                         </form>
                         
@@ -133,6 +134,16 @@
             </div>
 
         </div>
+    </div>
+    <div class="d-flex justify-content-end fixed-bottom fixed-right mb-4 me-5 pe-5">
+        <form action="{{ route('myTeam.destroy', 1) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" value="{{ $game->id }}" name="game">
+            <input type="hidden" value="{{ Auth::user()->id }}" name="user"> 
+            <input type="hidden" value="{{ $myTeam->id }}" name="myTeam"> 
+            <button type="submit" class="btn btn-danger btn-lg px-5 rounded-pill">Reset Selection</button>
+        </form>
     </div>
 </section>
 
@@ -162,11 +173,12 @@
 
     // Check if any teamID occurs more than three times
     var teamIDCounts = {};
+    var player_limit = document.getElementById('player_limit').value;
     for (var i = 0; i < selectedTeamIDs.length; i++) {
         var teamID = selectedTeamIDs[i];
         teamIDCounts[teamID] = (teamIDCounts[teamID] || 0) + 1;
-        if (teamIDCounts[teamID] > 3) {
-            alert("Error: Same team ID cannot be selected more than three times.");
+        if (teamIDCounts[teamID] > player_limit ) {
+            alert("Error: Same team ID cannot be selected more than"+ player_limit +"times.");
             return false; // Prevent form submission
         }
     }

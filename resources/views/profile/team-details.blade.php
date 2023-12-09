@@ -19,14 +19,14 @@
         <!-- Title -->
         <div class="row d-flex justify-content-center text-center pb-4 mb-2 zindex-5">
             <div class="col">
-                <h2 class="display-5 mb-4 text-warning">M5 Tournament Championship</h2>
+                <h2 class="display-5 mb-4 text-warning">M5 World Championship</h2>
             </div>
         </div>
 
         <!-- Icon boxes (Features) -->
         <div class="row row-cols-1 row-cols-md-3 g-4 pt-2 pt-md-4 pb-lg-2 d-flex justify-content-center">
 
-            <div class="row g-3 card shadow w-75 py-4 px-5 overflow-auto mx-auto" style="height:500px">
+            <div class="row g-3 card shadow w-100 py-4 px-2 overflow-auto row-submission" style="height:500px">
 
                 @php $count = 0 @endphp
                 
@@ -64,7 +64,7 @@
                                         <tr>
                                         <th scope="col">#PlayerID</th>
                                         <th scope="col">Roles</th>
-                                        <th scope="col">Player Name</th>
+                                        <th scope="col">Player</th>
                                         <th scope="col">Team</th>
                                         </tr>
                                     </thead>
@@ -85,12 +85,12 @@
                                                         </div>
                                                     </th>
                                                     <td>
-                                                        <input type="text" value="{{$roles[$roleKey]  }}" class="form-control"  id="" readonly>
+                                                        {{$roles[$roleKey]  }}
                                                     </td>
                                                     <td>
                                                         @foreach ($players as $player)
                                                             @if ($player->id == $myTeam->{$roleValue})
-                                                                <input type="text" value="{{$player->name }}" class="form-control"  id="" readonly>
+                                                                {{$player->name }}
                                                             @endif
                                                         @endforeach
                                                         
@@ -98,7 +98,7 @@
                                                     <td>
                                                         @foreach ($players as $player)
                                                             @if ($player->id == $myTeam->{$roleValue})
-                                                                <input type="text" name="teamNames[]" value="{{ $player->team_name }}" class="form-control" readonly/>
+                                                                {{ $player->team_name }}
                                                             @endif
                                                         @endforeach
                                                     </td>
@@ -114,12 +114,12 @@
                                                             {{$myTeam->{'Reserve_' . $roleKey +1}  }}
                                                         </th>
                                                         <td>
-                                                            <input type="text" value="{{$reserveRoles[$roleKey] }} -- ({{$roles[$roleKey] }})" class="form-control"  id="" readonly>
+                                                            {{$reserveRoles[$roleKey] }} -- ({{$roles[$roleKey] }})
                                                         </td>
                                                         <td>
                                                             @foreach ($players as $player)
                                                                 @if ($player->id == $myTeam->{'Reserve_' . $roleKey +1})
-                                                                    <input type="text" value="{{$player->name }}" class="form-control"  id="" readonly>
+                                                                    {{$player->name }}
                                                                 @endif
                                                             @endforeach
                                                             
@@ -127,7 +127,7 @@
                                                         <td>
                                                             @foreach ($players as $player)
                                                                 @if ($player->id == $myTeam->{'Reserve_' . $roleKey +1})
-                                                                    <input type="text" name="teamNames[]" value="{{ $player->team_name }}" class="form-control" readonly/>
+                                                                    {{ $player->team_name }}
                                                                 @endif
                                                             @endforeach
                                                         </td>
@@ -162,4 +162,4 @@
 </section>
 
 
-@endsection 
+@endsection

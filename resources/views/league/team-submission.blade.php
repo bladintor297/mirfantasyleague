@@ -114,12 +114,12 @@
                                                             {{$myTeam->{'Reserve_' . $roleKey +1}  }}
                                                         </th>
                                                         <td>
-                                                            <input type="text" value="{{$reserveRoles[$roleKey] }} -- ({{$roles[$roleKey] }})" class="form-control"  id="" readonly>
+                                                            {{$reserveRoles[$roleKey] }}
                                                         </td>
                                                         <td>
                                                             @foreach ($players as $player)
                                                                 @if ($player->id == $myTeam->{'Reserve_' . $roleKey +1})
-                                                                    <input type="text" value="{{$player->name }}" class="form-control"  id="" readonly>
+                                                                    {{$player->name }}
                                                                 @endif
                                                             @endforeach
                                                             
@@ -127,7 +127,7 @@
                                                         <td>
                                                             @foreach ($players as $player)
                                                                 @if ($player->id == $myTeam->{'Reserve_' . $roleKey +1})
-                                                                    <input type="text" name="teamNames[]" value="{{ $player->team_name }}" class="form-control" readonly/>
+                                                                    {{ $player->team_name }}
                                                                 @endif
                                                             @endforeach
                                                         </td>

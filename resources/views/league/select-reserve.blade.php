@@ -76,12 +76,12 @@
                                             <select name="reserveSelect" id="reserveSelect{{$reserveKey}}" class="form-select">
                                                 <option value="0" disabled selected> - Choose Reserve -</option>
                                                     @foreach($players as $reserve)
-                                                        @if ( ($reserve->status == 1) && $reserve->role == $reserveKey)
-                                                            <option value="{{ $reserve->id }}" data-role="{{ $reserve->role }}" data-card="{{ $reserve->picture }}"
-                                                                data-nationality="{{ $reserve->nationality }}" data-team="{{ $reserve->team }}">{{ $reserve->name }} ({{ $reserveRoles[$reserve->role] }}) -- <em>{{ $reserve->team_name }}</em>
-                                                            </option>
-
-                                                            
+                                                        @if (($reserve->role == $reserveKey))
+                                                            @if (($reserve->status == 1))
+                                                                <option value="{{ $reserve->id }}" data-role="{{ $reserve->role }}" data-card="{{ $reserve->picture }}"
+                                                                    data-nationality="{{ $reserve->nationality }}" data-team="{{ $reserve->team }}">{{ $reserve->name }} ({{ $reserveRoles[$reserve->role] }}) -- <em>{{ $reserve->team_name }}</em>
+                                                                </option>
+                                                            @endif
                                                         @endif
                                                     @endforeach
                                             </select>
@@ -96,7 +96,7 @@
                                 {{-- <input type="hidden" id="currentStep" name="currentStep" value="{{$step}}"> --}}
                                 <input type="hidden" value="{{ $game->id }}" name="game_id">
                                 <input type="hidden" value="{{ $myTeam->id }}" name="myTeam_id">
-                                <button id="submitReserveBtn" type="submit" class="btn btn-danger rounded-pill px-5" >Confirm Reserves</button>
+                                <button id="submitReserveBtn" type="submit" class="btn btn-success bg-gradient rounded-pill px-5" >Confirm Reserves</button>
                             </div>
                         </form>
                         
@@ -114,6 +114,16 @@
             </div>
 
         </div>
+    </div>
+    <div class="d-flex justify-content-end fixed-bottom fixed-right mb-4 me-5 pe-5">
+        <form action="{{ route('myTeam.destroy', 2) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" value="{{ $game->id }}" name="game">
+            <input type="hidden" value="{{ Auth::user()->id }}" name="user"> 
+            <input type="hidden" value="{{ $myTeam->id }}" name="myTeam"> 
+            <button type="submit" class="btn btn-danger btn-lg px-5 rounded-pill">Reset Selection</button>
+        </form>
     </div>
 </section>
 <script>

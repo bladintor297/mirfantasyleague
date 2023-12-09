@@ -50,7 +50,7 @@ class MyTeamController extends Controller
                     ->select('player.*', 'team.team_name as team_name')
                     ->where('team.label', $label)
                     ->get();
-
+        
 
             return view ("league.select-hero")->with([
                 'game' => $game,
@@ -74,6 +74,7 @@ class MyTeamController extends Controller
     {
          // Player Selection
         if ($id == 'TeamSelect' || $id == 4){
+
             
             $game = Game::find ($request->input('game_id'));
             $players = Player::join('team', 'player.team', '=', 'team.id')
@@ -84,6 +85,7 @@ class MyTeamController extends Controller
             $game->save();
 
             $myTeam = MyTeam::where('game', $request->input('game_id'))->where('user', Auth::user()->id)->get();
+
 
             if (count($myTeam) == 0){
                 $labels = ['A', 'B', 'C', 'D']; 
@@ -113,16 +115,35 @@ class MyTeamController extends Controller
 
         // Player Confirmation
         else if ($id == 1){
-
+            $game = Game::find ($request->input('game_id'));
             $requestData = $request->all();
-            // return $requestData;
-
 
             // Check for null values in the request data
             foreach ($requestData as $key => $value) {
                 if ($value === '+') {
                     // Return an error response indicating that a null value is not allowed
                     return back()->withError('There\'s an error to set your team. Please try again. If similar error occurs, contact admin.');
+                }
+            }
+
+            $teamIDCount = [];
+
+            // Validate teamID values
+            foreach ($requestData as $key => $value) {
+                if (strpos($key, 'teamID') === 0) {
+                    $teamID = (int)$value;
+                    
+                    // Increment the counter for the current team ID
+                    $teamIDCount[$teamID] = ($teamIDCount[$teamID] ?? 0) + 1;
+
+
+
+                    // Check if the team ID exceeds the limit
+                    if ($teamIDCount[$teamID] > $game->player_limit ) {
+                        return back()->withError('Players from same team cannot be selected more than '. $game->player_limit .' time');
+                        // Handle the error as needed
+                        // You may want to break out of the loop or return an error response
+                    }
                 }
             }
             
@@ -140,7 +161,6 @@ class MyTeamController extends Controller
                         ->get();
             
 
-            $game = Game::find (Session::get('game_id'));
             $myTeam = MyTeam::find($request->input('myTeam_id'));
             return view('league.confirm-players')->with([
                 'players' => $players,
@@ -265,8 +285,46 @@ class MyTeamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Request $request,)
     {
-        //
+        $myTeam = MyTeam::find($request->input('myTeam'));
+        $message = 'Heroes reset successfull';
+        $view = "league.select-hero";
+
+        if ($id == 1){
+            $myTeam->EXP_Laner = null;
+            $myTeam->Jungler = null;
+            $myTeam->Mid_Laner = null;
+            $myTeam->Roamer = null;
+            $myTeam->Gold_Laner = null;
+        }else{
+            $myTeam->Reserve_1 = null;
+            $myTeam->Reserve_2 = null;
+            $myTeam->Reserve_3 = null;
+            $myTeam->Reserve_4 = null;
+            $myTeam->Reserve_5 = null;
+            $message = 'Reserve reset successfull';
+            $view = "league.select-reserve";
+        }
+
+        $myTeam->save();
+
+        $players = Player::join('team', 'player.team', '=', 'team.id')
+                        ->select('player.*', 'team.team_name as team_name')
+                        ->get();
+
+        // return back()->withSuccess($message);
+        toastr()->success($message);
+
+        $players = Player::join('team', 'player.team', '=', 'team.id')
+                ->select('player.*', 'team.team_name as team_name')
+                ->get();
+        $game = Game::find($request->input('game'));
+
+        return view ($view)->with([
+            'game' => $game,
+            'players' => $players,
+            'myTeam' => $myTeam
+        ]);
     }
 }

@@ -40,8 +40,8 @@ class PlayerController extends Controller
      */
     public function show(string $id)
     {
-        $myTeams = MyTeam::where('game', 2)->where('user', $id)->get();
-        $game = Game::find (2);
+        $myTeams = MyTeam::where('game', 3)->where('user', $id)->get();
+        $game = Game::find (3);
 
 
             return view ("profile.select-team")->with([
