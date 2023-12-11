@@ -19,7 +19,7 @@
                 <form action="score/" id="filter-game"  >
                     <select name="game" id="game" class="form-select bg-dark" >
                         @foreach ($games as $game)
-                            <option class="text-white" value="{{ $game->id }}">{{ $game->name }}</option>
+                            <option class="text-white" value="{{ $game->id }}" {{ (isset($id) && $id == $game->id) ? 'selected' : '' }}>{{ $game->name }}</option>
                         @endforeach
                     </select>
                 </form>

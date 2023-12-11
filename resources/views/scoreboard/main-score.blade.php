@@ -6,7 +6,7 @@
     <div class="jarallax d-none d-md-block" data-jarallax data-speed="0.35" style="position: relative;">
         <span class="position-absolute top-0 start-0 w-100 h-100 "></span>
         <div class="jarallax-img"
-            style="background-image: url(assets/img/background/parallax-alucard.png); width: 100%; background-size: cover;">
+            style="background-image: url('{{ asset('assets/img/background/parallax-alucard.png') }}'); width: 100%; background-size: cover;">
         </div>
         <div class="d-none d-xxl-block" style="height: 450px;"></div>
         <div class="d-none d-md-block d-xxl-none" style="height: 550px;"></div>
@@ -41,7 +41,7 @@
                                 <select name="game" id="game" class="form-select mb-3">
     
                                     @foreach ($games as $game)
-                                        <option class="form-select" value="{{ $game->id }}"  >
+                                        <option class="form-select" value="{{ $game->id }}"  {{ (isset($id) && $id == $game->id) ? 'selected' : '' }}>
                                             {{ $game->name }} -- <em>{{ $game->league_name }}</em>
                                         </option>
                                     @endforeach
@@ -91,7 +91,7 @@
                                                         <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
                                                             style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
                                                         <div class="ps-3">
-                                                            <h3 class="h2 mb-0">{{ $totalScore[0]->total_score }}
+                                                            <h3 class="h2 mb-0">{{ number_format($totalScore[0]->score, 2) }}
                                                                 <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
                                                             </h3>
                                                         </div>
@@ -129,7 +129,7 @@
                                                             <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
                                                                 style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
                                                             <div class="ps-3">
-                                                                <h3 class="h2 mb-0">{{ $totalScore[$i]->total_score }}
+                                                                <h3 class="h2 mb-0">{{ number_format($totalScore[$i]->score, 2) }}
                                                                     <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
                                                                 </h3>
                                                             </div>
@@ -216,7 +216,7 @@
                                                     <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
                                                         style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
                                                     <div class="ps-3">
-                                                        <h3 class="h2 mb-0">{{ $playerScores[0]->score }}
+                                                        <h3 class="h2 mb-0">{{ number_format($playerScores[0]->score, 2) }}
                                                             <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
                                                         </h3>
                                                     </div>
@@ -236,16 +236,28 @@
                                         <!-- Rows 2 and onwards -->
                                         @for ($i = 1; $i < count($playerScores); ++$i)
                                         <tr data-aos="fade-up" data-aos-anchor-placement="center-center" class="user-row">
-                                            <td class="d-lg-table-cell align-middle h4 border-bottom py-3 py-lg-4 mb-0 ps-3">#{{ $i+1 }}</td>
+                                            <td class="d-lg-table-cell align-middle h4 border-bottom py-3 py-lg-4 mb-0 ps-3">
+
+                                                @if ($playerScores[$i]->score < -999)
+                                                    --
+                                                @else
+                                                    #{{ $i+1 }}
+                                                @endif
+                                            </td>
                                             <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
                                                 <div class="d-flex align-items-center">
-                                                    <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
+                                                    @if ($playerScores[$i]->score < -999)
+                                                        <p class="badge bg-danger ">Eliminated</p>
+                                                    @else
+                                                        <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
                                                         style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
-                                                    <div class="ps-3">
-                                                        <h3 class="h2 mb-0">{{ $playerScores[$i]->score }}
-                                                            <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
-                                                        </h3>
-                                                    </div>
+                                                        <div class="ps-3">
+                                                            <h3 class="h2 mb-0">{{ number_format($playerScores[$i]->score, 2) }}
+                                                                <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
+                                                            </h3>
+                                                        </div>
+                                                    @endif
+                                                    
                                                 </div>
                                             </td>
                                             <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">

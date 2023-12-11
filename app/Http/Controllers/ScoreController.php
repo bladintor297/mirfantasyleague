@@ -54,7 +54,6 @@ class ScoreController extends Controller
                         ->get(['score.*', 'users.username', 'users.team_name', 'users.id AS userid', 'users.team_logo']);
             
             $totalScore = $totalScore->where('game_id', $id)->sortByDesc('total_score')->values();
-            return count($totalScore);
 
             $playerScores = Player::orderBy('score', 'desc')
                         ->join('team', 'player.team', '=', 'team.id')
@@ -64,7 +63,8 @@ class ScoreController extends Controller
             return view ('scoreboard.main-score')->with([
                 'games' => $games,
                 'totalScore' => $totalScore,
-                'playerScores' => $playerScores
+                'playerScores' => $playerScores,
+                'id' => $id
             ]);
         }
 
@@ -82,6 +82,7 @@ class ScoreController extends Controller
 
             return view ('league.edit-score')->with([
                 'games' => $games,
+                'id' => $id,
                 'scores' => $scores
             ]);
         }
