@@ -48,10 +48,11 @@ class ScoreController extends Controller
                 ->select('game.*', 'league.league_name as league_name')
                 ->get();
 
-            $totalScore = Score::selectRaw('*, (day1 + day2 + day3 + day4 + day5 + day6) as total_score')
+            $totalScore = Score::selectRaw('*, score.updated_at as updated_at, (day1 + day2 + day3 + day4 + day5 + day6) as total_score')
                         ->join('users', 'users.id', '=', 'score.user_id')
                         ->orderBy('total_score', 'desc')
-                        ->get(['score.*', 'users.username', 'users.team_name', 'users.id AS userid', 'users.team_logo']);
+                        ->get(['score.*', 'users.username', 'users.team_name', 'users.id AS userid', 'users.team_logo', 
+                    ]);
             
             $totalScore = $totalScore->where('game_id', $id)->sortByDesc('total_score')->values();
 

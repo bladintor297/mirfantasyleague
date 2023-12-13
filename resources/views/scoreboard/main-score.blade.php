@@ -30,11 +30,6 @@
                         </li>
                     </ul>
                     <h2 class="display-2">Scoreboard</h2>
-                    <p class="text-muted mb-4">Updated at:
-                        @if (count($totalScore)>0)
-                            {{ date('F j, Y, G:i:s ', strtotime($totalScore[0]->updated_at )); }}
-                        @endif
-                        MYT</p>
                     <div class="row d-flex justify-content-center my-2">
                         <div class="col-8">
                             <form action="score/" id="filter-game">
@@ -60,6 +55,12 @@
 
                     <div class="tab-content " style="min-height: 500px;">
                         <div class="tab-pane fade show active" id="participants">
+                            <p class="text-muted mb-4">Updated at:
+                                @if (count($totalScore)>0)
+                                    {{ date('F j, Y, G:i:s ', strtotime($totalScore[0]->updated_at )); }}
+                                @endif
+                                MYT
+                            </p>
 
                             <div class="table-responsive">
                                 <table class="table bg-white shadow" >
@@ -91,7 +92,7 @@
                                                         <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
                                                             style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
                                                         <div class="ps-3">
-                                                            <h3 class="h2 mb-0">{{ number_format($totalScore[0]->score, 2) }}
+                                                            <h3 class="h2 mb-0">{{ number_format($totalScore[0]->total_score, 2) }}
                                                                 <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
                                                             </h3>
                                                         </div>
@@ -129,7 +130,7 @@
                                                             <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
                                                                 style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
                                                             <div class="ps-3">
-                                                                <h3 class="h2 mb-0">{{ number_format($totalScore[$i]->score, 2) }}
+                                                                <h3 class="h2 mb-0">{{ number_format($totalScore[$i]->total_score, 2) }}
                                                                     <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
                                                                 </h3>
                                                             </div>
@@ -185,7 +186,12 @@
                             
                         </div>
                         <div class="tab-pane fade" id="players">
-                            
+                            <p class="text-muted mb-4">Updated at:
+                                @if (count($totalScore)>0)
+                                    {{ date('F j, Y, G:i:s ', strtotime($playerScores->sortByDesc('updated_at')->first()->updated_at )); }}
+                                @endif
+                                MYT
+                            </p>
                             <div class="table-responsive">
                                 <table class="table bg-white shadow" >
                                     <thead class="bg-dark thead ">
