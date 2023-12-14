@@ -136,8 +136,6 @@ class MyTeamController extends Controller
                     // Increment the counter for the current team ID
                     $teamIDCount[$teamID] = ($teamIDCount[$teamID] ?? 0) + 1;
 
-
-
                     // Check if the team ID exceeds the limit
                     if ($teamIDCount[$teamID] > $game->player_limit ) {
                         return back()->withError('Players from same team cannot be selected more than '. $game->player_limit .' time');
@@ -226,11 +224,15 @@ class MyTeamController extends Controller
             $selectedPlayersCount = 0;
             
             $requestData = $request->all();
-
+            // Count the occurrences of '+' in the array
+            $countOfPlus = count(array_filter($requestData, function ($value) {
+                return $value === '+';
+            }));
 
             // Check for null values in the request data
             foreach ($requestData as $key => $value) {
-                if ($value === '+') {
+                // return count ($requestData->w)
+                if ((5 - $countOfPlus) > $game->reserve_limit) {
                     // Return an error response indicating that a null value is not allowed
                     // return back()->withError('There\'s an error to set your team. Please try again. If similar error occurs, contact admin.');
                     // return back()->withError('')->withInput();
@@ -242,6 +244,8 @@ class MyTeamController extends Controller
                     ]);
 
                 }
+
+                // if (count)
             }
 
             for ($reserveKey = 0; $reserveKey < 5; $reserveKey++) {

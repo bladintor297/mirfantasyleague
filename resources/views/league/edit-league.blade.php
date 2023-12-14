@@ -26,9 +26,10 @@
                         <th scope="col">Status</th>
                         <th scope="col">TW Rule</th>
                         <th scope="col">PL Rule</th>
-                        <th scope="col">PL Num</th>
+                        <th scope="col" width="8%">PL Num</th>
                         <th scope="col">RP Rule</th>
-                        <th scope="col">RP Num</th>
+                        <th scope="col" width="8%">RP Num</th>
+                        <th scope="col">Reset Rsv</th>
                         <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -51,6 +52,7 @@
                                             <input class="form-check-input" type="checkbox" role="switch" id="transfer_isOn" name="transfer_isOn" {{ $game->transfer_isOn ? 'checked' : '' }}>
                                         </div>
                                     </td>
+                                    
                                     <td >
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch" name="player_isOn" {{ $game->player_isOn ? 'checked' : '' }}>
@@ -66,6 +68,11 @@
                                     </td>
                                     <td>
                                         <input type="number" class="form-control form-control-sm" name="reserve_limit" value="{{ $game->reserve_limit }}">
+                                    </td>
+                                    <td  >
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="reset_reserve" name="reset_reserve" >
+                                        </div>
                                     </td>
                                     <td>
                                         <button type="submit" class="btn btn-warning btn-sm">Update</button>

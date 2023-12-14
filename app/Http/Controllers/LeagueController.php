@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Player;
 use App\Models\Game;
 use App\Models\Score;
+use App\Models\MyTeam;
 use App\Models\League;
 
 class LeagueController extends Controller
@@ -67,7 +68,6 @@ class LeagueController extends Controller
             return redirect()->route('league.index');
         }
 
-        session()->put('game_id', $id);
         return view ("league.terms")->with([
             'game' => $game,
             'players' => $players,
@@ -148,8 +148,19 @@ class LeagueController extends Controller
         }
         $game->reserve_isOn = $reserveIsOn;
 
+        if (request('reset_reserve')){
+            $myTeams = MyTeam::where('game', $game->id)->get();
+
+            foreach ($myTeams as $myTeam){
+                for($i = 1; $i <= 5; ++$i){
+                    $myTeam->{'Reserve_' . $i} = null;
+                }
+                $myTeam->save();
+            }
+        }
+
         $game->save();
-        return redirect()->route('league.edit', ['league' => 0]);
+        return redirect()->route('league.edit', ['league' => 1]);
     }
 
     /**
