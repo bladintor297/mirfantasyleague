@@ -8,6 +8,8 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PrizeController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\ImportExportController;
 
 /*
@@ -41,33 +43,34 @@ use App\Http\Controllers\ImportExportController;
         return view('about');
     });
 
-    Route::get('/about', function () {
-        return view('about');
+    Route::get('/faq', function () {
+        return view('faq');
     });
 
     Route::get('/privacypolicy', function () {
         return view('privacypolicy');
     });
 
-    Route::get('/prize', function () {
-        return view('prize.main-prize');
-    });
+
 
     Route::post('/scores-import', [ScoreController::class, 'import'])->name('scores.import');
     
     // Resource Controllers
     Route::resources([
         'league' => LeagueController::class,
+        'game' => GameController::class,
         'team' => TeamController::class,
         'myTeam' => MyTeamController::class,
         'player' => PlayerController::class,
         'profile' => ProfileController::class,
         'score' => ScoreController::class,
+        'prize' => PrizeController::class,
     ]);
 
     Route::controller(ImportExportController::class)->group(function(){
         Route::get('import_export', 'importExport');
         Route::post('import', 'import')->name('import');
+        Route::post('import-player', 'importPlayer')->name('import-player');
         Route::get('export', 'export')->name('export');
     });
     

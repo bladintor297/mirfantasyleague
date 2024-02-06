@@ -187,7 +187,7 @@
                         </div>
                         <div class="tab-pane fade" id="players">
                             <p class="text-muted mb-4">Updated at:
-                                @if (count($totalScore)>0)
+                                @if (count($playerScores)>0)
                                     {{ date('F j, Y, G:i:s ', strtotime($playerScores->sortByDesc('updated_at')->first()->updated_at )); }}
                                 @endif
                                 MYT
@@ -214,70 +214,80 @@
                                     </thead>
                                     <tbody class="tbody">
 
-                                        <!-- Row 1 -->
-                                        <tr data-aos="fade-up" data-aos-anchor-placement="center-center" class="user-row">
-                                            <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4 mb-0 ps-3">#1</td>
-                                            <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
-                                                <div class="d-flex align-items-center">
-                                                    <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
-                                                        style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
-                                                    <div class="ps-3">
-                                                        <h3 class="h2 mb-0">{{ number_format($playerScores[0]->score, 2) }}
-                                                            <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h2 user-username">
-                                                {{ $playerScores[0]->name }} </td>
-                                            <td class="d-lg-table-cell h2 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                                <img src="{{ $playerScores[0]->team_logo}}" class="rounded-circle ms-2 object-cover"
-                                                    style="width: 48px; height: 48px; object-fit: cover" alt="Bitcoin">
-                                                <span>{{ $playerScores[0]->team_name }}</span>
-                                            </td>
-                                            <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h2 user-username">
-                                                {{ $playerScores[0]->nationality }} </td>
-                                        </tr>
-                            
-                                        <!-- Rows 2 and onwards -->
-                                        @for ($i = 1; $i < count($playerScores); ++$i)
-                                        <tr data-aos="fade-up" data-aos-anchor-placement="center-center" class="user-row">
-                                            <td class="d-lg-table-cell align-middle h4 border-bottom py-3 py-lg-4 mb-0 ps-3">
+                                        @if (count($playerScores)>0)
 
-                                                @if ($playerScores[$i]->score < -999)
-                                                    --
-                                                @else
-                                                    #{{ $i+1 }}
-                                                @endif
-                                            </td>
-                                            <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
-                                                <div class="d-flex align-items-center">
-                                                    @if ($playerScores[$i]->score < -999)
-                                                        <p class="badge bg-danger ">Eliminated</p>
-                                                    @else
+                                            <!-- Row 1 -->
+                                            <tr data-aos="fade-up" data-aos-anchor-placement="center-center" class="user-row">
+                                                <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4 mb-0 ps-3">#1</td>
+                                                <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
+                                                    <div class="d-flex align-items-center">
                                                         <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
-                                                        style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
+                                                            style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
                                                         <div class="ps-3">
-                                                            <h3 class="h2 mb-0">{{ number_format($playerScores[$i]->score, 2) }}
+                                                            <h3 class="h2 mb-0">{{ number_format($playerScores[0]->score, 2) }}
                                                                 <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
                                                             </h3>
                                                         </div>
-                                                    @endif
-                                                    
-                                                </div>
-                                            </td>
-                                            <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
-                                                {{ $playerScores[$i]->name }} </td>
-                                            <td class="d-lg-table-cell h4 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                                <img src="{{ $playerScores[$i]->team_logo}}" class="rounded-circle ms-2 object-cover"
-                                                    style="width: 32px; height: 32px; object-fit: cover" alt="{{ $playerScores[$i]->name }}">
-                                                {{ $playerScores[$i]->team_name }}
-                                            </td>
-                                            <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
-                                                {{ $playerScores[$i]->nationality }} </td>
-                                        </tr>
+                                                    </div>
+                                                </td>
+                                                <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h2 user-username">
+                                                    {{ $playerScores[0]->name }} </td>
+                                                <td class="d-lg-table-cell h2 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
+                                                    <img src="{{ $playerScores[0]->team_logo}}" class="rounded-circle ms-2 object-cover"
+                                                        style="width: 48px; height: 48px; object-fit: cover" alt="Bitcoin">
+                                                    <span>{{ $playerScores[0]->team_name }}</span>
+                                                </td>
+                                                <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h2 user-username">
+                                                    {{ $playerScores[0]->nationality }} </td>
+                                            </tr>
                                 
-                                    @endfor
+                                            <!-- Rows 2 and onwards -->
+                                            @for ($i = 1; $i < count($playerScores); ++$i)
+                                            <tr data-aos="fade-up" data-aos-anchor-placement="center-center" class="user-row">
+                                                <td class="d-lg-table-cell align-middle h4 border-bottom py-3 py-lg-4 mb-0 ps-3">
+
+                                                    @if ($playerScores[$i]->score < -999)
+                                                        --
+                                                    @else
+                                                        #{{ $i+1 }}
+                                                    @endif
+                                                </td>
+                                                <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
+                                                    <div class="d-flex align-items-center">
+                                                        @if ($playerScores[$i]->score < -999)
+                                                            <p class="badge bg-danger ">Eliminated</p>
+                                                        @else
+                                                            <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
+                                                            style="width: 32px; height: 32px; object-fit: cover" alt="Bitcoin">
+                                                            <div class="ps-3">
+                                                                <h3 class="h2 mb-0">{{ number_format($playerScores[$i]->score, 2) }}
+                                                                    <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
+                                                                </h3>
+                                                            </div>
+                                                        @endif
+                                                        
+                                                    </div>
+                                                </td>
+                                                <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
+                                                    {{ $playerScores[$i]->name }} </td>
+                                                <td class="d-lg-table-cell h4 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
+                                                    <img src="{{ $playerScores[$i]->team_logo}}" class="rounded-circle ms-2 object-cover"
+                                                        style="width: 32px; height: 32px; object-fit: cover" alt="{{ $playerScores[$i]->name }}">
+                                                    {{ $playerScores[$i]->team_name }}
+                                                </td>
+                                                <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
+                                                    {{ $playerScores[$i]->nationality }} </td>
+                                            </tr>
+                                            @endfor
+
+                                        @else
+                                            <tr data-aos="flip-up" data-aos-anchor-placement="center-center" class="user-row">
+                                                <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4 mb-0 ps-3" colspan="5">
+                                                    <p class="h6 text-muted">No record found</p>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                
                                     </tbody>
                                 </table>
                                 

@@ -23,13 +23,14 @@ class LeagueController extends Controller
         $mergedGames = $games->map(function ($groupedGames, $leagueId) {
             $leagueInfo = League::join('game', 'league.id', '=', 'game.league_id')
                 ->where('game.league_id', $leagueId)
-                ->select('league.id', 'league.league_name', 'league.description')
+                ->select('league.id', 'league.league_name', 'league.description', 'league.logo')
                 ->first();
 
             return [
                 'league_id' => $leagueInfo->id,
                 'league_name' => $leagueInfo->league_name,
                 'description' => $leagueInfo->description,
+                'logo' =>$leagueInfo->logo,
                 'games' => $groupedGames,
             ];
         });
@@ -52,7 +53,16 @@ class LeagueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $league = new League();
+        $league->league_name = $request->input('league_name');
+        $league->description = $request->input('description');
+        $league->logo = $request->input('logo');
+
+
+        $league->save();
+
+        return back()->with('success', 'League created successfully!');
     }
 
     /**
@@ -84,28 +94,15 @@ class LeagueController extends Controller
             $games = Game::leftJoin('league', 'game.league_id', '=', 'league.id')
                     ->select(['game.*', 'league.league_name as league_name'])
                     ->get();
-            return view ('league.edit-league')->with([
+            return view ('league.game-list')->with([
                 'games' => $games
             ]);
         }
 
         else{
-            $scores = Score::selectRaw('*, (day1 + day2 + day3 + day4 + day5 + day6) as total_score')
-                    ->join('users', 'users.id', '=', 'score.user_id')
-                    ->orderBy('total_score', 'desc')
-                    ->get(['score.*', 'users.username', 'users.team_name', 'users.id AS userid', 'users.team_logo']);
-        
-            $scores = $scores->sortByDesc('total_score')->values();
-
-            $games = Game::leftJoin('league', 'game.league_id', '=', 'league.id')
-                    ->select(['game.*', 'league.league_name as league_name'])
-                    ->get();
-
-            return view ('league.edit-score')->with([
-                'games' => $games,
-                'scores' => $scores
-            ]);
-
+            $leagues =  League::orderBy('id', 'desc')->get();
+            
+            return view ('league.league-list')->with(['leagues' => $leagues]);
         }
     }
 
@@ -114,53 +111,82 @@ class LeagueController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if ($id == 1){
+            $data = $request->all();
 
-        $status = 0;
-        $reserveIsOn = 0;
-        $playerIsOn = 0;
-        $transferIsOn = 0;
+            // Loop through the submitted data and update the corresponding records
+            foreach ($data['leagues'] as $leagueData) {
+                $league = League::find($leagueData['id']);
 
-        $game = Game::find($id);
+                if ($league) {
+                    // Update only if the data is different
+                    if ($league->league_name !== $leagueData['league_name']) {
+                        $league->league_name = $leagueData['league_name'];
+                    }
 
-        // Update Status
-        if (request('status')) $status = 1;
-        else $status = 0;
-        $game->status = $status;
-        
-        // Check Transfer Window Rule (TW Rule)
-        if (request('transfer_isOn')) $transferIsOn = 1;
-        else $transferIsOn = 0;
-        $game->transfer_isOn = $transferIsOn;
+                    if ($league->description !== $leagueData['description']) {
+                        $league->description = $leagueData['description'];
+                    }
 
-        // Check Player Limit Rule (PL Rule)
-        if (request('player_isOn')) {
-            $playerIsOn = 1;
-            $game->player_limit = $request->player_limit;
-        }
-        else $playerIsOn = 0;
-        $game->player_isOn = $playerIsOn;
+                    if ($league->logo !== $leagueData['logo']) {
+                        $league->logo = $leagueData['logo'];
+                    }
 
-        
-        // Check Reserve Player Rule (RP Rule)
-        if (request('reserve_isOn')) {
-            $reserveIsOn = 1;
-            $game->reserve_limit = $request->reserve_limit;
-        }
-        $game->reserve_isOn = $reserveIsOn;
-
-        if (request('reset_reserve')){
-            $myTeams = MyTeam::where('game', $game->id)->get();
-
-            foreach ($myTeams as $myTeam){
-                for($i = 1; $i <= 5; ++$i){
-                    $myTeam->{'Reserve_' . $i} = null;
+                    $league->save();
                 }
-                $myTeam->save();
             }
+
+            return back()->with('success', 'Leagues updated successfully!');
         }
 
-        $game->save();
-        return redirect()->route('league.edit', ['league' => 1]);
+        else {
+            $status = 0;
+            $reserveIsOn = 0;
+            $playerIsOn = 0;
+            $transferIsOn = 0;
+    
+            $game = Game::find($id);
+    
+            // Update Status
+            if (request('status')) $status = 1;
+            else $status = 0;
+            $game->status = $status;
+            
+            // Check Transfer Window Rule (TW Rule)
+            if (request('transfer_isOn')) $transferIsOn = 1;
+            else $transferIsOn = 0;
+            $game->transfer_isOn = $transferIsOn;
+    
+            // Check Player Limit Rule (PL Rule)
+            if (request('player_isOn')) {
+                $playerIsOn = 1;
+                $game->player_limit = $request->player_limit;
+            }
+            else $playerIsOn = 0;
+            $game->player_isOn = $playerIsOn;
+    
+            
+            // Check Reserve Player Rule (RP Rule)
+            if (request('reserve_isOn')) {
+                $reserveIsOn = 1;
+                $game->reserve_limit = $request->reserve_limit;
+            }
+            $game->reserve_isOn = $reserveIsOn;
+    
+            if (request('reset_reserve')){
+                $myTeams = MyTeam::where('game', $game->id)->get();
+    
+                foreach ($myTeams as $myTeam){
+                    for($i = 1; $i <= 5; ++$i){
+                        $myTeam->{'Reserve_' . $i} = null;
+                    }
+                    $myTeam->save();
+                }
+            }
+    
+            $game->save();
+            return redirect()->route('league.edit', ['league' => 1]);
+        }
     }
 
     /**

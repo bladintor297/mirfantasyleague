@@ -59,6 +59,7 @@ class ScoreController extends Controller
             $playerScores = Player::orderBy('score', 'desc')
                         ->join('team', 'player.team', '=', 'team.id')
                         ->select('player.*', 'team.logo AS team_logo', 'team.team_name AS team_name')
+                        ->where('player.game', $id)
                         ->get();
 
             return view ('scoreboard.main-score')->with([

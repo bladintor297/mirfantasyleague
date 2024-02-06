@@ -40,30 +40,47 @@
 
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end my-1" style="width: 14rem;">
-                        <li>
-                            @if (Auth::user()->role == 1)
-                                <a href="/league/1/edit" class="dropdown-item d-flex align-items-center">
+                        @if (Auth::user()->role == 1)
+                            <li>
+                                <a href="/league/2/edit" class="dropdown-item d-flex align-items-center">
                                     <i class="bx bx-trophy fs-base opacity-60 me-2"></i>
+                                    Manage League
+                                    {{-- <span class="ms-auto fs-xs text-muted">5</span> --}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/game" class="dropdown-item d-flex align-items-center">
+                                    <i class="bx bx-joystick fs-base opacity-60 me-2"></i>
                                     Manage Games
                                     {{-- <span class="ms-auto fs-xs text-muted">5</span> --}}
                                 </a>
-                            @else
+                            </li>
+                            <li>
+                                <a href="/player/1" class="dropdown-item d-flex align-items-center">
+                                    <i class="bx bx-body fs-base opacity-60 me-2"></i>
+                                    Manage Players
+                                    {{-- <span class="ms-auto fs-xs text-muted">5</span> --}}
+                                </a>
+                            </li>
+                        @else
+                            <li>
                                 <a href="/league" class="dropdown-item d-flex align-items-center">
                                     <i class="bx bx-trophy fs-base opacity-60 me-2"></i>
                                     My Games
                                     {{-- <span class="ms-auto fs-xs text-muted">5</span> --}}
                                 </a>
-                            @endif
-                        </li>
+                            </li>
+                        @endif
+                        
                         <li>
                             @if (Auth::user()->role == 1)
                                 <a href="/score/1" class="dropdown-item d-flex align-items-center">
-                                    <i class="bx bx-group fs-base opacity-60 me-2"></i>
+                                    <i class="bx bx-clipboard fs-base opacity-60 me-2"></i>
                                     Manage Score
                                     {{-- <span class="ms-auto fs-xs text-muted">5</span> --}}
                                 </a>
                             @else
-                                <a href="/player/{{ Auth::user()->id }}" class="dropdown-item d-flex align-items-center">
+                                <a href="/player" class="dropdown-item d-flex align-items-center">
                                     <i class="bx bx-group fs-base opacity-60 me-2"></i>
                                     My Teams
                                     {{-- <span class="ms-auto fs-xs text-muted">5</span> --}}
@@ -116,10 +133,10 @@
                         <a href="/league" class="nav-link">League</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/score/1" class="nav-link">Scoreboard</a>
+                        <a href="/score/3" class="nav-link">Scoreboard</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/prize" class="nav-link">Prizes</a>
+                        <a href="/prize/3" class="nav-link">Prizes</a>
                     </li>
                     <li class="nav-item">
                         <a href="/faq" class="nav-link">FAQ</a>
