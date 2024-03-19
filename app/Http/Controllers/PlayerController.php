@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
-use App\Models\Player;
-use App\Models\MyTeam;
+
+use App\Models\Game;
 use App\Models\Team;
 use App\Models\League;
-use App\Models\Game;
+use App\Models\Player;
+
+use Illuminate\Support\Facades\Auth;
 
 class PlayerController extends Controller
 {
@@ -19,22 +19,16 @@ class PlayerController extends Controller
     public function index()
     {
         $games = Game::orderBy('id', 'desc')->get();
-        $teams = Team::where('game',1)->get();
-        $players = Player::where('game', 1)->get();
+        $teams = Team::get();
+        $players = Player::orderBy('game')->get();
         $leagues = League::orderBy('id', 'desc')->get();
         if (Auth::check() && Auth::user()->role == 1){
-            return view ('league.player-list')->with([
+            return view ('league.admin.player-list')->with([
                 'games'=>$games,
                 'leagues'=>$leagues,
                 'players'=>$players,
                 'teams'=>$teams,
-                'id' => 1
             ]);
-        }
-
-
-        else{
-            return "Buat kotak2 utk my team";   
         }
     }
 
@@ -59,34 +53,6 @@ class PlayerController extends Controller
      */
     public function show(string $id)
     {
-        // Use ID 'X'
-
-        if($id == 'x'){
-            $myTeams = MyTeam::where('game', 3)->where('user', Auth::user()->id)->get();
-            $game = Game::find (3);
-    
-    
-                return view ("profile.select-team")->with([
-                    'myTeams' => $myTeams,
-                    'game' => $game,
-                ]);
-        }
-
-        else {
-            $games = Game::orderBy('id', 'desc')->get();
-            $teams = Team::where('game',$id)->get();
-            $players = Player::where('game', $id)->get();
-            $leagues = League::orderBy('id', 'desc')->get();
-            if (Auth::check() && Auth::user()->role == 1){
-                return view ('league.player-list')->with([
-                    'games'=>$games,
-                    'leagues'=>$leagues,
-                    'players'=>$players,
-                    'teams'=>$teams,
-                    'id' => $id
-                ]);
-            }
-        }
         
     }
 
@@ -128,14 +94,15 @@ class PlayerController extends Controller
         }
 
         return back()->with('success', 'Players updated successfully.');
-
     }
 
     /**
-     * Remove the specified resource from storage.F
+     * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        Player::truncate();
+
+        return back()->with('All players has been reset');
     }
 }

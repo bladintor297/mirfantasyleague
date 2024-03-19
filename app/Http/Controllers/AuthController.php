@@ -9,11 +9,12 @@ class AuthController extends Controller
 {
     public function index()
     {
-        return view('login');
+        return view('auth.login');
     }
     
     public function customLogin(Request $request)
     {
+
         $request->validate([
             'email' => 'required',
             'password' => 'required',
@@ -23,7 +24,6 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
 
             $user = User::find (Auth::user()->id);
-            
             // Store user ID and name in the session
             session()->put('user_id', $user->id);
             session()->put('user_name', $user->username);
@@ -34,13 +34,13 @@ class AuthController extends Controller
                         ->withSuccess('Signed in');
         }
     
-        return redirect("login")->withError('Invalid username or password');
+        return redirect("login")->withError('Login details are not valid');
     }
 
     public function registration()
     {
         $users = User::get();
-        return view('register')->with(['users'=>$users]);
+        return view('auth.register')->with(['users'=>$users]);
     }
     
     public function customRegistration(Request $request)
@@ -68,7 +68,10 @@ class AuthController extends Controller
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
             'team_name' => $data['team_name'],
-            'team_logo' =>  $request->input('username'). '.' . $request->team_logo->extension()
+            'team_logo' =>  $request->input('username'). '.' . $request->team_logo->extension(),
+            'ingame_id' => $data['ingame_id'],
+            'ingame_name' => $data['ingame_name'],
+            'ingame_server' => $data['ingame_server'],
         ]);
 
         $path = public_path('assets/img/profile/');
@@ -87,11 +90,11 @@ class AuthController extends Controller
     public function dashboard()
     {
         if(Auth::check()){
-            return view('welcome');
+            return redirect('/home');
             
         }
 
-        return redirect("login")->withError('You are not allowed to access');
+        return redirect("login")->withError('You are not logged in');
     }
     
     public function signOut() {

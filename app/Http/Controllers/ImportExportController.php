@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Imports\ScoresImport;
 use App\Imports\PlayersImport;
+use App\Imports\TeamsImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ImportExportController extends Controller
@@ -29,5 +30,11 @@ class ImportExportController extends Controller
     {
         Excel::import(new PlayersImport, request()->file('file'));
         return back()->withSuccess('Players Updated !');
+    }
+
+    public function importTeam()
+    {
+        Excel::import(new TeamsImport, request()->file('file'));
+        return back()->withSuccess('Teams Updated !');
     }
 }

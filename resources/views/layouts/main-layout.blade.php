@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>MLBB Fantasy League</title>
+    <title>MIR Fantasy League</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="Mobile Legend Bang Bang (MLBB) Fantasy League">
@@ -25,138 +25,158 @@
 
     <!-- Vendor Styles -->
     <link rel="stylesheet" media="screen" href="{{ url('assets/vendor/boxicons/css/boxicons.min.css') }}" />
-    <link rel="stylesheet" media="screen"
-        href="https://fontawesome.com/icons/medal?f=classic&s=duotone&an=beat&pc=%23ffd700&sc=%23ffd700" />
     <link rel="stylesheet" media="screen" href="{{ url('assets/vendor/swiper/swiper-bundle.min.css') }}" />
-    <link rel="stylesheet" media="screen"
-        href="{{ url('assets/vendor/lightgallery/css/lightgallery-bundle.min.css') }}" />
+    <link rel="stylesheet" media="screen" href="{{ url('assets/vendor/lightgallery/css/lightgallery-bundle.min.css') }}" />
 
     <!-- Main Theme Styles + Bootstrap -->
     <link rel="stylesheet" media="screen" href="{{ url('assets/css/theme.min.css') }}">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" media="screen" href="{{ url('assets/css/style.css') }}">
-
     <!-- Fonts -->
     <link href="https://db.onlinewebfonts.com/c/561f38b1f4570de0fb8a39d691ab058c?family=Tungsten-Bold" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="https://fontawesome.com/icons/medal?f=classic&s=duotone&an=beat&pc=%23ffd700&sc=%23ffd700" />
 
     <!-- Page Loader JS -->
-    <script src="{{ url('assets/js/top-function.js') }}"></script>
+    {{-- <script src="{{ url('assets/js/top-function.js') }}"></script> --}}
 
+    {{-- Custom CSS --}}
+    <link rel="stylesheet" href="{{ url('assets/css/table.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/fancy-button.css') }}">
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <!-- Page loading styles -->
     <style>
-        /* Styling for the modal */
-        .modal {
-            display: none;
+        @import url('https://fonts.cdnfonts.com/css/whisper-quiet');
+        
+        .header-parallax{
+            font-family: 'Whisper Quiet', sans-serif !important;
+            margin-bottom: 0;
+            font-size: 12rem;
+            position: absolute !important;
+            bottom: 0 !important;
+            margin: 0 !important;
+            padding: 0 5rem !important;
+            line-height: 7.5rem !important;
+        }
+
+        .hero-title{
+            font-size: 5rem !important;
+            position: static !important;
+            line-height: 5rem !important;
+            padding: 0 !important;
+
+        }
+
+        .text-gaming{
+            font-family: 'Whisper Quiet', sans-serif !important;
+        }
+
+        @media (max-width:768px){
+            .hero-title{
+                font-size: 3rem !important;
+            }
+        }
+
+        .modal-img {
+            filter: grayscale(80%);
+            transition: all 0.3s ease;
+        }
+
+        .modal-img:hover {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+
+        .card-img-overlay .position-absolute::before {
+            display: none !important;
+        }
+
+        .card-img-overlay:hover .position-absolute::before {
+            display: none !important;
+        }
+        
+        .page-loading {
             position: fixed;
             top: 0;
+            right: 0;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
+            -webkit-transition: all .4s .2s ease-in-out;
+            transition: all .4s .2s ease-in-out;
+            background-color: #fff;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 9999;
         }
 
-        .modal-content {
+        [data-bs-theme="dark"] .page-loading {
+            background-color: #0b0f19;
+        }
+
+        .page-loading.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .page-loading-inner {
             position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            border-radius: 5px;
-            width: 300px;
-            /* Set the width to 300px */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            left: 0;
+            width: 100%;
             text-align: center;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            -webkit-transition: opacity .2s ease-in-out;
+            transition: opacity .2s ease-in-out;
+            opacity: 0;
         }
 
-        /* Styling for the close button */
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            cursor: pointer;
+        .page-loading.active>.page-loading-inner {
+            opacity: 1;
         }
 
-        #preview {
-            max-width: 100px;
-            max-height: 100px;
-        }
-
-        .fixed-width {
-            width: 300px;
-            /* Adjust the width as needed */
-            margin: 0 auto;
-        }
-
-        .table {
+        .page-loading-inner>span {
+            display: block;
             font-size: 1rem;
-            /* Default font size */
+            font-weight: normal;
+            color: #9397ad;
         }
 
-        @media (max-width: 768px) {
-            .diamond {
-                display: none;
-            }
-
-            thead th,
-            thead th .h4,
-            tbody td,
-            tbody td .h2 {
-                font-size: 0.8em !important;
-            }
-
-            tbody td img,
-            thead .btn-header {
-                display: none;
-            }
-
-            tbody td .btn,
-            tbody td img thead .btn-header {
-                display: none;
-            }
-
-            .table-submission {
-                width: 100% !important;
-            }
+        [data-bs-theme="dark"] .page-loading-inner>span {
+            color: #fff;
+            opacity: .6;
         }
 
-
-        /* Regular styles for the table */
-        .table-submission {
-            font-size: 1rem;
-            /* Default font size */
+        .page-spinner {
+            display: inline-block;
+            width: 2.75rem;
+            height: 2.75rem;
+            margin-bottom: .75rem;
+            vertical-align: text-bottom;
+            border: .15em solid #b4b7c9;
+            border-right-color: transparent;
+            border-radius: 50%;
+            -webkit-animation: spinner .75s linear infinite;
+            animation: spinner .75s linear infinite;
         }
 
-        /* Media query for smaller screens (e.g., phones) */
-        @media (max-width: 767px) {
+        [data-bs-theme="dark"] .page-spinner {
+            border-color: rgba(255, 255, 255, .4);
+            border-right-color: transparent;
+        }
 
-            .table-submission,
-            .table-submission td input {
-                font-size: 0.5rem !important;
-                /* Adjust the font size for smaller screens */
-            }
-
-            .row-submission {
-                width: 100% !important;
+        @-webkit-keyframes spinner {
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
             }
         }
 
-        @media (max-width: 768px) {
-            .my-rank {
-                display: flex !important;
-                position: fixed !important;
-                justify-content: center;
-            }
-
-            .my-rank i {
-                font-size: 1.5rem !important;
-            }
-
-            .my-rank .h5,
-            .my-rank .text-muted {
-                font-size: 0.8rem !important;
-
+        @keyframes spinner {
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
             }
         }
     </style>
@@ -165,7 +185,7 @@
 
 <body>
 
-    <main class="page-wrapper ">
+    <main class="page-wrapper">
 
         @include('inc.navbar')
         @yield('content')
@@ -181,27 +201,41 @@
     <!-- Vendor Scripts -->
     <script src="{{ url('assets/vendor/parallax-js/dist/parallax.min.js') }}"></script>
     <script src="{{ url('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url('assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
+    {{-- <script src="{{ url('assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script> --}}
     <script src="{{ url('assets/vendor/jarallax/dist/jarallax.min.js') }}"></script>
-    <script src="{{ url('assets/vendor/@lottiefiles/lottie-player/dist/lottie-player.js') }}"></script>
+    {{-- <script src="{{ url('assets/vendor/@lottiefiles/lottie-player/dist/lottie-player.js') }}"></script> --}}
     <script src="{{ url('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ url('assets/vendor/lightgallery/lightgallery.min.js') }}"></script>
-    <script src="{{ url('assets/vendor/lightgallery/plugins/video/lg-video.min.js') }}"></script>
+    {{-- <script src="{{ url('assets/vendor/lightgallery/plugins/video/lg-video.min.js') }}"></script> --}}
     <script src="{{ url('assets/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ url('assets/vendor/shufflejs/dist/shuffle.min.js') }}"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- Main Theme Script -->
     <script src="{{ url('assets/js/theme.min.js') }}"></script>
-    <script src="{{ url('assets/js/bottom-function.js') }}"></script>
+    {{-- <script src="{{ url('assets/js/bottom-function.js') }}"></script> --}}
 
     <!-- Include jQuery library -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) {
+                // Smoothly scroll to the stored position
+                window.scrollTo({
+                    top: scrollpos,
+                    behavior: 'smooth'
+                });
+            }
+        });
 
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
     </script>
 
 </body>
 
 </html>
+

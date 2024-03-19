@@ -1,6 +1,6 @@
 /*!
- * Video Extension for Jarallax v2.1.3 (https://github.com/nk-o/jarallax)
- * Copyright 2022 nK <https://nkdev.info>
+ * Video Extension for Jarallax v2.1.4 (https://github.com/nk-o/jarallax)
+ * Copyright 2023 nK <https://nkdev.info>
  * Licensed under MIT (https://github.com/nk-o/jarallax/blob/master/LICENSE)
  */
 

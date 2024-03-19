@@ -25,6 +25,9 @@ class User extends Authenticatable
         'phone',
         'team_name',
         'team_logo',
+        'ingame_name',
+        'ingame_id',
+        'ingame_server',
     ];
 
     /**

@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
-use App\Models\MyTeam;
+
+use App\Models\Score;
+use App\Models\Game;
+use App\Models\League;
 use App\Models\Team;
 use App\Models\Player;
+
 
 class TeamController extends Controller
 {
@@ -16,17 +18,11 @@ class TeamController extends Controller
      */
     public function index()
     {
-        
-        if (Auth::user()->role == 1){
-
-            $teams = Team::all();
-            return view ('league.manage-team')->with([
+        $game = Game::orderBy('id','desc')->first();
+        $teams = Team::where('game', $game->id)->get();
+            return view ('league.admin.manage-team')->with([
                 'teams'=>$teams
             ]);
-        }
-
-        else
-        return view ('profile.my-teams');
     }
 
     /**
@@ -42,36 +38,7 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-
-        $team = new MyTeam();
-        // Extracting relevant data
-        $roles = $data['roles'];
-        $playerIDs = $data['playerIDs'];
-        $teamNames = $data['teamNames'];
-        $reserves = $data['reserves'];
-        $reserveIDs = $data['reserveIDs'];
-        $reserveTeamNames = $data['reserveTeamNames'];
-
-        // Creating an instance of MyTeam and filling the attributes
-        $team->user = Auth::user()->id; // Replace 'your_user_value' with the actual user value
-        $team->game = Session::get('game_id'); // Replace 'your_game_value' with the actual game value
-        $team->fill([
-            'EXP Laner' => $playerIDs[0],
-            'Jungler' => $playerIDs[1],
-            'Mid Laner' => $playerIDs[2],
-            'Gold Laner' => $playerIDs[3],
-            'Roamer' => $playerIDs[4],
-            'Reserve_1' => $reserveIDs[0],
-            'Reserve_2' => $reserveIDs[1],
-            'Reserve_3' => null,
-            'Reserve_4' => null, // Assuming Reserve_4 and Reserve_5 are not provided in the data
-            'Reserve_5' => null,
-        ]);
-
-        $team->save();
-    
-        return response()->json(['message' => 'Data stored successfully']);
+        //
     }
 
     /**
@@ -79,13 +46,11 @@ class TeamController extends Controller
      */
     public function show(string $id)
     {
-        $myTeam = MyTeam::where('user',$id)->first();
-        $players = Player::all();
-        return view ('profile.team-details')->with([
-            'myTeam' => $myTeam,
-            'players' => $players
-        ]);
-        
+        $game = Game::orderBy('id','desc')->first();
+        $teams = Team::where('game', $game->id)->get();
+            return view ('league.admin.manage-team')->with([
+                'teams'=>$teams
+            ]);
     }
 
     /**
@@ -93,7 +58,7 @@ class TeamController extends Controller
      */
     public function edit(string $id)
     {
-        // $myTeam = MyTeam::w
+        //
     }
 
     /**
@@ -101,25 +66,39 @@ class TeamController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $team = Team::find($id);
+        
+            
+        $teamsData = $request->input('teams');
 
-        $team->status = $request->input('status') ? 1 : 0;
-        $team->label = $request->input('label');
 
-        $team->save();
+        foreach ($teamsData as $teamId => $teamData) {
 
-        $players = Player::where('team', $id)->get();
+            // Find the team by ID
+            $team = Team::findOrFail($teamId);
 
-        foreach ($players as $player){
-            $player->status = $request->input('status') ? 1 : 0;
-            $player->label = $request->input('label');
-            $player->save();
+            // Update team details
+            $team->team_name = $teamData['team_name'];
+            $team->status = isset($teamData['status']) ? 1 : 0;
+            $team->label = $teamData['label'];
+
+            $players = Player::where('team', $teamId)->get();
+
+            foreach ($players as $player){
+                $player->status = $request->input('status') ? 1 : 0;
+                $player->label = $request->input('label');
+                $player->save();
+            }
+
+            // Handle logo update if provided
+            if ($request->hasFile("teams.$teamId.logo")) {
+                $logoPath = $request->file("teams.$teamId.logo")->store('logos');
+                $team->logo = $logoPath;
+            }
+
+            $team->save();
         }
 
-        $teams = Team::all();
-            return view ('league.manage-team')->with([
-                'teams'=>$teams
-            ]);
+        return back()->with('success', 'Teams updated successfully');
     }
 
     /**
@@ -127,6 +106,8 @@ class TeamController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Team::truncate();
+
+        return back()->with('All teams has been reset');
     }
 }

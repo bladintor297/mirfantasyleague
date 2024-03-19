@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Kuala_Lumpur',
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -141,7 +141,7 @@ return [
 
     'maintenance' => [
         'driver' => 'file',
-        // 'store'  => 'redis',
+        // 'store' => 'redis',
     ],
 
     /*

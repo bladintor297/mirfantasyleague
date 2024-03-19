@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-use App\Models\MyTeam;
-use App\Models\Game;
-use App\Models\Player;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -15,7 +14,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        return view ('profile.my-account');
     }
 
     /**
@@ -39,20 +38,7 @@ class ProfileController extends Controller
      */
     public function show(string $id)
     {
-        $myTeam = MyTeam::find($id);
-            $game = Game::find ($myTeam->game);
-
-            $players = Player::join('team', 'player.team', '=', 'team.id')
-                    ->select('player.*', 'team.team_name as team_name')
-                    ->where('player.status', 1)
-                    ->get();
-
-
-            return view ("profile.team-details")->with([
-                'game' => $game,
-                'players' => $players,
-                'myTeam' => $myTeam,
-            ]);
+        //
     }
 
     /**
@@ -68,7 +54,19 @@ class ProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // return $request->all();
+
+        $user = User::find(Auth::user()->id);
+
+        $user->name = $request->input('name');
+        $user->username = $request->input('username');
+        $user->phone = $request->input('phone');
+        $user->ingame_id = $request->input('ingame_id');
+        $user->ingame_name = $request->input('ingame_name');
+        $user->ingame_server = $request->input('ingame_server');
+        $user->save();
+
+        return back()->withSuccess('Profile has been updated');
     }
 
     /**

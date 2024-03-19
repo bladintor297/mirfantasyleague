@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Player;
 use App\Models\Game;
-use App\Models\Score;
-use App\Models\MyTeam;
 use App\Models\League;
 
 class LeagueController extends Controller
@@ -17,9 +14,11 @@ class LeagueController extends Controller
      */
     public function index()
     {
-        $games = Game::all()->groupBy('league_id');
+               /* ----- Fetch Data ----- */
 
         // Fetch league information for the corresponding league_ids
+        $games = Game::all()->groupBy('league_id');
+
         $mergedGames = $games->map(function ($groupedGames, $leagueId) {
             $leagueInfo = League::join('game', 'league.id', '=', 'game.league_id')
                 ->where('game.league_id', $leagueId)
@@ -35,8 +34,8 @@ class LeagueController extends Controller
             ];
         });
 
-        return view("league.main-league")->with([
-            'allGames' => $mergedGames,
+        return view ('league.league-card')->with([
+            'games' => $mergedGames,
         ]);
     }
 
@@ -53,7 +52,6 @@ class LeagueController extends Controller
      */
     public function store(Request $request)
     {
-
         $league = new League();
         $league->league_name = $request->input('league_name');
         $league->description = $request->input('description');
@@ -70,19 +68,7 @@ class LeagueController extends Controller
      */
     public function show(string $id)
     {
-        $players = Player::join('team', 'player.team', '=', 'team.id')
-                ->select('player.*', 'team.team_name as team_name')
-                ->get();
-        $game = Game::find($id);
-        if ($game->status != 1){
-            return redirect()->route('league.index');
-        }
-
-        return view ("league.terms")->with([
-            'game' => $game,
-            'players' => $players,
-            'teamRegistered' => 0,
-        ]);
+        //
     }
 
     /**
@@ -90,20 +76,9 @@ class LeagueController extends Controller
      */
     public function edit(string $id)
     {
-        if ($id == 1){
-            $games = Game::leftJoin('league', 'game.league_id', '=', 'league.id')
-                    ->select(['game.*', 'league.league_name as league_name'])
-                    ->get();
-            return view ('league.game-list')->with([
-                'games' => $games
-            ]);
-        }
-
-        else{
-            $leagues =  League::orderBy('id', 'desc')->get();
+        $leagues =  League::orderBy('id', 'desc')->get();
             
-            return view ('league.league-list')->with(['leagues' => $leagues]);
-        }
+        return view ('league.admin.league-list')->with(['leagues' => $leagues]);
     }
 
     /**

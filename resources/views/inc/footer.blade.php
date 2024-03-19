@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="footer pt-5 pb-4 pb-lg-5 bg-dark">
+<footer class="footer pt-5 pb-4 pb-lg-5 bg-dark  zindex-5">
     <div class="container text-center pt-lg-3">
         <div class="navbar-brand justify-content-center text-dark mb-2 mb-lg-4">
             <img src="{{ url('assets/img/navbar/fantasyleague.png') }}" class="me-2" width="60" alt="Silicon">
