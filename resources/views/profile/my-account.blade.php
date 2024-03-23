@@ -87,15 +87,15 @@
               <h2 class="h5 text-primary pt-1 pt-lg-3 my-4">In-Game Details</h2>
               <div class="row pb-2">
                     <div class="col-sm-6 mb-4">
-                        <label for="zip" class="form-label fs-base">In-Game ID:</label>
+                        <label for="zip" class="form-label fs-base">In-Game ID Server ID <a type="button" data-bs-toggle="modal" data-bs-target="#ingame-guide" class="badge bg-primary rounded-circle text-decoration-none" style="font-size: 0.6rem">?</a></label>
                         <input type="text" id="ingame_id" name="ingame_id" class="form-control form-control-lg" value="{{ Auth::user()->ingame_id }}" required>
                     </div>
                     <div class="col-sm-6 mb-4">
-                        <label for="zip" class="form-label fs-base">In-Game Name:</label>
+                        <label for="zip" class="form-label fs-base">In-Game Name (Case Sensitive):</label>
                         <input type="text" id="ingame_name" name="ingame_name" class="form-control form-control-lg" value="{{ Auth::user()->ingame_name }}" required>
                     </div>
                     <div class="col-sm-6 mb-4">
-                        <label for="zip" class="form-label fs-base">In-Game Server ID:</label>
+                        <label for="zip" class="form-label fs-base">Server ID <a type="button" data-bs-toggle="modal" data-bs-target="#ingame-guide" class="badge bg-primary rounded-circle text-decoration-none" style="font-size: 0.6rem">?</a></label>
                         <input type="text" id="ingame_server" name="ingame_server" class="form-control form-control-lg" value="{{ Auth::user()->ingame_server }}" required>
                     </div>
                 </div>

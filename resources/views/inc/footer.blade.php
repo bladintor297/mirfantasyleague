@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="footer pt-5 pb-4 pb-lg-5 bg-dark  zindex-5">
+<footer class="footer pt-5 pb-4 pb-lg-5 bg-dark zindex-1">
     <div class="container text-center pt-lg-3">
         <div class="navbar-brand justify-content-center text-dark mb-2 mb-lg-4">
             <img src="{{ url('assets/img/navbar/fantasyleague.png') }}" class="me-2" width="60" alt="Silicon">
@@ -11,7 +11,7 @@
             <li class="nav-item"><a href="/scoreboard" class="nav-link text-white">Scoreboard</a></li>
             <li class="nav-item"><a href="/prize" class="nav-link text-white">Prize</a></li>
             <li class="nav-item"><a href="/faq" class="nav-link text-white">FAQ</a></li>
-            <li class="nav-item"><a href="/privacypolicy" class="nav-link text-white">Privacy Policy</a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-white">Privacy Policy</a></li>
         </ul>
         <div class="d-flex justify-content-center pt-1 mt-lg-3" style="font-size: 0.8rem;">
             <a href="#" class="btn btn-icon btn-secondary btn-facebook mx-2" aria-label="Facebook">

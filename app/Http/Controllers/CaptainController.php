@@ -69,8 +69,10 @@ class CaptainController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        return $request->all();
+
         if ($request->input('selected_captain') == null || $request->input('selected_vice_captain') == null)
-            return back()->withError('Something went wrong. Please reselect captain and vice captain. If error persist, reload the page.');
+            return redirect()->back()->withError('Something went wrong. Please reselect captain and vice captain. If error persist, reload the page.');
 
         else {
             $myteam = MyTeam::find($id);

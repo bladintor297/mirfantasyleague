@@ -75,7 +75,13 @@
                                                                 @else
                                                                     <a href="#" class="btn btn-sm btn-dark btn-shadow rounded-pill px-5 disabled">Event Ended</a>
                                                                 @endif
+
                                                             </div>
+                                                            @if (Auth::user()->role == 1)
+                                                                <div class="mb-2">
+                                                                    <span class="fs-sm fst-italic">Entries: {{ count($entries->where('game', $game->id)) }}</span>
+                                                                </div>
+                                                            @endif
                                                             
                                                         </div>
                                                     </div>

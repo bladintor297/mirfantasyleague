@@ -198,6 +198,14 @@
     <!-- top button -->
     @include ('inc.top-button')
 
+    <!-- Default modal -->
+    <div class="modal fade" id="ingame-guide" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <img src="{{ asset('public/assets/img/home/ingame-guide.jpg') }}" alt="xx">
+            </div>
+        </div>
+    </div>
     <!-- Vendor Scripts -->
     <script src="{{ url('assets/vendor/parallax-js/dist/parallax.min.js') }}"></script>
     <script src="{{ url('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>

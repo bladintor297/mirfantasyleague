@@ -86,7 +86,7 @@
                 <hr class="my-4">
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <label for="ingame_id" class="form-label">In-Game ID</label>
+                        <label for="ingame_id" class="form-label">In-Game ID <a type="button" data-bs-toggle="modal" data-bs-target="#ingame-guide" class="badge bg-primary rounded-circle text-decoration-none" style="font-size: 0.6rem">?</a></label>
                         <input class="form-control" type="text" id="ingame_id" placeholder="In-Game ID" name="ingame_id" required>
                         <div class="valid-tooltip">Looks good!</div>
                     </div>
@@ -96,8 +96,8 @@
                         <div class="valid-tooltip">Looks good!</div>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="ingame_server" class="form-label">In-Game Server</label>
-                        <input class="form-control" type="text" id="ingame_server" placeholder="In-Game Server" name="ingame_server" required>
+                        <label for="ingame_server" class="form-label">Server ID <a type="button" data-bs-toggle="modal" data-bs-target="#ingame-guide" class="badge bg-primary rounded-circle text-decoration-none" style="font-size: 0.6rem">?</a></label>
+                        <input class="form-control" type="text" id="ingame_server" placeholder="Server ID" name="ingame_server" required>
                         <div class="valid-tooltip">Looks good!</div>
                     </div>
                 </div>

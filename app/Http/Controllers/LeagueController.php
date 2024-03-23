@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Game;
 use App\Models\League;
+use App\Models\Myteam;
 
 class LeagueController extends Controller
 {
@@ -17,7 +18,9 @@ class LeagueController extends Controller
                /* ----- Fetch Data ----- */
 
         // Fetch league information for the corresponding league_ids
-        $games = Game::all()->groupBy('league_id');
+        $games = Game::all()->sortByDesc('league_id')->groupBy('league_id');
+
+        $entries = MyTeam::where('label', 'A')->get();
 
         $mergedGames = $games->map(function ($groupedGames, $leagueId) {
             $leagueInfo = League::join('game', 'league.id', '=', 'game.league_id')
@@ -30,12 +33,13 @@ class LeagueController extends Controller
                 'league_name' => $leagueInfo->league_name,
                 'description' => $leagueInfo->description,
                 'logo' =>$leagueInfo->logo,
-                'games' => $groupedGames,
+                'games' => $groupedGames->sortByDesc('league_id'),
             ];
         });
 
         return view ('league.league-card')->with([
             'games' => $mergedGames,
+            'entries' => $entries,
         ]);
     }
 

@@ -87,15 +87,24 @@
                                     <!-- Radio buttons for captain and vice-captain selection -->
                                     <div class="text-start border-top border-1 mb-5">
                                         <div class="d-flex justify-content-center">
-                                            <label class="form-check mt-3">
-                                                <input type="radio" class="form-check-input" name="captain" value="{{ $player->id }}" id="captain-{{ $player->id }}" {{ $player->id == $myteam->captain ? 'checked' : '' }} required> Captain
-
-                                            </label>
+                                            <div class="form-check mt-3">
+                                                <input type="radio" class="form-check-input" name="captain" value="{{ $player->id }}" id="captain" {{ $player->id == $myteam->captain ? 'checked' : '' }} required> 
+                                                <label class="form-check-label" for="captain-{{ $player->id }}">Captain 
+                                                    @if ($player->id == $myteam->captain)
+                                                        <span class="text-success"><i class='bx bxs-check-circle' ></i></span>
+                                                    @endif
+                                                </label>
+                                            </div>
                                         </div>
                                         <div class="d-flex justify-content-center">
-                                            <label class="form-check">
-                                                <input type="radio" class="form-check-input" name="vice_captain" value="{{ $player->id }}" id="vice-captain-{{ $player->id }}" {{ $player->id == $myteam->vice_captain ? 'checked' : '' }}required> Vice Captain
-                                            </label>
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="vice_captain" value="{{ $player->id }}" id="vice-captain" {{ $player->id == $myteam->vice_captain ? 'checked' : '' }}required>
+                                                <label class="form-check-label" for="vice-captain-{{ $player->id }}">Vice Captain 
+                                                    @if ($player->id == $myteam->vice_captain)
+                                                        <span class="text-success"><i class='bx bxs-check-circle' ></i></span>
+                                                    @endif
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
@@ -137,17 +146,19 @@
 
     <!-- JavaScript to handle radio button selections -->
     <script>
-        // Listen for changes in radio button selections
-        document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                // Update hidden input fields with selected IDs
-                var playerId = this.value;
-                if (this.name === 'captain') {
+        // Listen for changes in radio button selections using event delegation
+        document.addEventListener('change', function(event) {
+            var target = event.target;
+            // Check if the changed element is a radio button
+            if (target.type === 'radio') {
+                var playerId = target.value;
+                // Update hidden input fields with selected IDs based on the radio button's name
+                if (target.name === 'captain') {
                     document.getElementById('selectedCaptain').value = playerId;
-                } else if (this.name === 'vice_captain') {
+                } else if (target.name === 'vice_captain') {
                     document.getElementById('selectedViceCaptain').value = playerId;
                 }
-            });
+            }
         });
     
         document.addEventListener('DOMContentLoaded', function() {
