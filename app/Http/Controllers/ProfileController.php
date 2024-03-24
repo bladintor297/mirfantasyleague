@@ -58,12 +58,31 @@ class ProfileController extends Controller
 
         $user = User::find(Auth::user()->id);
 
-        $user->name = $request->input('name');
-        $user->username = $request->input('username');
-        $user->phone = $request->input('phone');
-        $user->ingame_id = $request->input('ingame_id');
-        $user->ingame_name = $request->input('ingame_name');
-        $user->ingame_server = $request->input('ingame_server');
+        if ($id == 0){
+
+            // Team Logo
+            $path = public_path('assets/img/profile/');
+            !is_dir($path) &&
+                mkdir($path, 0777, true);
+
+            $imageName = Auth::user()->username. '.' . $request->team_logo->extension();
+            $user->team_logo = $imageName;
+
+            $request->team_logo->move($path, $imageName);
+        }
+
+        else {
+            $user->name = $request->input('name');
+            $user->username = $request->input('username');
+            $user->team_name = $request->input('team_name');
+            $user->phone = $request->input('phone');
+            $user->ingame_id = $request->input('ingame_id');
+            $user->ingame_name = $request->input('ingame_name');
+            $user->ingame_server = $request->input('ingame_server');
+        }
+
+        
+
         $user->save();
 
         return back()->withSuccess('Profile has been updated');

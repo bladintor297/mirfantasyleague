@@ -81,6 +81,7 @@ Route::controller(ImportExportController::class)->group(function(){
     Route::post('import-player', 'importPlayer')->name('import-player');
     Route::post('import-team', 'importTeam')->name('import-team');
     Route::get('export', 'export')->name('export');
+    Route::get('export-teams', 'exportTeams')->name('export-teams');
 });
 
 Route::get('forget-password', [App\Http\Controllers\ForgetPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');

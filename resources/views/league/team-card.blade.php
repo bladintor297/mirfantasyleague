@@ -32,7 +32,7 @@
                             <span class="text-gaming h5 my-0 py-0">Team {{$myteam->label }}</span>
                             <span>
                                 @if ($myteam->isCompleted !== '1')
-                                    <span class="badge bg-danger shadow-danger">Incomplete {{ $myteam->isCompleted }}</span>
+                                    <span class="badge bg-danger shadow-danger">Incomplete</span>
                                 @else
                                     <span class="badge bg-success shadow-success">Completed</span>
                                 @endif

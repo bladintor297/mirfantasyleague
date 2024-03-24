@@ -121,7 +121,7 @@
             
             <div class="row mt-md-3">
                 <div class="col d-flex justify-content-center align-items-center">
-                    <h3 class="h4 pb-1 mb-0 text-warning text-gaming">Step 3. Select captain & vice captain </h3>
+                    <h3 class="h4 pb-1 mb-0 text-warning text-gaming">Step 3. Select captain & vice </h3>
                         <span class="text-success"><i class='bx bxs-check-circle' style='font-size: 28px;'></i></span>
                 </div>
             </div>

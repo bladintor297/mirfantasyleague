@@ -24,12 +24,18 @@
           <aside class="col-lg-3 col-md-4 border-end pb-5 mt-n5">
             <div class="position-sticky top-0">
               <div class="text-center pt-5">
-                <div class="d-table position-relative mx-auto mt-2 mt-lg-4 pt-5 mb-3">
-                  <img src="{{ asset('public/assets/img/profile/'.Auth::user()->team_logo)  }}" class="d-block rounded-circle" width="120"  alt="{{ Auth::user()->name }}" style="width: 120px; height:120px; object-fit:cover">
-                  <button type="button" class="btn btn-icon btn-light bg-white btn-sm border rounded-circle shadow-sm position-absolute bottom-0 end-0 mt-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Change picture" aria-label="Change picture">
-                    <i class="bx bx-refresh"></i>
-                  </button>
-                </div>
+                <form id="profile-form" class="needs-validation pb-3 pb-lg-4" action="{{ route('profile.update', ['profile' => '0']) }}" method="POST" enctype="multipart/form-data" novalidate>
+                  @csrf
+                  @method('PUT')
+                  <div class="d-table position-relative mx-auto mt-2 mt-lg-4 pt-5 mb-3">
+                      <img id="profile-image" src="{{ asset('public/assets/img/profile/'.Auth::user()->team_logo) }}" class="d-block rounded-circle" width="120" alt="{{ Auth::user()->name }}" style="width: 120px; height:120px; object-fit:cover">
+                      <input type="file" id="upload-input" name="team_logo" accept="image/png, image/jpeg, image/jpg" style="display: none;">
+                      <button type="button" class="btn btn-icon btn-light bg-white btn-sm border rounded-circle shadow-sm position-absolute bottom-0 end-0 mt-4" onclick="document.getElementById('upload-input').click();" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Change picture" aria-label="Change picture">
+                          <i class="bx bx-refresh"></i>
+                      </button>
+                  </div>
+                  <button type="submit" id="submit-button" class="btn btn-primary" style="display: none;">Submit</button>
+              </form>
                 <h2 class="h5 mb-1">{{ Auth::user()->name }}</h2>
                 <p class="mb-3 pb-3">{{ Auth::user()->email }}</p>
                 <button type="button" class="btn btn-secondary w-100 d-md-none mt-n2 mb-3" data-bs-toggle="collapse" data-bs-target="#account-menu">
@@ -70,7 +76,7 @@
                   </div>
                   <div class="col-sm-6 mb-4">
                     <label for="sn" class="form-label fs-base">Username</label>
-                    <input type="text" id="sn" name="username" class="form-control form-control-lg" value="{{ Auth::user()->username }}" required>
+                    <input type="text" id="sn" name="username" class="form-control form-control-lg" value="{{ Auth::user()->username }}" readonly>
                     <div class="invalid-feedback">Please enter your second name!</div>
                   </div>
                   <div class="col-sm-6 mb-4">
@@ -87,7 +93,7 @@
               <h2 class="h5 text-primary pt-1 pt-lg-3 my-4">In-Game Details</h2>
               <div class="row pb-2">
                     <div class="col-sm-6 mb-4">
-                        <label for="zip" class="form-label fs-base">In-Game ID Server ID <a type="button" data-bs-toggle="modal" data-bs-target="#ingame-guide" class="badge bg-primary rounded-circle text-decoration-none" style="font-size: 0.6rem">?</a></label>
+                        <label for="zip" class="form-label fs-base">In-Game ID <a type="button" data-bs-toggle="modal" data-bs-target="#ingame-guide" class="badge bg-primary rounded-circle text-decoration-none" style="font-size: 0.6rem">?</a></label>
                         <input type="text" id="ingame_id" name="ingame_id" class="form-control form-control-lg" value="{{ Auth::user()->ingame_id }}" required>
                     </div>
                     <div class="col-sm-6 mb-4">
@@ -118,5 +124,17 @@
         </div>
         </div>
     </section>
-
+    <script>
+      document.getElementById('upload-input').addEventListener('change', function() {
+          var file = this.files[0];
+          if (file) {
+              var reader = new FileReader();
+              reader.onload = function(event) {
+                  document.getElementById('profile-image').src = event.target.result;
+                  document.getElementById('submit-button').click(); // Trigger form submission
+              };
+              reader.readAsDataURL(file);
+          }
+      });
+  </script>
 @endsection

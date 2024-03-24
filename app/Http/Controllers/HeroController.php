@@ -103,6 +103,11 @@ class HeroController extends Controller
             $foreignPlayerReached = true;
         }
 
+        $myteam->captain = null;
+        $myteam->vice_captain = null;
+
+        $myteam->save();
+
         return view ('league.hero-selection')->with([
             'players' => $players,
             'myteam' => $myteam,
@@ -222,6 +227,8 @@ class HeroController extends Controller
         $myteam->MidLaner = null;
         $myteam->GoldLaner = null;
         $myteam->Roamer = null;
+        $myteam->captain = null;
+        $myteam->vice_captain = null;
 
         $myteam->save();
 

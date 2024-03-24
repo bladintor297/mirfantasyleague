@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Imports\ScoresImport;
 use App\Imports\PlayersImport;
 use App\Imports\TeamsImport;
+use App\Exports\TeamsExport;
+use App\Exports\UsersExport;
+
 use Maatwebsite\Excel\Facades\Excel;
 
 class ImportExportController extends Controller
@@ -17,7 +20,12 @@ class ImportExportController extends Controller
 
     public function export()
     {
-        return Excel::download(new ExportUsers, 'scores.xlsx');
+        return Excel::download(new UsersExport, 'all-users.xlsx');
+    }
+
+    public function exportTeams()
+    {
+        return Excel::download(new TeamsExport, 'all-teams.xlsx');
     }
 
     public function import()

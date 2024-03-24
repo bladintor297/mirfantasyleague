@@ -5,44 +5,38 @@
     
 
     <!-- Hero -->
-    <section class="dark-mode hero bg-size-cover bg-repeat-0 bg-position-center position-relative overflow-hidden pb-5 ">
+    <section class="dark-mode hero bg-size-cover bg-repeat-0 bg-position-center position-relative overflow-hidden py-5 " style="min-height: 100vh">
+
+        <div class="mt-4 mb-lg-2 mb-2 pt-3">
+            <h1 class="display-1 text-center mb-0 text-warning header-parallax hero-title">Manage Score</h1>
+        </div>
+
         <div class="container position-relative zindex-2 pb-md-2 pb-lg-4  hero-container ">
 
-            <!-- Title -->
-            <div class="row d-flex justify-content-center text-center pb-4 mb-2 zindex-5">
-                <div class="col">
-                    <h2 class="display-2 mb-4 text-warning">All Leagues</h2>
+            <div class="row justify-content-end my-1 pt-4">
+                <div class="col-5 btn-group btn-group-lg" role="group">
+                    <form action="{{ route('import') }}" method="POST" name="importform" enctype="multipart/form-data" class="me-1">
+                        @csrf
+                        <div class="input-group">
+                            <input id="file" type="file" name="file" class="form-control" >
+                            <button class="btn btn-success">Import File</button>
+                        </div>
+                        
+                    </form>
+                    <form action="{{ route('export-teams') }}" name="importform" enctype="multipart/form-data" class="me-1">
+                        @csrf
+                        <button class="btn btn-info"><i class='bx bxs-download'></i> Teams</button>
+                    </form>
+                    <form action="{{ route('export') }}" name="importform" enctype="multipart/form-data">
+                        @csrf
+                        <button class="btn btn-info"><i class='bx bxs-download'></i> Users</button>
+                    </form>
                 </div>
             </div>
 
-            <div class="d-flex justify-content-end my-3">
-                <form action="score/" id="filter-game"  >
-                    <select name="game" id="game" class="form-select bg-dark" >
-                        @foreach ($games as $game)
-                            <option class="text-white" value="{{ $game->id }}" {{ (isset($id) && $id == $game->id) ? 'selected' : '' }}>{{ $game->name }}</option>
-                        @endforeach
-                    </select>
-                </form>
-                <form action="{{ route('import') }}" method="POST" name="importform" class="d-flex justify-content-end mx-1" enctype="multipart/form-data">
-                    @csrf
-                    <div class="d-flex rounded bg-dark">
-                        <div class="form-group">
-                            <input id="file" type="file" name="file" class="form-control" >
-                        </div>
-                        <button class="btn btn-success">Import File</button>
-                    </div>
-    
-                    {{-- <div class="form-group">
-                        <a class="btn btn-info" href="{{ route('export') }}">Export File</a>
-                    </div>  --}}
-                </form>
-                
-
-            </div>
-            
             
             <!-- Dark bordered table -->
-            <div class="table-responsive">
+            <div class="table-responsive mt-3">
                 
                 <form action="{{ route('score.update', ['score' => 1]) }}" method="post">
                     @csrf
