@@ -51,7 +51,22 @@ class PrizeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $path = public_path('assets/img/prizes/');
+            !is_dir($path) &&
+                mkdir($path, 0777, true);
+
+        if ($request->hasFile('overall-prize')) {
+            $overall_prize = $request->file('overall-prize');
+            $overall_prize->move($path, 'poster-2.png');
+        }
+
+        if ($request->hasFile('weekly-prize')) {
+            $weekly_prize = $request->file('weekly-prize');
+            $weekly_prize->move($path, 'poster-4.png');
+        }
+
+        return redirect()->back()->with('success', 'Prize poster has been updated successfully.');
+
     }
 
     /**

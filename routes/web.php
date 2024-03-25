@@ -14,6 +14,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ImportExportController;
 
 
@@ -61,7 +62,9 @@ Route::resources([
     '/captain' => CaptainController::class,
     '/player' => PlayerController::class,
     '/team' => TeamController::class,
+    '/prize' => PrizeController::class,
     '/profile' => ProfileController::class,
+    '/post' => PostController::class,
 ]);
 
 

@@ -79,7 +79,50 @@
 
     <!-- Social Media -->
     <section class="container py-5 mb-1 mb-md-4 mb-lg-5">
-        <h2 class="h1 text-center pt-1 pb-4 mb-1 mb-lg-3">Visit Our Socials</h2>
+        <h2 class="h1 text-center pt-1 pb-4 mb-1 mb-lg-3">
+            Visit Our Socials
+            @if (Auth::check() && Auth::user()->role == 1)
+                <button class="btn btn-link mx-0 px-0" data-bs-toggle="modal" data-bs-target="#edit-feed"><i class='bx bxs-cog h1 text-warning'></i></button>
+                <!-- Large modal -->
+                <div class="modal fade" id="edit-feed" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg" role="document">
+                        
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                Edit Feed
+                            </div>
+                            <div class="modal-body">
+                                <!-- Dark table -->
+                                <form action="{{ route('post.update', ['post' => '1']) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tbody>
+                                                    
+                                                    @foreach ($posts as $post)
+                                                        <tr>
+                                                            <th scope="row" >
+                                                                Poster-{{$post->id}}
+                                                                <input type="hidden" name="posts[{{ $post->id }}][id]" value="{{$post->id}}">
+                                                                <textarea name="posts[{{ $post->id }}][title]" class="form-control mt-2" row="2">{{ $post->title }}</textarea>
+                                                            </th>
+                                                            <td width="60%">
+                                                                <img id="image-{{ $post->id }}" src="{{ asset('public/assets/img/home/feed/'.$post->image) }}" class="card-img-top mb-3" alt="Poster-{{$post->id}}">
+                                                                <input type="file" name="posts[{{ $post->id }}][image]" accept="image/*" class="form-control" onchange="previewImage(event, '{{ $post->id }}')">
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                            </table>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </h2>
         <div class="position-relative px-xl-5">
         
         <!-- Slider prev/next buttons -->
@@ -240,27 +283,6 @@
                             </tr>
                             
 
-                            @if (Auth::check() && $totalScores[$i]->user_id == Auth::user()->id)
-
-                            <div class="d-flex justify-content-end fixed-bottom fixed-right mb-4 me-3 my-rank">
-                                <div class="card bg-white border border-warning border-3 px-4 shadow ">
-                                    <div class="position-relative d-flex align-items-center py-2 my-1">
-                                        <div class="position-relative flex-shrink-0 p-3">
-                                            <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle bg-faded-warning"></span>
-                                            <span class="position-relative d-flex zindex-2">
-                                                <i class='bx bx-medal text-warning' style="font-size: 40px"></i>
-                                            </span>
-                                        </div>
-                                        <div class="nav flex-column ps-3 text-start">
-                                            <div class="nav-link p-0 text-muted">My Rank: <span class="text-warning fs-lg">#{{ $i+1 }}</span></div>
-                                            <div class="h5 my-0 py-0"><span class="fw-bold">{{ $totalScores[$i]->username }} </span><em>({{ $totalScores[$i]->total_score }} pts)</em></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                                
-                            @endif
                         @endfor
                         <tr>
                             <td colspan="5">
@@ -307,13 +329,13 @@
                 <div class="col-xl-9 col-md-8">
                     <div class="parallax ratio ratio-1x1 mx-auto" >
                         <div class="parallax-layer position-absolute zindex-3 p-3" data-depth="-0.15">
-                            <img src="{{ asset('assets/img/prizes/poster-3.png')  }}" alt="Avatar" >
+                            <img src="{{ asset('public/assets/img/prizes/poster-3.png')  }}" alt="Avatar" >
                         </div>
                         <div class="parallax-layer position-absolute zindex-2 p-3" data-depth="0.25">
-                            <img src="{{ asset('assets/img/prizes/poster-1.png')  }}" alt="Avatar" class="bg-primary">
+                            <img src="{{ asset('public/assets/img/prizes/poster-1.png')  }}" alt="Avatar" class="bg-primary">
                         </div>
                         <div class="parallax-layer position-absolute zindex-4 p-3" data-depth="0.15">
-                            <img src="{{ asset('assets/img/prizes/poster-2.png')  }}" alt="Avatar" >
+                            <img src="{{ asset('public/assets/img/prizes/poster-2.png')  }}" alt="Avatar" >
                         </div>
                     </div>
                 </div>
@@ -324,6 +346,18 @@
         
     </section>
     
+    <script>
+        function previewImage(event, postId) {
+            var input = event.target;
+            var reader = new FileReader();
+            reader.onload = function () {
+                var imgElement = document.getElementById('image-' + postId);
+                imgElement.src = reader.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
+
     <script>
         var typed = new Typed('#about-us', {
             strings: ['Dive into the world of MIR Fantasy League, brought to you by MIR Ventures. As passionate organizers of fantasy sports tournaments, we offer an exhilarating platform for players to build their dream teams and compete in thrilling tournaments. Join us, plan your strategies, pick your stars, and watch as your team rises to victory!'],
