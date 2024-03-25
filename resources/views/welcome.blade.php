@@ -191,7 +191,7 @@
                             <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h2 user-username">
                                 {{ $totalScores[0]->username }} </td>
                             <td class="d-lg-table-cell h2 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                <img src="{{ asset('assets/img/profile/' . $totalScores[0]->team_logo) }}" class="rounded-circle ms-2 object-cover"
+                                <img src="{{ asset('public/assets/img/profile/' . $totalScores[0]->team_logo) }}" class="rounded-circle ms-2 object-cover"
                                     style="width: 48px; height: 48px; object-fit: cover" alt="Diamond">
                                 <span>{{ $totalScores[0]->team_name }}</span>
                             </td>
@@ -229,7 +229,7 @@
                                 <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
                                     {{ $totalScores[$i]->username }} </td>
                                 <td class="d-lg-table-cell h4 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                    <img src="{{ asset('assets/img/profile/' . $totalScores[$i]->team_logo) }}" class="rounded-circle ms-2 object-cover"
+                                    <img src="{{ asset('public/assets/img/profile/' . $totalScores[$i]->team_logo) }}" class="rounded-circle ms-2 object-cover"
                                         style="width: 30px; height: 30px; object-fit: cover" alt="{{ $totalScores[$i]->username }}">
                                     {{ $totalScores[$i]->team_name }}
                                 </td>

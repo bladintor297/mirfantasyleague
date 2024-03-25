@@ -229,6 +229,7 @@ class HeroController extends Controller
         $myteam->Roamer = null;
         $myteam->captain = null;
         $myteam->vice_captain = null;
+        $myteam->isCompleted = 0;
 
         $myteam->save();
 

@@ -69,6 +69,13 @@
                                 {{-- <span class="ms-auto fs-xs text-muted">2</span> --}}
                             </a>
                         </li>
+                        <li>
+                            <a href="/myteam" class="dropdown-item d-flex align-items-center">
+                                <i class="bx bx-joystick fs-base opacity-60 me-2"></i>
+                                My Team
+                                {{-- <span class="ms-auto fs-xs text-muted">2</span> --}}
+                            </a>
+                        </li>
                     @else
                         <li>
                             <a href="/profile" class="dropdown-item d-flex align-items-center">

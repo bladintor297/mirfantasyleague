@@ -81,20 +81,29 @@
                             'Reserve_4' => '(Reserve) Gold Laner ',
                             'Reserve_5' => '(Reserve) Roamer ',
                         ] : []) as $position => $label)
-                            @if($myteam->{$position} !== null)
+                            @if($myteam->{$position} !== null || $myteam->{$position} !== 'EXPLaner' || $myteam->{$position} !== 'Jungler' || $myteam->{$position} !== 'MidLaner' || $myteam->{$position} !== 'GoldLaner' || $myteam->{$position} !== 'Roamer')
                                 
                                 <!-- Player card -->
                                 <div class="swiper-slide">
                                     <a href="#" class="text-decoration-none">
-                                        <!-- Display player image -->
-                                        @foreach($players as $player)
-                                            @if($player->id == $myteam->{$position})
-                                                <!-- Player found, update the image source -->
-                                                <img src="{{ asset('public/assets/img/players/'.$player->id.'.png') }}" class="d-block mx-auto zindex-5" alt="Screen" id="{{ $position }}Img">
-                                                @php $playerFound = true; $count++; @endphp
-                                                @break
-                                            @endif
-                                        @endforeach
+
+                                    @php
+                                        $playerFound = false;
+                                    @endphp
+                                    
+                                    @foreach($players as $player)
+                                        @if($player->id == $myteam->{$position})
+                                            <!-- Player found, update the image source -->
+                                            <img src="{{ asset('public/assets/img/players/'.$player->id.'.png') }}" class="d-block mx-auto zindex-5" alt="Screen" id="{{ $position }}Img">
+                                            @php $playerFound = true; $count++; @endphp
+                                            @break
+                                        @endif
+                                    @endforeach
+
+                                    @if (!$playerFound)
+                                        <!-- No player found, keep the original image source -->
+                                        <img src="{{ asset('assets/img/league/hero-selection/default-screen.png') }}" class="d-block mx-auto zindex-5" alt="Screen" id="{{ $position }}Img">
+                                    @endif
                                         
                                         <!-- Display player label -->
                                         <h3 class="h6 text-center mt-3 mb-0">{{ $label }}</h3>
@@ -136,8 +145,12 @@
             <hr class="mt-3"></div>
             <div class="row mt-md-3 mt-3">
                 <div class="col d-flex justify-content-center align-items-center">
-                    <h3 class="h4 pb-1 mb-0 text-warning text-gaming">Step 4. Your Final Line Up </h3>
-                        <span class="text-success"><i class='bx bxs-check-circle' style='font-size: 28px;'></i></span>
+                    <h3 class="h4 pb-1 mb-0 text-warning text-gaming">Step 4. Your team is completed</h3>
+                        @if ($myteam->isCompleted == 1)
+                            <span class="text-success"><i class='bx bxs-check-circle' style='font-size: 28px;'></i></span>
+                        @else
+                            <span class="text-danger"><i class='bx bxs-x-circle' style='font-size: 28px;'></i></span>
+                        @endif
                 </div>
             </div>
 
