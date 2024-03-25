@@ -34,8 +34,22 @@
                         <div class="row d-flex justify-content-center my-2">
 
                             <div class="col-8">
-                                <input type="text" value="{{ $league->league_name }} - {{ $game->name }}" id="" class="form-select mb-1 fw-bold" readonly>
+                                {{-- <input type="text" value="{{ $league->league_name }} - {{ $game->name }}" id="" class="form-select mb-1 fw-bold" readonly> --}}
                                 
+                                <form id="filter-game">
+                                    <select name="game" id="game" class="form-select mb-3">
+        
+                                            <option value="0" {{ $id == 0 ? 'selected' : '' }}>{{ $league->league_name }} - {{ $game->name }} (Overall)</option>
+                                            <option value="1" {{ $id == 1 ? 'selected' : '' }}>{{ $league->league_name }} - {{ $game->name }} (Week 1)</option>
+                                            <option value="2" {{ $id == 2 ? 'selected' : '' }}>{{ $league->league_name }} - {{ $game->name }} (Week 2)</option>
+                                            <option value="3" {{ $id == 3 ? 'selected' : '' }}>{{ $league->league_name }} - {{ $game->name }} (Week 3)</option>
+                                            <option value="4" {{ $id == 4 ? 'selected' : '' }}>{{ $league->league_name }} - {{ $game->name }} (Week 4)</option>
+                                            <option value="5" {{ $id == 5 ? 'selected' : '' }}>{{ $league->league_name }} - {{ $game->name }} (Week 5)</option>
+                                            <option value="6" {{ $id == 6 ? 'selected' : '' }}>{{ $league->league_name }} - {{ $game->name }} (Week 6)</option>
+        
+                                    </select>
+                                </form>
+
                                 <div class="input-group mt-2">
                                     <!-- Add this input field above your table -->
                                     <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search player by username">
@@ -100,7 +114,7 @@
                                                     <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h2 user-username">
                                                         {{ $totalScores[0]->username }} </td>
                                                     <td class="d-lg-table-cell h2 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                                        <img src="{{ asset('assets/img/profile/' . $totalScores[0]->team_logo) }}" class="rounded-circle ms-2 object-cover"
+                                                        <img src="{{ asset('public/assets/img/profile/' . $totalScores[0]->team_logo) }}" class="rounded-circle ms-2 object-cover"
                                                             style="width: 48px; height: 48px; object-fit: cover" alt="Diamond">
                                                         <span>{{ $totalScores[0]->team_name }}</span>
                                                     </td>
@@ -138,7 +152,7 @@
                                                         <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
                                                             {{ $totalScores[$i]->username }} </td>
                                                         <td class="d-lg-table-cell h4 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                                            <img src="{{ asset('assets/img/profile/' . $totalScores[$i]->team_logo) }}" class="rounded-circle ms-2 object-cover"
+                                                            <img src="{{ asset('public/assets/img/profile/' . $totalScores[$i]->team_logo) }}" class="rounded-circle ms-2 object-cover"
                                                                 style="width: 30px; height: 30px; object-fit: cover" alt="{{ $totalScores[$i]->username }}">
                                                             {{ $totalScores[$i]->team_name }}
                                                         </td>
@@ -204,11 +218,11 @@
                                                     <th class="border-bottom py-3 py-lg-4 bg-dark" id="theader" style="width:15%">
                                                         <h3 class="h4 mb-0 text-start text-white">POINTS</h3>
                                                     </th>
-                                                    <th class="border-bottom py-3 py-lg-4 bg-dark"  id="theader" style="width:20%">
-                                                        <h3 class="h4 mb-0 text-start text-white">TEAM</h3>
-                                                    </th>
-                                                    <th class="h4 border-bottom py-3 py-lg-4 mb-0 ps-3 text-white bg-dark"  id="theader" style="width:30%">
+                                                    <th class="h4 border-bottom py-3 py-lg-4 mb-0 ps-3 text-white bg-dark"  id="theader">
                                                         <h3 class="h4 mb-0 text-start text-white">PLAYER</h3>
+                                                    </th>
+                                                    <th class="border-bottom py-3 py-lg-4 bg-dark"  id="theader" style="width:30%">
+                                                        <h3 class="h4 mb-0 text-start text-white">TEAM</h3>
                                                     </th>
                                                     <th class="h4 border-bottom py-3 py-lg-4 mb-0 ps-3 text-white bg-dark" id="theader">
                                                         <h3 class="h4 mb-0 text-start text-white">NATIONALITY</h3>
@@ -226,7 +240,7 @@
                                                     <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
                                                         <div class="d-flex align-items-center">
                                                             <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
-                                                                style="width: 30px; height: 30px; object-fit: cover" alt="{{ $totalScores[0]->username }}">
+                                                                style="width: 30px; height: 30px; object-fit: cover" alt="{{ $playerScores[0]->username }}">
                                                             <div class="ps-3">
                                                                 <h3 class="h3 mb-0">{{ number_format($playerScores[0]->score, 2) }}
                                                                     <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
@@ -237,9 +251,15 @@
                                                     <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h2 user-username">
                                                         {{ $playerScores[0]->name }} </td>
                                                     <td class="d-lg-table-cell h2 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                                        <img src="{{ $playerScores[0]->team_logo}}" class="rounded-circle ms-2 object-cover"
-                                                            style="width: 48px; height: 48px; object-fit: cover" alt="{{ $totalScores[0]->username }}">
-                                                        <span>{{ $playerScores[0]->team_name }}</span>
+                                                        <img src="{{ asset('public/assets/img/teams/'.$playerScores[0]->team.'.png') }}" class="rounded-circle ms-2 object-cover"
+                                                            style="width: 48px; height: 48px; object-fit: cover" alt="{{ $playerScores[0]->name }}">
+                                                        <span>
+                                                            @foreach ($teams as $team)
+                                                            @if ($playerScores[0]->team == $team->id)
+                                                                {{ $team->team_name }}
+                                                            @endif
+                                                        @endforeach
+                                                        </span>
                                                     </td>
                                                     <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h2 user-username">
                                                         {{ $playerScores[0]->nationality }} </td>
@@ -262,7 +282,7 @@
                                                                 <p class="badge bg-danger ">Eliminated</p>
                                                             @else
                                                                 <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
-                                                                style="width: 30px; height: 30px; object-fit: cover" alt="{{ $totalScoress[0]->username }}">
+                                                                style="width: 30px; height: 30px; object-fit: cover" alt="{{ $playerScores[$i]->username }}">
                                                                 <div class="ps-3">
                                                                     <h3 class="h3 mb-0">{{ number_format($playerScores[$i]->score, 2) }}
                                                                         <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
@@ -275,9 +295,14 @@
                                                     <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
                                                         {{ $playerScores[$i]->name }} </td>
                                                     <td class="d-lg-table-cell h4 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                                        <img src="{{ $playerScores[$i]->team_logo}}" class="rounded-circle ms-2 object-cover"
+                                                        <img src="{{ asset('public/assets/img/teams/'.$playerScores[$i]->team.'.png') }}" class="rounded-circle ms-2 object-cover"
                                                             style="width: 30px; height: 30px; object-fit: cover" alt="{{ $playerScores[$i]->name }}">
-                                                        {{ $playerScores[$i]->team_name }}
+                                                        {{-- {{ $playerScores[$i]->team_name }} --}}
+                                                        @foreach ($teams as $team)
+                                                            @if ($playerScores[$i]->team == $team->id)
+                                                                {{ $team->team_name }}
+                                                            @endif
+                                                        @endforeach
                                                     </td>
                                                     <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
                                                         {{ $playerScores[$i]->nationality }} </td>
@@ -328,6 +353,24 @@
                         // Toggle the visibility of the row
                         row.style.display = isVisible ? '' : 'none';
                     });
+                });
+            });
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+
+            $(document).ready(function () {
+                $('#game').change(function () {
+                    var selectedGameId = $(this).val();
+                    console.log(selectedGameId);
+                    var newAction = '';
+                    if (selectedGameId == 0) {
+                        newAction = '/score';
+                    } else {
+                        newAction = '/score/' + selectedGameId;
+                    }
+                    $('#filter-game').attr('action', newAction);
+                    window.location.href = newAction;
                 });
             });
         </script>

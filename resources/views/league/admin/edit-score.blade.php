@@ -38,7 +38,7 @@
             <!-- Dark bordered table -->
             <div class="table-responsive mt-3">
                 
-                <form action="{{ route('score.update', ['score' => 1]) }}" method="post">
+                <form action="{{ route('score.update', ['score' => 1]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <table class="table table-dark table-bordered">
@@ -47,46 +47,46 @@
                             <th scope="col">#ID</th>
                             <th scope="col" width="12%">Username</th>
                             <th scope="col">Game</th>
-                            <th scope="col" width="10%">Day 1</th>
-                            <th scope="col" width="10%">Day 2</th>
-                            <th scope="col" width="10%">Day 3</th>
-                            <th scope="col" width="10%">Day 4</th>
-                            <th scope="col" width="10%">Day 5</th>
-                            <th scope="col" width="10%">Day 6</th>
+                            <th scope="col" width="10%">Mark 1</th>
+                            <th scope="col" width="10%">Mark 2</th>
+                            <th scope="col" width="10%">Mark 3</th>
+                            <th scope="col" width="10%">Mark 4</th>
+                            <th scope="col" width="10%">Mark 5</th>
+                            <th scope="col" width="10%">Mark 6</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($scores as $score)
-                                <tr>
-                                    <th scope="row">{{ $score->id }}
-                                        <input type="hidden" name="entries[{{ $score->id }}][score_id]" id="" value="{{ $score->id }}">
-                                        <input type="hidden" name="entries[{{ $score->id }}][user_id]" id="" value="{{ $score->user_id }}">
-                                    </th>
-                                    <td><input name="entries[{{ $score->id }}][username]" type="text" class="form-control"
-                                            value="{{ $score->username }}"></td>
-                                    <td>
-                                        @foreach ($games as $game)
-                                        @if ($game->id == $score->game_id)
-                                        <input name="entries[{{ $score->id }}][game_id]" type="hidden" class="form-control"
-                                            value="{{ $score->game_id }}">
-                                        <input name="entries[{{ $score->id }}][game_name]" type="text" readonly class="form-control"
-                                            value="{{ $game->league_name }} -- {{ $game->name }}">
-                                        @endif
-                                        @endforeach
-                                    </td>
-                                    <td><input name="entries[{{ $score->id }}][day1]" type="text" class="form-control"
-                                            value="{{ $score->day1 }}"></td>
-                                    <td><input name="entries[{{ $score->id }}][day2]" type="text" class="form-control"
-                                            value="{{ $score->day2 }}"></td>
-                                    <td><input name="entries[{{ $score->id }}][day3]" type="text" class="form-control"
-                                            value="{{ $score->day3 }}"></td>
-                                    <td><input name="entries[{{ $score->id }}][day4]" type="text" class="form-control"
-                                            value="{{ $score->day4 }}"></td>
-                                    <td><input name="entries[{{ $score->id }}][day5]" type="text" class="form-control"
-                                            value="{{ $score->day5 }}"></td>
-                                    <td><input name="entries[{{ $score->id }}][day6]" type="text" class="form-control"
-                                            value="{{ $score->day6 }}"></td>
-                                </tr>
+                            <tr>
+                                <th scope="row">{{ $score->id }}
+                                    <input type="hidden" name="entries[{{ $score->id }}][score_id]" id="" value="{{ $score->id }}">
+                                    <input type="hidden" name="entries[{{ $score->id }}][user_id]" id="" value="{{ $score->user_id }}">
+                                </th>
+                                <td><input name="entries[{{ $score->id }}][username]" type="text" class="form-control"
+                                        value="{{ $score->username }}" readonly></td>
+                                <td>
+                                    @foreach ($games as $game)
+                                    @if ($game->id == $score->game_id)
+                                    <input name="entries[{{ $score->id }}][game_id]" type="hidden" class="form-control"
+                                        value="{{ $score->game_id }}">
+                                    <input name="entries[{{ $score->id }}][game_name]" type="text" readonly class="form-control"
+                                        value="{{ $game->league_name }} -- {{ $game->name }}">
+                                    @endif
+                                    @endforeach
+                                </td>
+                                <td><input name="entries[{{ $score->id }}][day1]" type="text" class="form-control"
+                                        value="{{ $score->day1 }}"></td>
+                                <td><input name="entries[{{ $score->id }}][day2]" type="text" class="form-control"
+                                        value="{{ $score->day2 }}"></td>
+                                <td><input name="entries[{{ $score->id }}][day3]" type="text" class="form-control"
+                                        value="{{ $score->day3 }}"></td>
+                                <td><input name="entries[{{ $score->id }}][day4]" type="text" class="form-control"
+                                        value="{{ $score->day4 }}"></td>
+                                <td><input name="entries[{{ $score->id }}][day5]" type="text" class="form-control"
+                                        value="{{ $score->day5 }}"></td>
+                                <td><input name="entries[{{ $score->id }}][day6]" type="text" class="form-control"
+                                        value="{{ $score->day6 }}"></td>
+                            </tr>
                             @endforeach
                                 
                         </tbody>

@@ -55,7 +55,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/score/1" class="dropdown-item d-flex align-items-center">
+                            <a href="/score/create" class="dropdown-item d-flex align-items-center">
                                 <i class="bx bx-clipboard fs-base opacity-60 me-2"></i>
                                 Manage Score
                                 {{-- <span class="ms-auto fs-xs text-muted">5</span> --}}
