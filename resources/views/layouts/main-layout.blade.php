@@ -179,6 +179,21 @@
                 transform: rotate(360deg);
             }
         }
+
+        #btnModal {
+            padding: 8px 30px !important;
+        }
+
+        @media only screen and (max-width: 576px) {
+            #btnModal {
+                font-size: 15px !important; /* Adjust the font size as needed */
+                padding: 8px 15px !important; /* Adjust the padding as needed */
+                min-height: auto !important; /* Remove the minimum height */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+            }
+        }
+
+        
     </style>
 
 </head>
@@ -206,6 +221,9 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="https://storage.sociabuzz.com/storage/js/main/buttononwebsite/index.min.js"></script>
+    <script>sbBoW.draw("mirfantasyleague","U3VwcG9ydCBVcyE","position-bottom-left","#ffcc00","#FFFFFF")</script>
+
     <!-- Vendor Scripts -->
     <script src="{{ url('assets/vendor/parallax-js/dist/parallax.min.js') }}"></script>
     <script src="{{ url('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
