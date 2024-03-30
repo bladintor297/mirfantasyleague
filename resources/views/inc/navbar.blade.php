@@ -27,7 +27,7 @@
                 <ul class="dropdown-menu dropdown-menu-end my-1" style="width: 14rem;">
                     @if (Auth::user()->role == 1)
                         <li>
-                            <a href="/league/2/edit" class="dropdown-item d-flex align-items-center">
+                            <a href="/league/1/edit" class="dropdown-item d-flex align-items-center">
                                 <i class="bx bx-trophy fs-base opacity-60 me-2"></i>
                                 Manage League
                                 {{-- <span class="ms-auto fs-xs text-muted">5</span> --}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Player;
 use App\Models\Game;
@@ -39,18 +40,21 @@ class CaptainController extends Controller
      */
     public function show(string $id)
     {
-        $myTeams = MyTeam::find($id);
-        $players = Player::where('game', $myTeams->game)->get();
+        $myteam = MyTeam::find($id);
+        if ($myteam->user != Auth::user()->id)
+            abort(403, 'Unauthorized');
+
+        $players = Player::where('game', $myteam->game)->get();
 
         // $id refers to game->id
 
         $game = Game::with(['league' => function ($query) {
             $query->select('id', 'league_name');
-        }])->find($myTeams->game);
+        }])->find($myteam->game);
 
 
         return view ("league.captain-selection")->with([
-            'myteam' => $myTeams,
+            'myteam' => $myteam,
             'players' => $players,
             'game' => $game
         ]);

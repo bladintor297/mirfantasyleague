@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Game;
 use App\Models\League;
-use App\Models\Myteam;
+use App\Models\MyTeam;
 
 class LeagueController extends Controller
 {

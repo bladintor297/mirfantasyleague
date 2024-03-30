@@ -94,7 +94,7 @@ class AuthController extends Controller
             
         }
 
-        return redirect("login")->withError('You are not logged in');
+        return redirect("login")->withSuccess('You are logged out');
     }
     
     public function signOut() {
