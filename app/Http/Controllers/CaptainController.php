@@ -69,10 +69,8 @@ class CaptainController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return $request->all();
-
         if ($request->input('selected_captain') == null || $request->input('selected_vice_captain') == null)
-            return redirect()->back()->withError('Something went wrong. Please reselect captain and vice captain. If error persist, reload the page.');
+            return back()->withError('Something went wrong. Please reselect captain and vice captain. If error persist, reload the page.');
 
         else {
             $myteam = MyTeam::find($id);
@@ -90,14 +88,13 @@ class CaptainController extends Controller
 
             $isComplete = 0;
             if (!$game->reserve_isOn) {
-                // Check primary team members
-                foreach ($noReserveColumns as $column) {
-                    if (is_null($myteam->$column)) {
-                        $isComplete = 0;
-                        break; // Once any member is found null, no need to continue checking
-                    } else {
-                        $isComplete = 1; // If all primary team members are not null, set isComplete to 1
-                    }
+                // Check if all columns in noReserveColumns have values
+                $allColumnsHaveValues = collect($noReserveColumns)->every(function ($column) use ($myteam) {
+                    return !empty($myteam->{$column});
+                });
+
+                if ($allColumnsHaveValues) {
+                    $isComplete = 1;
                 }
             }
             
