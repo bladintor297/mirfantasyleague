@@ -103,9 +103,6 @@ class HeroController extends Controller
             $foreignPlayerReached = true;
         }
 
-        $myteam->captain = null;
-        $myteam->vice_captain = null;
-
         $myteam->save();
 
         return view ('league.hero-selection')->with([
@@ -204,13 +201,18 @@ class HeroController extends Controller
         }
 
 
+        $myteam->captain = null;
+        $myteam->vice_captain = null;
+        $myteam->isCompleted = 0;
+        $myteam->save();
+
         return redirect()->back()->with([
             'currentSlide' => $currentSlide,
             'count' => $count,
             'game' => $game,
             'teamExceedLimit' =>  $teamsExceedingLimit,
             'foreignPlayerReached' =>  $foreignPlayerReached
-        ]);
+        ])->withSuccess('Line up updated.  Please proceed to reselect your captain.');;
 
 
     }

@@ -28,7 +28,7 @@ class ScoreController extends Controller
         
         $totalScores = $totalScores->sortByDesc('total_score')->values();
 
-        $playerScores = Player::where('game', $curGame->id)->get();
+        $playerScores = Player::where('game', $curGame->id) ->orderBy('score', 'desc')->get();
 
         return view ('score.score-board')->with([
             'totalScores'=>$totalScores,
@@ -88,7 +88,7 @@ class ScoreController extends Controller
         
         $totalScores = $totalScores->sortByDesc('total_score')->values();
 
-        $playerScores = Player::where('game', $curGame->id)->get();
+        $playerScores = Player::where('game', $curGame->id) ->orderBy('score', 'desc')->get();
 
         return view ('score.score-board')->with([
             'totalScores'=>$totalScores,

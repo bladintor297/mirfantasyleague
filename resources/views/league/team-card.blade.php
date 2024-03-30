@@ -31,7 +31,7 @@
                         <div class="card-header fw-bolder text-center d-grid my-0 py-3">
                             <span class="text-gaming h5 my-0 py-0">Team {{$myteam->label }}</span>
                             <span>
-                                @if ($myteam->isCompleted !== '1')
+                                @if ($myteam->isCompleted == 0)
                                     <span class="badge bg-danger shadow-danger">Incomplete</span>
                                 @else
                                     <span class="badge bg-success shadow-success">Completed</span>

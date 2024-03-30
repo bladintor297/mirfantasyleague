@@ -112,14 +112,14 @@
 
     <!-- Team grid -->
     <div
-        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 pb-lg-2 pb-xl-3 d-flex justify-content-center">
+        class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 pb-lg-2 pb-xl-3 d-flex justify-content-center">
 
         <!-- Item -->
         <div class="col">
             <div class="card card-hover border-0 bg-transparent">
                 <div class="position-relative">
                     <img src="{{ url('public/assets/img/about/amir.png') }}" class="rounded-3 h-100 w-100"
-                        style="height: 300px; width:300px; object-fit:cover" alt="Amir Syafiq bin Abd Rashid">
+                        style="height: 300px; width:300px; object-fit:cover" alt="Amir Syafiq">
                     <div
                         class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
                         <span
@@ -146,7 +146,7 @@
                     </div>
                 </div>
                 <div class="card-body text-center p-3">
-                    <h3 class="fs-lg fw-semibold pt-1 mb-2">Amir Syafiq bin Abd Rashid</h3>
+                    <h3 class="fs-lg fw-semibold pt-1 mb-2">Amir Syafiq</h3>
                     <p class="fs-sm mb-0">Game Developer &amp; Manager</p>
                 </div>
             </div>
@@ -157,7 +157,7 @@
             <div class="card card-hover border-0 bg-transparent">
                 <div class="position-relative">
                     <img src="{{ url('public/assets/img/about/idham.jpeg') }}" class="rounded-3 h-100 w-100"
-                        style="height: 300px; width:300px; object-fit:cover" alt="Mohd Idham bin Anur">
+                        style="height: 300px; width:300px; object-fit:cover" alt="Baam">
                     <div
                         class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
                         <span
@@ -184,50 +184,12 @@
                     </div>
                 </div>
                 <div class="card-body text-center p-3">
-                    <h3 class="fs-lg fw-semibold pt-1 mb-2">Mohd Idham bin Anur</h3>
+                    <h3 class="fs-lg fw-semibold pt-1 mb-2">Baam</h3>
                     <p class="fs-sm mb-0">Website Developer</p>
                 </div>
             </div>
         </div>
 
-        <!-- Item -->
-        <div class="col">
-            <div class="card card-hover border-0 bg-transparent">
-                <div class="position-relative">
-                    <img src="{{ url('public/assets/img/about/aisya.png') }}" class="rounded-3 h-100 w-100"
-                        style="height: 300px; width:300px; object-fit:cover" alt="Nur Aisya Nabila binti Rosli">
-                    <div
-                        class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
-                        <span
-                            class="position-absolute top-0 start-0 w-100 h-100 bg-warning opacity-35 rounded-3"></span>
-                        <div class="position-absolute bottom-0 pb-2 zindex-2">
-                            <p class="mb-2 blockquote text-white text-center">"Don't Wait for Opportunity, Create it."
-                            </p>
-                            <div class="d-flex justify-content-center">
-                                <a target="_blank" href="#"
-                                    class="btn btn-icon btn-secondary btn-facebook btn-sm bg-white me-2 disabled"
-                                    aria-label="Facebook">
-                                    <i class="bx bxl-facebook"></i>
-                                </a>
-                                <a target="_blank" href="#"
-                                    class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2 disabled"
-                                    aria-label="LinkedIn">
-                                    <i class="bx bxl-linkedin"></i>
-                                </a>
-                                <a target="_blank" href="mailto:aradmille@gmail.com"
-                                    class="btn btn-icon btn-secondary btn-google btn-sm bg-white" aria-label="gmail">
-                                    <i class="bx bxl-gmail"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body text-center p-3">
-                    <h3 class="fs-lg fw-semibold pt-1 mb-2">Nur Aisya Nabila binti Rosli</h3>
-                    <p class="fs-sm mb-0">Graphic Designer</p>
-                </div>
-            </div>
-        </div>
 
     </div>
 </section>

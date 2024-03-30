@@ -3,10 +3,35 @@
 
 @section('content')
 
+<style>
+    /* CSS to make images fill container while maintaining aspect ratio */
+.image-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 200px; /* Fixed height */
+}
+
+@media (max-width:768px){
+    .image-container {
+        height: 100px; /* Fixed height */
+    }
+}
+
+.image-container img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures the image covers the container without stretching */
+    object-position: center bottom; /* Center the image horizontally and align it to the bottom */
+}
+</style>
     <!-- Hero -->
     <section class="vh-100 bg-repeat-0 bg-position-center bg-size-cover overflow-hidden"
         style="background-image: url({{ asset('assets/img/background/ml-bg.png')  }});" data-bs-theme="dark">
+        
         <div class="container">
+            
             <div class="row flex-nowrap mt-5 pt-5">
                 <div class="col-lg-6 col-xl-5 text-center text-lg-start pt-3 mt-xl-4  py-5 mt-2">
                     <h1 class="display-3 pt-5 pb-2 pb-lg-1 mt-sm-2 mt-lg-5 fw-bold">
@@ -21,6 +46,69 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Gallery (carousels) -->
+    <section class="py-2 bg-body">
+        <div class=" zindex-5 ">
+
+            <!-- LTR -->
+            <div class="swiper" data-swiper-options='{
+                    "loop": true,
+                    "grabCursor": false,
+                    "autoplay": {
+                        "delay": 0,
+                        "disableOnInteraction": true
+                    },
+                    "freeMode": true,
+                    "speed": 5000,
+                    "freeModeMomentum": false,
+                    "breakpoints": {
+                        "0": {
+                            "slidesPerView": 1,
+                            "spaceBetween": 8
+                        },
+                        "500": {
+                            "spaceBetween": 16
+                        },
+                        "1024": {
+                            "slidesPerView": 2,
+                            "spaceBetween": 24
+                        }
+                    }
+                    
+                }'>
+                <div class="swiper-wrapper">
+    
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <a href="https://todak.com/gaming/" class="stretched-link">
+                                <img src="{{ asset('public/assets/img/home/advertisement/post1.png') }}" alt="Gallery image" class="rounded-3">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <a href="https://todak.com/gaming/" class="stretched-link">
+                                <img src="{{ asset('public/assets/img/home/advertisement/post2.png') }}" alt="Gallery image" class="rounded-3">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="image-container">
+                            <a href="https://todak.com/gaming/" class="stretched-link">
+                                <img src="{{ asset('public/assets/img/home/advertisement/post3.png') }}" alt="Gallery image" class="rounded-3">
+                            </a>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+
+    </div>
     </section>
 
     <!-- Hero -->
@@ -105,7 +193,7 @@
                                                             <th scope="row" >
                                                                 Poster-{{$post->id}}
                                                                 <input type="hidden" name="posts[{{ $post->id }}][id]" value="{{$post->id}}">
-                                                                <textarea name="posts[{{ $post->id }}][title]" class="form-control mt-2" row="2">{{ $post->title }}</textarea>
+                                                                <textarea name="posts[{{ $post->id }}][title]" class="form-control mt-2 text-uppercase" row="2">{{ $post->title }}</textarea>
                                                             </th>
                                                             <td width="60%">
                                                                 <img id="image-{{ $post->id }}" src="{{ asset('public/assets/img/home/feed/'.$post->image) }}" class="card-img-top mb-3" alt="Poster-{{$post->id}}">
@@ -174,7 +262,8 @@
                                 <span class="fs-sm text-muted">{{ $post->updated_at->format('j F Y, g.i a') }}</span>
                             </div>
                             <h3 class="h5 mb-0">
-                                <a >{{ $post->title }}</a>
+                                <a ><span class="text-uppercase">{{ $post->title }}</span>
+                                </a>
                             </h3>
                             </div>
                         </article>
