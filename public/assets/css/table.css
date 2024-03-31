@@ -8,6 +8,9 @@
     background-color: black !important;
 }
 
+tbody td img {
+    height: 30px !important;
+}
 @media (max-width: 768px) {
 
     #theader{
@@ -37,8 +40,16 @@
         padding-right: 0px !important;
     }
 
-    tbody td img,
     thead .btn-header {
+        display: none;
+    }
+
+    tbody td img {
+        height: 20px !important;
+        object-fit: cover;
+    }
+
+    .player-team {
         display: none;
     }
 

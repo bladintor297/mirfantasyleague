@@ -77,8 +77,8 @@
                                     <div class="bg-dark">
                                         <thead class="thead">
                                             <tr class="bg-dark">
-                                                <th class="h4 border-bottom py-3 py-lg-4 mb-0 ps-3 text-white bg-dark"  width="10%" id="theader">
-                                                    <h3 class="h4 mb-0  text-white text-rank text-center">RANK</h3>
+                                                <th class="h4 border-bottom py-3 py-lg-4 mb-0 ps-3 text-white bg-dark"  width="1%" id="theader">
+                                                    <h3 class="h4 mb-0  text-white text-rank text-center"></h3>
                                                 </th>
                                                 <th class="border-bottom py-3 py-lg-4 bg-dark" id="theader" style="width:15%">
                                                     <h3 class="h4 mb-0 text-start text-white">POINTS</h3>
@@ -166,20 +166,42 @@
                             
                             {{-- {{ $totalScores->links() }} --}}
                         </div>
-                        <div class="tab-pane fade" id="players">
+                        <div class="tab-pane fade " id="players">
                             <p class="text-muted mb-4 text-center">Updated at:
                                 @if (count($playerScores)>0)
                                     {{ date('F j, Y, G:i:s ', strtotime($playerScores->sortByDesc('updated_at')->first()->updated_at )); }}
                                 @endif
                                 MYT
                             </p>
+
+                            @php
+                                $roles = [
+                                    'EXP Laner',
+                                    'Jungler',
+                                    'Mid Laner',
+                                    'Gold Laner',
+                                    'Roamer'
+                                ];
+                            @endphp
+
+                            {{-- <div class="d-flex justify-content-end mb-2">
+                                <div class="col-lg-2 col-sm-6">
+                                    <!-- Add this input field above your table -->
+                                    <select id="roleFilter" class="form-select">
+                                        <option value="">All Roles</option>
+                                        @foreach($roles as $index => $role)
+                                            <option value="{{ $index }}">{{ $role }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div> --}}
                             <div class="table-responsive">
                                 <table class="table bg-white shadow" >
                                     <div class="bg-dark">
                                         <thead class="thead">
                                             <tr class="bg-dark">
-                                                <th class="h4 border-bottom py-3 py-lg-4 mb-0 ps-3 text-white bg-dark"  width="10%" id="theader">
-                                                    <h3 class="h4 mb-0  text-white text-rank text-center">RANK</h3>
+                                                <th class="h4 border-bottom py-3 py-lg-4 mb-0 ps-3 text-white bg-dark"  width="1%" id="theader">
+                                                    <h3 class="h4 mb-0  text-white text-center"></h3>
                                                 </th>
                                                 <th class="border-bottom py-3 py-lg-4 bg-dark" id="theader" style="width:15%">
                                                     <h3 class="h4 mb-0 text-start text-white">POINTS</h3>
@@ -191,7 +213,7 @@
                                                     <h3 class="h4 mb-0 text-start text-white">TEAM</h3>
                                                 </th>
                                                 <th class="h4 border-bottom py-3 py-lg-4 mb-0 ps-3 text-white bg-dark" id="theader">
-                                                    <h3 class="h4 mb-0 text-start text-white">NATIONALITY</h3>
+                                                    <h3 class="h4 mb-0 text-start text-white">ROLE</h3>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -214,34 +236,44 @@
                                                 </td>
                                                 <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
                                                     <div class="d-flex align-items-center">
+                                                        
                                                         @if ($player->score < -999)
                                                             <p class="badge bg-danger ">Eliminated</p>
                                                         @else
-                                                            <img class="diamond" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
-                                                            style="width: 30px; height: 30px; object-fit: cover" alt="{{ $player->username }}">
-                                                            <div class="ps-3">
-                                                                <h3 class="h3 mb-0">{{ number_format($player->score, 2) }}
+                                                            <img class="diamond pe-1" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
+                                                                style="width: 30px; height: 30px; object-fit: cover" alt="Diamond">
+                                                            <div class="total-score">
+                                                                <h3 class="h2 mb-0 text-info">{{ number_format($player->score, 2) }}
                                                                     <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
                                                                 </h3>
                                                             </div>
                                                         @endif
-                                                        
+
                                                     </div>
+                                                    
                                                 </td>
                                                 <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
-                                                    {{ $player->name }} </td>
-                                                <td class="d-lg-table-cell h4 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                                    <img src="{{ asset('public/assets/img/teams/'.$player->team.'.png') }}" class="rounded-circle ms-2 object-cover"
-                                                        style="width: 30px; height: 30px; object-fit: cover" alt="{{ $player->name }}">
+                                                    <div class="d-flex">
+                                                        <span class="me-2"><img src="{{ asset('public/assets/img/flags/'.$player->nationality.'.png') }}" class="p-1" alt="{{ $player->nationality }}" ></span>
+                                                        <span>{{ $player->name }}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="d-lg-table-cell h4 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark ">
+                                                    
                                                     {{-- {{ $player->team_name }} --}}
                                                     @foreach ($teams as $team)
                                                         @if ($player->team == $team->id)
-                                                            {{ $team->team_name }}
+                                                            <span class="player-team">
+                                                                {{ $team->team_name }}
+                                                            </span>
                                                         @endif
                                                     @endforeach
+                                                    <img src="{{ asset('public/assets/img/teams/'.$player->team.'.png') }}" class="ms-2 object-cover"
+                                                        alt="{{ $player->name }}">
                                                 </td>
                                                 <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
-                                                    {{ $player->nationality }} </td>
+                                                    {{ $roles[$player->role]  }}
+                                                </td>
                                             </tr>
                                             @endforeach
 

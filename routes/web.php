@@ -66,7 +66,7 @@ Route::middleware('authenticate')->group(function () {
 Route::middleware('admin')->group(function () {
 
     Route::get('/score/create', [ScoreController::class, 'create']);
-    // Route::get('league/{league}/edit', [LeagueController::class, 'edit']);
+    Route::get('league/{league}/edit', [LeagueController::class, 'edit']);
 
     Route::resource('/player', PlayerController::class);
     Route::resource('/team', TeamController::class);

@@ -8,10 +8,10 @@
         </a>
 
         {{-- Mobile Toggler --}}
-        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse5"
-            aria-expanded="false">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <button class="navbar-toggler ms-auto me-3" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse2" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
         @if (Auth::check())
 
