@@ -23,6 +23,70 @@
                 <span class="text-warning header-parallax hero-title my-0 py-0">{{ $game->name }}</span>
             </h1>
         </div>
+        
+        <div class="container">
+            <div class="py-2">
+                <div class="zindex-5 ">
+
+                    <!-- LTR -->
+                    <div class="swiper" data-swiper-options='{
+                            "loop": true,
+                            "grabCursor": false,
+                            "autoplay": {
+                                "delay": 0,
+                                "disableOnInteraction": true
+                            },
+                            "freeMode": true,
+                            "speed": 5000,
+                            "freeModeMomentum": false,
+                            "breakpoints": {
+                                "0": {
+                                    "slidesPerView": 1,
+                                    "spaceBetween": 8
+                                },
+                                "500": {
+                                    "spaceBetween": 16
+                                },
+                                "1024": {
+                                    "slidesPerView": 2,
+                                    "spaceBetween": 24
+                                }
+                            }
+                            
+                        }'>
+                        <div class="swiper-wrapper">
+            
+                            <div class="swiper-slide">
+                                <div class="image-container">
+                                    <a href="https://todak.com/gaming/" class="stretched-link">
+                                        <img src="{{ asset('assets/img/home/advertisement/post1.png') }}" alt="Gallery image" class="rounded-3">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="image-container">
+                                    <a href="https://todak.com/gaming/" class="stretched-link">
+                                        <img src="{{ asset('assets/img/home/advertisement/post2.png') }}" alt="Gallery image" class="rounded-3">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="image-container">
+                                    <a href="https://todak.com/gaming/" class="stretched-link">
+                                        <img src="{{ asset('assets/img/home/advertisement/post3.png') }}" alt="Gallery image" class="rounded-3">
+                                    </a>
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+            
+
+                </div>
+            </div>
+        </div>
         <div class="container py-md-2 py-lg-2">
             <div class="row pb-5">
                 @foreach ($myteams as $myteam)

@@ -49,6 +49,9 @@ class ReserveController extends Controller
     {
 
         $myteam = MyTeam::find($id);
+        if ($myteam->user != Auth::user()->id)
+            abort(403, 'Unauthorized');
+        
         $game = Game::find($myteam->game);
         $players = Player::where('game', $myteam->game)->get();
 

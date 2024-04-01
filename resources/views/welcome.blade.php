@@ -83,7 +83,7 @@
                     <div class="swiper-slide">
                         <div class="image-container">
                             <a href="https://todak.com/gaming/" class="stretched-link">
-                                <img src="{{ asset('public/assets/img/home/advertisement/post1.png') }}" alt="Gallery image" class="rounded-3">
+                                <img src="{{ asset('assets/img/home/advertisement/post1.png') }}" alt="Gallery image" class="rounded-3">
                             </a>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                     <div class="swiper-slide">
                         <div class="image-container">
                             <a href="https://todak.com/gaming/" class="stretched-link">
-                                <img src="{{ asset('public/assets/img/home/advertisement/post2.png') }}" alt="Gallery image" class="rounded-3">
+                                <img src="{{ asset('assets/img/home/advertisement/post2.png') }}" alt="Gallery image" class="rounded-3">
                             </a>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                     <div class="swiper-slide">
                         <div class="image-container">
                             <a href="https://todak.com/gaming/" class="stretched-link">
-                                <img src="{{ asset('public/assets/img/home/advertisement/post3.png') }}" alt="Gallery image" class="rounded-3">
+                                <img src="{{ asset('assets/img/home/advertisement/post3.png') }}" alt="Gallery image" class="rounded-3">
                             </a>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
             </div>
     
 
-    </div>
+        </div>
     </section>
 
     <!-- Hero -->
@@ -279,7 +279,7 @@
     </section>
 
     <!-- Location -->
-    <section class="container py-5" style="min-height: 100vh" >
+    <section class="container py-5" >
         <h1 class="py-0 pb-md-3 text-warning display-1 text-gaming text-center" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Scoreboard</h1>
         <div class="table-responsive">
             <table class="table" >
@@ -306,45 +306,9 @@
                 </div>
                 <tbody class="tbody">
                     @if (count($totalScores)>0)
-                        <!-- Row 1 -->
-                        <tr data-aos="flip-up" data-aos-anchor-placement="center-center" class="user-row">
-                            <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4 mb-0 ps-3 rank-no text-center">#1</td>
-                            <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="diamond pe-1" src="https://d1x91p7vw3vuq8.cloudfront.net/itemku-upload/202155/kxreukcwaabzi98gw5t2.png"
-                                        style="width: 30px; height: 30px; object-fit: cover" alt="Diamond">
-                                    <div class="total-score">
-                                        <h3 class="h2 mb-0 text-info">{{ number_format($totalScores[0]->total_score, 2) }}
-                                            <i class="fa-solid fa-medal fa-beat-fade" style="color: #ffd700;"></i>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h2 user-username">
-                                {{ $totalScores[0]->username }} </td>
-                            <td class="d-lg-table-cell h2 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark team-name">
-                                <img src="{{ asset('public/assets/img/profile/' . $totalScores[0]->team_logo) }}" class="rounded-circle ms-2 object-cover"
-                                    style="width: 48px; height: 48px; object-fit: cover" alt="Diamond">
-                                <span>{{ $totalScores[0]->team_name }}</span>
-                            </td>
-                            <td class="d-lg-table-cell text-lg-center border-bottom-lg pt-2 pb-3 py-lg-4">
-                                <button type="button" class="btn btn-lg btn-outline-warning fs-sm w-100 w-lg-auto fs-3 py-1">View
-                                    Profile</button>
-
-                                    <!-- Default modal -->
-                                    <div class="modal fade" id="modalId" tabindex="-1" role="dialog">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                ...
-                                            </div>
-                                        </div>
-                                    </div>
-
-                            </td>
-                        </tr>
-            
+                        
                         <!-- Rows 2 and onwards -->
-                        @for ($i = 1; $i <= 3; ++$i)
+                        @for ($i = 0; $i <= 4; ++$i)
                             <tr data-aos="fade-up" data-aos-anchor-placement="center-center" class="user-row">
                                 <td class="d-lg-table-cell align-middle h4 border-bottom py-3 py-lg-4 mb-0 ps-3 rank-no text-center">#{{ $i+1 }}</td>
                                 <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">

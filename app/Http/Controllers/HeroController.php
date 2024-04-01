@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Player;
 use App\Models\Game;
@@ -52,6 +53,10 @@ class HeroController extends Controller
     public function edit(string $id)
     {
         $myteam = MyTeam::find($id);
+
+        if ($myteam->user != Auth::user()->id)
+            abort(403, 'Unauthorized');
+
         $players = Player::where('game', $myteam->game)->get();
         $game = Game::find($myteam->game);
 
