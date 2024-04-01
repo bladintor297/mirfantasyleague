@@ -36,7 +36,7 @@
                 <div class="col-lg-6 col-xl-5 text-center text-lg-start pt-3 mt-xl-4  py-5 mt-2">
                     <h1 class="display-3 pt-5 pb-2 pb-lg-1 mt-sm-2 mt-lg-5 fw-bold">
                         <span class="text-warning text-uppercase header-parallax hero-title">{{ $league->league_name }}</span>
-                        <span class="header-parallax hero-title">Fantasy Leaguexx</span>
+                        <span class="header-parallax hero-title">Fantasy League TEST</span>
                     </h1>
                     <p class="fs-lg mb-2 mb-lg-4 px-3 px-sm-0 text-white" align="justify">
                         Draft your dream team, conquer the arena. {{ $league->league_name }}  Fantasy League awaits.
