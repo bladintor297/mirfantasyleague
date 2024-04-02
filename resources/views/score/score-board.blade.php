@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="tab-content " style="min-height: 500px;">
-                        <div class="tab-pane fade " id="participants">
+                        <div class="tab-pane fade show active" id="participants">
 
                             <p class="text-muted mb-4 text-center">Updated at:
                                 @if (count($totalScores)>0)
@@ -72,68 +72,6 @@
                                 @endif
                                 MYT
                             </p>
-                            <!-- Gallery (carousels) -->
-                            <div class="py-2 bg-body">
-                                <div class=" zindex-5 ">
-
-                                    <!-- LTR -->
-                                    <div class="swiper" data-swiper-options='{
-                                            "loop": true,
-                                            "grabCursor": false,
-                                            "autoplay": {
-                                                "delay": 0,
-                                                "disableOnInteraction": true
-                                            },
-                                            "freeMode": true,
-                                            "speed": 5000,
-                                            "freeModeMomentum": false,
-                                            "breakpoints": {
-                                                "0": {
-                                                    "slidesPerView": 1,
-                                                    "spaceBetween": 8
-                                                },
-                                                "500": {
-                                                    "spaceBetween": 16
-                                                },
-                                                "1024": {
-                                                    "slidesPerView": 2,
-                                                    "spaceBetween": 24
-                                                }
-                                            }
-                                            
-                                        }'>
-                                        <div class="swiper-wrapper">
-                            
-                                            <div class="swiper-slide">
-                                                <div class="image-container">
-                                                    <a href="https://todak.com/gaming/" class="stretched-link">
-                                                        <img src="{{ asset('assets/img/home/advertisement/post1.png') }}" alt="Gallery image" class="rounded-3">
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <div class="image-container">
-                                                    <a href="https://todak.com/gaming/" class="stretched-link">
-                                                        <img src="{{ asset('assets/img/home/advertisement/post2.png') }}" alt="Gallery image" class="rounded-3">
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <div class="image-container">
-                                                    <a href="https://todak.com/gaming/" class="stretched-link">
-                                                        <img src="{{ asset('assets/img/home/advertisement/post3.png') }}" alt="Gallery image" class="rounded-3">
-                                                    </a>
-                                                </div>
-                                            </div>
-                            
-                                        </div>
-                                    </div>
-                            
-
-                                </div>
-                            </div>
                             <div class="table-responsive">
                                 <table class="table" >
                                     <div class="bg-dark">
@@ -183,7 +121,8 @@
                                                         style="width: 48px; height: 48px; object-fit: cover" alt="Diamond"> --}}
                                                         <span>{{ $score->team_name }}</span>
                                                     <td class="d-lg-table-cell border-bottom-lg text-lg-center pt-2 pb-3 py-lg-4 my-auto">
-                                                        <button type="button" class="btn btn-sm btn-outline-warning fs-sm w-100 w-lg-auto">ViewProfile</button>
+                                                        <button type="button" class="btn btn-sm btn-outline-warning fs-sm w-100 w-lg-auto">View
+                                                            Profile</button>
                                                     </td>
                                                 </tr>
                             
@@ -227,7 +166,7 @@
                             
                             {{-- {{ $totalScores->links() }} --}}
                         </div>
-                        <div class="tab-pane fade show active" id="players">
+                        <div class="tab-pane fade " id="players">
                             <p class="text-muted mb-4 text-center">Updated at:
                                 @if (count($playerScores)>0)
                                     {{ date('F j, Y, G:i:s ', strtotime($playerScores->sortByDesc('updated_at')->first()->updated_at )); }}
@@ -239,7 +178,7 @@
                                 $roles = [
                                     'EXP',
                                     'Jungler',
-                                    'Mid',
+                                    'Mid ',
                                     'Gold',
                                     'Roamer'
                                 ];
@@ -270,8 +209,8 @@
                                                 <th class="h4 border-bottom py-3 py-lg-4 mb-0 ps-3 text-white bg-dark"  id="theader">
                                                     <h3 class="h4 mb-0 text-start text-white">PLAYER</h3>
                                                 </th>
-                                                <th class="border-bottom py-3 py-lg-4 bg-dark"  id="theader" style="width:10%">
-                                                    <h3 class="h4 mb-0 text-start text-white">K | D | A</h3>
+                                                <th class="border-bottom py-3 py-lg-4 bg-dark"  id="theader" style="width:30%">
+                                                    <h3 class="h4 mb-0 text-start text-white">TEAM</h3>
                                                 </th>
                                                 <th class="h4 border-bottom py-3 py-lg-4 mb-0 ps-3 text-white bg-dark" id="theader">
                                                     <h3 class="h4 mb-0 text-start text-white">ROLE</h3>
@@ -315,19 +254,22 @@
                                                 </td>
                                                 <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
                                                     <div class="d-flex">
-                                                        <span class="me-2"><img src="{{ asset('public/assets/img/flags/'.$player->nationality.'.png') }}" class="p-1" alt="{{ $player->nationality }}" ></span>
+                                                        <span class="me-2"><img id="flag" src="{{ asset('public/assets/img/flags/'.$player->nationality.'.png') }}" class="p-1" alt="{{ $player->nationality }}" style="height: 30px !important;"></span>
                                                         <span>{{ $player->name }}</span>
-                                                        <span>
-                                                            <img src="{{ asset('assets/img/teams/'.$player->team.'.png') }}"
-                                                                    class="ms-2 object-cover P-1"
-                                                                    alt="{{ $player->name }}"
-                                                                    onerror="this.onerror=null; this.classList.add('rounded-pill'); this.src='https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg';">
-                                                        </span>
                                                     </div>
                                                 </td>
                                                 <td class="d-lg-table-cell h4 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark ">
                                                     
-                                                    <span class="text-success">5 </span> | <span class="text-danger">2 </span> | <span class="text-muted">1</span>
+                                                    {{-- {{ $player->team_name }} --}}
+                                                    @foreach ($teams as $team)
+                                                        @if ($player->team == $team->id)
+                                                            <span class="player-team">
+                                                                {{ $team->team_name }}
+                                                            </span>
+                                                        @endif
+                                                    @endforeach
+                                                    <img id="team_logo" src="{{ asset('public/assets/img/teams/'.$player->team.'.png') }}" class="ms-2 object-cover"
+                                                        alt="{{ $player->name }}" style="height: 30px !important;>
                                                 </td>
                                                 <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
                                                     {{ $roles[$player->role]  }}
