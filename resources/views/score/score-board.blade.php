@@ -317,8 +317,12 @@
                                                     <div class="d-flex">
                                                         <span class="me-2"><img src="{{ asset('public/assets/img/flags/'.$player->nationality.'.png') }}" class="p-1" alt="{{ $player->nationality }}" ></span>
                                                         <span>{{ $player->name }}</span>
-                                                        <span><img src="{{ asset('assets/img/teams/'.$player->team.'.png') }}" class="ms-2 object-cover P-1"
-                                                            alt="{{ $player->name }}"></span>
+                                                        <span>
+                                                            <img src="{{ asset('assets/img/teams/'.$player->team.'.png') }}"
+                                                                    class="ms-2 object-cover P-1"
+                                                                    alt="{{ $player->name }}"
+                                                                    onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg';">
+                                                        </span>
                                                     </div>
                                                 </td>
                                                 <td class="d-lg-table-cell h4 align-middle text-lg-start border-bottom py-3 py-lg-4 text-dark ">
