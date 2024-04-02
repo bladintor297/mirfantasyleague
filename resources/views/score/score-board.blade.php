@@ -178,7 +178,7 @@
                                 $roles = [
                                     'EXP',
                                     'Jungler',
-                                    'Mid ',
+                                    'Mid',
                                     'Gold',
                                     'Roamer'
                                 ];
@@ -254,7 +254,7 @@
                                                 </td>
                                                 <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
                                                     <div class="d-flex">
-                                                        <span class="me-2"><img id="flag" src="{{ asset('public/assets/img/flags/'.$player->nationality.'.png') }}" class="p-1" alt="{{ $player->nationality }}" style="height: 30px !important;"></span>
+                                                        <span class="me-2"><img src="{{ asset('public/assets/img/flags/'.$player->nationality.'.png') }}" class="p-1" alt="{{ $player->nationality }}" ></span>
                                                         <span>{{ $player->name }}</span>
                                                     </div>
                                                 </td>
@@ -268,8 +268,8 @@
                                                             </span>
                                                         @endif
                                                     @endforeach
-                                                    <img id="team_logo" src="{{ asset('public/assets/img/teams/'.$player->team.'.png') }}" class="ms-2 object-cover"
-                                                        alt="{{ $player->name }}" style="height: 30px !important;">
+                                                    <img src="{{ asset('public/assets/img/teams/'.$player->team.'.png') }}" class="ms-2 object-cover"
+                                                        alt="{{ $player->name }}">
                                                 </td>
                                                 <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
                                                     {{ $roles[$player->role]  }}
