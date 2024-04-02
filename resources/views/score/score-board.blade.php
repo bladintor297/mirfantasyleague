@@ -269,7 +269,7 @@
                                                         @endif
                                                     @endforeach
                                                     <img id="team_logo" src="{{ asset('public/assets/img/teams/'.$player->team.'.png') }}" class="ms-2 object-cover"
-                                                        alt="{{ $player->name }}" style="height: 30px !important;>
+                                                        alt="{{ $player->name }}" style="height: 30px !important;">
                                                 </td>
                                                 <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
                                                     {{ $roles[$player->role]  }}
