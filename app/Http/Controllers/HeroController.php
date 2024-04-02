@@ -217,7 +217,7 @@ class HeroController extends Controller
             'game' => $game,
             'teamExceedLimit' =>  $teamsExceedingLimit,
             'foreignPlayerReached' =>  $foreignPlayerReached
-        ])->withSuccess('Line up updated.  Please proceed to reselect your captain.');;
+        ])->withSuccess('Line up updated.  Please complete and reselect your captain.');;
 
 
     }
