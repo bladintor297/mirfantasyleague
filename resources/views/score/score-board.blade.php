@@ -315,7 +315,7 @@
                                                 </td>
                                                 <td class="d-lg-table-cell align-middle text-lg-start text-dark border-bottom py-3 py-lg-4 h4 user-username">
                                                     <div class="d-flex">
-                                                        <span class="me-2"><img src="{{ asset('assets/img/flags/'.$player->nationality.'.png') }}" class="p-1" alt="{{ $player->nationality }}" ></span>
+                                                        <span class="me-2"><img src="{{ asset('public/assets/img/flags/'.$player->nationality.'.png') }}" class="p-1" alt="{{ $player->nationality }}" ></span>
                                                         <span>{{ $player->name }}</span>
                                                         <span><img src="{{ asset('assets/img/teams/'.$player->team.'.png') }}" class="ms-2 object-cover P-1"
                                                             alt="{{ $player->name }}"></span>
