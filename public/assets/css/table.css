@@ -8,9 +8,7 @@
     background-color: black !important;
 }
 
-tbody td .flag, tbody td .team-logo {
-    height: 30px !important;
-}
+
 @media (max-width: 768px) {
 
     #theader{
@@ -45,7 +43,7 @@ tbody td .flag, tbody td .team-logo {
     }
 
     tbody td img {
-        height: 20px !important;
+        height: 15px !important;
         object-fit: cover;
     }
 
