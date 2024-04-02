@@ -8,7 +8,7 @@
     background-color: black !important;
 }
 
-tbody td img {
+tbody td .flag, tbody td .team-logo {
     height: 30px !important;
 }
 @media (max-width: 768px) {
