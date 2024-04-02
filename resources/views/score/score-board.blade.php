@@ -321,7 +321,7 @@
                                                             <img src="{{ asset('assets/img/teams/'.$player->team.'.png') }}"
                                                                     class="ms-2 object-cover P-1"
                                                                     alt="{{ $player->name }}"
-                                                                    onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg';">
+                                                                    onerror="this.onerror=null; this.class='rounded-pill' this.src='https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg';">
                                                         </span>
                                                     </div>
                                                 </td>
