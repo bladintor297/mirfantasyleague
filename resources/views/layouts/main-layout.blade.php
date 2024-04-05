@@ -33,8 +33,7 @@
 
     <!-- Fonts -->
     <link href="https://db.onlinewebfonts.com/c/561f38b1f4570de0fb8a39d691ab058c?family=Tungsten-Bold" rel="stylesheet">
-    {{-- <link rel="stylesheet" media="screen" href="https://fontawesome.com/icons/medal?f=classic&s=duotone&an=beat&pc=%23ffd700&sc=%23ffd700" /> --}}
-
+  
     <!-- Page Loader JS -->
     {{-- <script src="{{ url('assets/js/top-function.js') }}"></script> --}}
 
@@ -197,6 +196,15 @@
     </style>
 
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DEVWYG4D3F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DEVWYG4D3F');
+</script>
 
 <body>
 
@@ -221,8 +229,8 @@
             </div>
         </div>
     </div>
-    {{-- <script type="text/javascript" src="https://storage.sociabuzz.com/storage/js/main/buttononwebsite/index.min.js"></script>
-    <script>sbBoW.draw("mirfantasyleague","U3VwcG9ydCBVcyE","position-bottom-left","#ffcc00","#FFFFFF")</script> --}}
+    <script type="text/javascript" src="https://storage.sociabuzz.com/storage/js/main/buttononwebsite/index.min.js"></script>
+    <script>sbBoW.draw("mirfantasyleague","U3VwcG9ydCBVcyE","position-bottom-left","#ffcc00","#FFFFFF")</script>
 
     <!-- Vendor Scripts -->
     <script src="{{ url('assets/vendor/parallax-js/dist/parallax.min.js') }}"></script>

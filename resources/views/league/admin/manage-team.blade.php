@@ -103,7 +103,7 @@
                                     <td>
                                         <div class="d-flex">
                                             <input type="file" class="form-control"  name="teams[{{ $team->id }}][logo]">
-                                            <img src="{{ asset('assets/img/teams/'.$team->id.'.png') }}" alt="team logo" style="height: 30px"class="rounded float-start"> 
+                                            <img src="{{ asset('public/assets/img/teams/'.$team->id.'.png') }}" alt="team logo" style="height: 30px"class="rounded float-start"> 
                                         </div>
                                     </td>
                                     <td>

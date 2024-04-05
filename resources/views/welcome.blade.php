@@ -36,7 +36,7 @@
                 <div class="col-lg-6 col-xl-5 text-center text-lg-start pt-3 mt-xl-4  py-5 mt-2">
                     <h1 class="display-3 pt-5 pb-2 pb-lg-1 mt-sm-2 mt-lg-5 fw-bold">
                         <span class="text-warning text-uppercase header-parallax hero-title">{{ $league->league_name }}</span>
-                        <span class="header-parallax hero-title">Fantasy League TEST</span>
+                        <span class="header-parallax hero-title">Fantasy League</span>
                     </h1>
                     <p class="fs-lg mb-2 mb-lg-4 px-3 px-sm-0 text-white" align="justify">
                         Draft your dream team, conquer the arena. {{ $league->league_name }}  Fantasy League awaits.
@@ -48,12 +48,12 @@
         </div>
     </section>
 
-    <!-- Gallery (carousels) -->
-    <section class="py-2 bg-body">
+<!-- Gallery (carousels) -->
+    {{-- <section class="py-2 bg-body">
         <div class=" zindex-5 ">
 
-            <!-- LTR -->
-            <div class="swiper" data-swiper-options='{
+                <!-- LTR -->
+                <div class="swiper" data-swiper-options='{
                     "loop": true,
                     "grabCursor": false,
                     "autoplay": {
@@ -78,38 +78,40 @@
                     }
                     
                 }'>
-                <div class="swiper-wrapper">
-    
-                    <div class="swiper-slide">
-                        <div class="image-container">
-                            <a href="https://todak.com/gaming/" class="stretched-link">
-                                <img src="{{ asset('assets/img/home/advertisement/post1.png') }}" alt="Gallery image" class="rounded-3">
-                            </a>
-                        </div>
-                    </div>
+                        <div class="swiper-wrapper">
 
-                    <div class="swiper-slide">
-                        <div class="image-container">
-                            <a href="https://todak.com/gaming/" class="stretched-link">
-                                <img src="{{ asset('assets/img/home/advertisement/post2.png') }}" alt="Gallery image" class="rounded-3">
-                            </a>
-                        </div>
-                    </div>
+                                <div class="swiper-slide">
+                                        <div class="image-container">
+                                                <a href="https://todak.com/gaming/" class="stretched-link">
+                                                        <img src="{{ asset('assets/img/home/advertisement/post1.png') }}"
+                                                                alt="Gallery image" class="rounded-3">
+                                                </a>
+                                        </div>
+                                </div>
 
-                    <div class="swiper-slide">
-                        <div class="image-container">
-                            <a href="https://todak.com/gaming/" class="stretched-link">
-                                <img src="{{ asset('assets/img/home/advertisement/post3.png') }}" alt="Gallery image" class="rounded-3">
-                            </a>
+                                <div class="swiper-slide">
+                                        <div class="image-container">
+                                                <a href="https://todak.com/gaming/" class="stretched-link">
+                                                        <img src="{{ asset('assets/img/home/advertisement/post2.png') }}"
+                                                                alt="Gallery image" class="rounded-3">
+                                                </a>
+                                        </div>
+                                </div>
+
+                                <div class="swiper-slide">
+                                        <div class="image-container">
+                                                <a href="https://todak.com/gaming/" class="stretched-link">
+                                                        <img src="{{ asset('assets/img/home/advertisement/post3.png') }}"
+                                                                alt="Gallery image" class="rounded-3">
+                                                </a>
+                                        </div>
+                                </div>
+
                         </div>
-                    </div>
-    
                 </div>
-            </div>
-    
 
         </div>
-    </section>
+    </section> --}}
 
     <!-- Hero -->
     <section class="position-relative pt-5">
@@ -196,7 +198,7 @@
                                                                 <textarea name="posts[{{ $post->id }}][title]" class="form-control mt-2 text-uppercase" row="2">{{ $post->title }}</textarea>
                                                             </th>
                                                             <td width="60%">
-                                                                <img id="image-{{ $post->id }}" src="{{ asset('public/assets/img/home/feed/'.$post->image) }}" class="card-img-top mb-3" alt="Poster-{{$post->id}}">
+                                                                <img id="image-{{ $post->id }}" src="{{ asset('public/assets/img/home/feed/'.$post->image) }}" style="height: 100%" class="card-img-top mb-3" alt="Poster-{{$post->id}}">
                                                                 <input type="file" name="posts[{{ $post->id }}][image]" accept="image/*" class="form-control" onchange="previewImage(event, '{{ $post->id }}')">
                                                             </td>
                                                         </tr>

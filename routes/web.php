@@ -60,7 +60,6 @@ Route::middleware('authenticate')->group(function () {
     Route::resource('reserve', ReserveController::class);
     Route::resource('captain', CaptainController::class);
     Route::resource('profile', ProfileController::class);
-    Route::resource('post', PostController::class);
 });
     // Admin Routes
 Route::middleware('admin')->group(function () {
@@ -71,6 +70,7 @@ Route::middleware('admin')->group(function () {
     Route::resource('/player', PlayerController::class);
     Route::resource('/team', TeamController::class);
     Route::resource('/game', GameController::class);
+    Route::resource('/post', PostController::class);
 
     // Excel Routes
     Route::controller(ImportExportController::class)->group(function(){

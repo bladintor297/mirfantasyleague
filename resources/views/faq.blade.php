@@ -152,8 +152,7 @@
                                     Each role (EXP Laner, Jungler, Mid Laner, Gold Laner and Roamer) has different point
                                     calculation based on player’s KDA during a certain match, please refer table below.
                                     Besides, there are bonus points too from team winning point and multiplier (refer
-                                    table below), MVP point (+5 points) and getting triple kill (+1 point) or maniac (+2
-                                    points) or savage (+3 points).
+                                    table below), MVP point (+5 points) and getting triple kill (+2 point) or maniac (+3 points) or savage (+4 points), damage dealt (+1 point/20,000 damage), damage taken (+1 point/20,000 damage), turtle/lord (+1 point), Rich Guy/The Carry/Sand Bag/Best Wingman (+2 points) and match win point (0-5 points) and multiplier (1-1.4 times) 
                                 </p>
                                 <table class="table table-bordered">
                                     <thead>
@@ -169,31 +168,31 @@
                                             <td>EXP Laner</td>
                                             <td>2</td>
                                             <td>-1</td>
-                                            <td>1</td>
+                                            <td>2</td>
                                         </tr>
                                         <tr>
                                             <td>Jungler</td>
                                             <td>1</td>
-                                            <td>-3</td>
+                                            <td>-2</td>
                                             <td>2</td>
                                         </tr>
                                         <tr>
                                             <td>Mid Laner</td>
-                                            <td>1</td>
-                                            <td>-2</td>
+                                            <td>2</td>
+                                            <td>-3</td>
                                             <td>2</td>
                                         </tr>
                                         <tr>
                                             <td>Gold Laner</td>
-                                            <td>1</td>
-                                            <td>-2</td>
+                                            <td>3</td>
+                                            <td>-3</td>
                                             <td>2</td>
                                         </tr>
                                         <tr>
                                             <td>Roamer</td>
-                                            <td>3</td>
-                                            <td>-1</td>
                                             <td>1</td>
+                                            <td>-1</td>
+                                            <td>2</td>
                                         </tr>
                                     </tbody>
                                 </table>

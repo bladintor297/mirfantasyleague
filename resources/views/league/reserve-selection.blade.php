@@ -216,7 +216,7 @@
                                                         <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50 rounded-3"></span>
                                                         <div class="position-relative zindex-2" >
                                                             <h3 class="h5 text-center mb-2 text-danger">Cannot be selected</h3>
-                                                            <span class="fs-sm text-white fst-italic fw-bold text-center opacity-75">Exceeded player limit for foreign countries</span>
+                                                            <span class="fs-sm text-white fst-italic fw-bold text-center opacity-75">Exceeded limit for import players</span>
                                                         </div>
                                                     </div>
                                                 @endif
