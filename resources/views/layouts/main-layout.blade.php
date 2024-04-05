@@ -200,12 +200,7 @@
                 height: 230px; /* Fixed height */
             }
 
-            @media (max-width:768px){
-                .image-container {
-                    height: 100px; /* Fixed height */
-                }
-            }
-
+            
             .image-container img {
                 position: absolute;
                 width: 100%;
@@ -213,6 +208,22 @@
                 object-fit: cover; /* This ensures the image covers the container without stretching */
                 object-position: center bottom; /* Center the image horizontally and align it to the bottom */
             }
+
+            .adv-div img {
+                height: 70% !important;
+            }
+
+            @media (max-width:768px){
+                .image-container {
+                    height: 100px; /* Fixed height */
+                }
+
+                .adv-div img {
+                    height: 100% !important;
+                    width: 100% !important;
+                }
+            }
+
     </style>
 
 </head>

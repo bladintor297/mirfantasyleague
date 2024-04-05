@@ -73,6 +73,9 @@
                                 MYT
                             </p>
                             <div class="table-responsive">
+                                <div class="adv-div">
+                                    @include('inc.adv')
+                                </div>
                                 <table class="table" >
                                     <div class="bg-dark">
                                         <thead class="thead">

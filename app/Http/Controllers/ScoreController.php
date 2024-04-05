@@ -8,6 +8,7 @@ use App\Models\Game;
 use App\Models\League;
 use App\Models\Player;
 use App\Models\Team;
+use App\Models\Adv;
 
 class ScoreController extends Controller
 {
@@ -29,6 +30,7 @@ class ScoreController extends Controller
         $totalScores = $totalScores->sortByDesc('total_score')->values();
 
         $playerScores = Player::where('game', $curGame->id) ->orderBy('score', 'desc')->get();
+        $advs = Adv::orderBy('id','desc')->get();
 
         return view ('score.score-board')->with([
             'totalScores'=>$totalScores,
@@ -36,6 +38,7 @@ class ScoreController extends Controller
             'league' => $curLeague,
             'playerScores'=>$playerScores,
             'teams' => $teams,
+            'advs' => $advs,
             'id' => 0
         ]);
     }

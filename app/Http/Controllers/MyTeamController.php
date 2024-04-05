@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Player;
 use App\Models\Game;
+use App\Models\Adv;
 use App\Models\MyTeam;
 
 class MyTeamController extends Controller
@@ -59,6 +60,8 @@ class MyTeamController extends Controller
         $myteam = MyTeam::where('game', $id)->where('user', Auth::user()->id)->get(); // Change 1 -> Auth::user()->id
         $players = Player::where('game', $id)->get();
 
+        $advs = Adv::orderBy('id','desc')->get();
+
         if (count($myteam) == 0){
             $labels = ['A', 'B', 'C', 'D']; 
             for ($i = 0; $i < $game->team_num; ++$i){
@@ -76,7 +79,8 @@ class MyTeamController extends Controller
         return view ("league.team-card")->with([
             'myteams' => $myteams,
             'players' => $players,
-            'game' => $game
+            'game' => $game,
+            'advs' => $advs
         ]);
     }
 

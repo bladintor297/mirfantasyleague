@@ -23,6 +23,9 @@
                 <span class="text-warning header-parallax hero-title my-0 py-0">{{ $game->name }}</span>
             </h1>
         </div>
+        <div class="container adv-div">
+            @include('inc.adv')
+        </div>
         <div class="container py-md-2 py-lg-2">
             <div class="row pb-5">
                 @foreach ($myteams as $myteam)
