@@ -3,29 +3,6 @@
 
 @section('content')
 
-<style>
-    /* CSS to make images fill container while maintaining aspect ratio */
-.image-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 200px; /* Fixed height */
-}
-
-@media (max-width:768px){
-    .image-container {
-        height: 100px; /* Fixed height */
-    }
-}
-
-.image-container img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* This ensures the image covers the container without stretching */
-    object-position: center bottom; /* Center the image horizontally and align it to the bottom */
-}
-</style>
     <!-- Hero -->
     <section class="vh-100 bg-repeat-0 bg-position-center bg-size-cover overflow-hidden"
         style="background-image: url({{ asset('assets/img/background/ml-bg.png')  }});" data-bs-theme="dark">
@@ -48,70 +25,7 @@
         </div>
     </section>
 
-    <!-- Gallery (carousels) -->
-    {{-- <section class="py-2 bg-body">
-        <div class=" zindex-5 ">
-
-                <!-- LTR -->
-                <div class="swiper" data-swiper-options='{
-                    "loop": true,
-                    "grabCursor": false,
-                    "autoplay": {
-                        "delay": 0,
-                        "disableOnInteraction": true
-                    },
-                    "freeMode": true,
-                    "speed": 5000,
-                    "freeModeMomentum": false,
-                    "breakpoints": {
-                        "0": {
-                            "slidesPerView": 1,
-                            "spaceBetween": 8
-                        },
-                        "500": {
-                            "spaceBetween": 16
-                        },
-                        "1024": {
-                            "slidesPerView": 2,
-                            "spaceBetween": 24
-                        }
-                    }
-                    
-                }'>
-                        <div class="swiper-wrapper">
-
-                                <div class="swiper-slide">
-                                        <div class="image-container">
-                                                <a href="https://todak.com/gaming/" class="stretched-link">
-                                                        <img src="{{ asset('assets/img/home/advertisement/post1.png') }}"
-                                                                alt="Gallery image" class="rounded-3">
-                                                </a>
-                                        </div>
-                                </div>
-
-                                <div class="swiper-slide">
-                                        <div class="image-container">
-                                                <a href="https://todak.com/gaming/" class="stretched-link">
-                                                        <img src="{{ asset('assets/img/home/advertisement/post2.png') }}"
-                                                                alt="Gallery image" class="rounded-3">
-                                                </a>
-                                        </div>
-                                </div>
-
-                                <div class="swiper-slide">
-                                        <div class="image-container">
-                                                <a href="https://todak.com/gaming/" class="stretched-link">
-                                                        <img src="{{ asset('assets/img/home/advertisement/post3.png') }}"
-                                                                alt="Gallery image" class="rounded-3">
-                                                </a>
-                                        </div>
-                                </div>
-
-                        </div>
-                </div>
-
-        </div>
-    </section> --}}
+    @include('inc.adv')
 
     <!-- Hero -->
     <section class="position-relative pt-5">

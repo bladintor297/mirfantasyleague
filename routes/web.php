@@ -16,6 +16,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\FAQController;
+use App\Http\Controllers\AdvController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\ImportExportController;
 use App\Http\Controllers\ForgetPasswordController;
@@ -72,6 +73,7 @@ Route::middleware('admin')->group(function () {
     Route::resource('/team', TeamController::class);
     Route::resource('/game', GameController::class);
     Route::resource('/post', PostController::class);
+    Route::resource('/adv', AdvController::class);
 
     // Excel Routes
     Route::controller(ImportExportController::class)->group(function(){

@@ -61,6 +61,13 @@
                                 {{-- <span class="ms-auto fs-xs text-muted">5</span> --}}
                             </a>
                         </li>
+                        <li>
+                            <a href="/adv" class="dropdown-item d-flex align-items-center">
+                                <i class="bx bxs-megaphone fs-base opacity-60 me-2"></i>
+                                Manage Ads
+                                {{-- <span class="ms-auto fs-xs text-muted">5</span> --}}
+                            </a>
+                        </li>
                         <hr class="my-2">
                         <li>
                             <a href="/profile" class="dropdown-item d-flex align-items-center">

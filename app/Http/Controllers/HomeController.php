@@ -7,6 +7,7 @@ use App\Models\League;
 use App\Models\Game;
 use App\Models\Post;
 use App\Models\Score;
+use App\Models\Adv;
 
 class HomeController extends Controller
 {
@@ -31,12 +32,14 @@ class HomeController extends Controller
 
         $posts = Post::get();
 
+        $advs = Adv::orderBy('id','desc')->get();
         return view ('welcome')->with([
             'league' => $league,
             'posts' => $posts,
             'totalScores'=>$totalScores,
             'game'=>$curGame,
-            'playerScores'=>$totalScores
+            'playerScores'=>$totalScores,
+            'advs' => $advs
         ]);
     }
 

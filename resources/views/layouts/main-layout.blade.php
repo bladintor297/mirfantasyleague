@@ -192,7 +192,27 @@
             }
         }
 
-        
+            /* CSS to make images fill container while maintaining aspect ratio */
+            .image-container {
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+                height: 230px; /* Fixed height */
+            }
+
+            @media (max-width:768px){
+                .image-container {
+                    height: 100px; /* Fixed height */
+                }
+            }
+
+            .image-container img {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* This ensures the image covers the container without stretching */
+                object-position: center bottom; /* Center the image horizontally and align it to the bottom */
+            }
     </style>
 
 </head>
