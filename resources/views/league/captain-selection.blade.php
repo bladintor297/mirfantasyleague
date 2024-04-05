@@ -19,10 +19,6 @@
         <!-- Page title -->
         <div class="mt-4 mb-lg-2 mb-2 pt-3">
             <h1 class="display-1 text-center mb-0 text-warning header-parallax hero-title">Captain</h1>
-            <div class="d-flex justify-content-center">
-                <span class="badge bg-faded-dark text-dark me-1">Captain: <span class="shadow text-warning">x1.5</span> pts </span>
-                <span class="badge bg-faded-dark text-dark ms-1">Vice Captain: <span class="text-warning">x1.2</span> pts</span>
-            </div>
         </div>
         <div class="container mt-3 pt-md-2 pt-lg-4 pb-2 pb-md-4 pb-lg-5">
             
@@ -125,7 +121,7 @@
             
             <div class="row mt-md-3">
                 <div class="col d-flex justify-content-center align-items-center">
-                    <h3 class="h4 pb-1 mb-0 text-warning text-gaming">Step {{ $game->reserveIsOn ? '3' : '2' }}. Select captain & vice </h3>
+                    <h3 class="h4 pb-1 mb-0 text-warning text-gaming">Step 3. Select captain & vice </h3>
                         <span class="text-success"><i class='bx bxs-check-circle' style='font-size: 28px;'></i></span>
                 </div>
             </div>

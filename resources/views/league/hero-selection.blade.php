@@ -33,7 +33,7 @@
     <section class="position-relative bg-white py-5" style="min-height:100vh">
         <!-- Page title -->
         <div class="mt-4 mb-lg-2 mb-2 pt-3">
-            <h1 class="display-1 text-center mb-0 text-warning header-parallax hero-title">Player Line-Up</h1>
+            <h1 class="display-1 text-center mb-0 text-warning header-parallax hero-title">Hero Line-Up</h1>
         </div>
         <div class="container mt-3 pt-md-2 pt-lg-4 pb-2 pb-md-4 pb-lg-5">
             

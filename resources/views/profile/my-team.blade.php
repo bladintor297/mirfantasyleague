@@ -145,7 +145,7 @@
             <hr class="mt-3"></div>
             <div class="row mt-md-3 mt-3">
                 <div class="col d-flex justify-content-center align-items-center">
-                    <h3 class="h4 pb-1 mb-0 text-warning text-gaming">Step Step {{ $game->reserveIsOn ? '4' : '3' }}. Your team is completed</h3>
+                    <h3 class="h4 pb-1 mb-0 text-warning text-gaming">Step 4. Your team is completed</h3>
                         @if ($myteam->isCompleted == 1)
                             <span class="text-success"><i class='bx bxs-check-circle' style='font-size: 28px;'></i></span>
                         @else

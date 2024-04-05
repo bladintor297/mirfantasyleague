@@ -15,7 +15,6 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\FAQController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\ImportExportController;
 use App\Http\Controllers\ForgetPasswordController;
@@ -40,6 +39,7 @@ Route::post('reset-password', [ForgetPasswordController::class, 'submitResetPass
 
 // Static Pages
 Route::view('/about', 'about')->name('about');
+Route::view('/faq', 'faq')->name('faq');
 Route::view('/privacypolicy', 'privacypolicy')->name('privacypolicy');
 
 //  Resource Routes
@@ -49,7 +49,6 @@ Route::resources([
     '/game' => GameController::class,
     '/prize' => PrizeController::class,
     '/test' => TestController::class,
-    '/faq' => FAQController::class,
 ]);
 
 // Protected Routes (Require Authentication)

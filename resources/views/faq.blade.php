@@ -121,18 +121,18 @@
                         <div class="accordion-collapse collapse" id="q-3" data-bs-parent="#faq">
                             <div class="accordion-body fs-sm pt-0">
                                 <p align="justify">
-                                    In conjunction with on-going {{ $league->name }}, we have Facebook page;
+                                    In conjunction with on-going M5 World Championship, we have Facebook page;
                                     <a target="_blank"
                                         href="https://www.facebook.com/profile.php?id=61551020144213&mibextid=ZbWKwL"
-                                        class="text-warning">MIR Fantasy League</a>,
+                                        class="text-warning">Fantasy League M5 World Championship</a>,
                                     Instagram page; <a href="https://www.instagram.com/mlbbm5.fantasyleague"
-                                        class="text-warning" target="_blank">@mir.fantasyleague</a>,
+                                        class="text-warning" target="_blank">@mlbbm5.fantasyleague</a>,
                                     English WhatsApp channel; <a
                                         href="https://whatsapp.com/channel/0029Va96uAn6buMQ7bjbrg2N"
-                                        class="text-warning" target="_blank">Fantasy League {{ $league->name }}</a>
+                                        class="text-warning" target="_blank">Fantasy League M5 World Championship</a>
                                     and Malay WhatsApp channel; <a
                                         href="https://whatsapp.com/channel/0029VaCOMyAInlqSntuhiR0J"
-                                        class="text-warning" target="_blank">Liga Fantasi {{ $league->name }}</a>.
+                                        class="text-warning" target="_blank">Liga Fantasi M5 World Championship</a>.
                                     Please follow our social medias for the latest updates!
                                 </p>
                             </div>
@@ -210,7 +210,8 @@
                         <div class="accordion-collapse collapse" id="q-6" data-bs-parent="#faq">
                             <div class="accordion-body fs-sm pt-0">
                                 <p>
-                                    The organizer will give winning diamonds to the winners' account using the informations in the My Account page. Make sure to fill in the correct informations in the team details!
+                                    The organizer will contact the winners through the phone number (WhatsApp) and email
+                                    provided. Make sure to fill in the correct informations in the team details!
                                 </p>
                             </div>
                         </div>
