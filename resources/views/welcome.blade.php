@@ -48,7 +48,7 @@
         </div>
     </section>
 
-<!-- Gallery (carousels) -->
+    <!-- Gallery (carousels) -->
     {{-- <section class="py-2 bg-body">
         <div class=" zindex-5 ">
 
