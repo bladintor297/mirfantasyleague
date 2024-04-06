@@ -91,7 +91,8 @@
                                 <th scope="col" >Picture</th>
                                 <th scope="col" >Role</th>
                                 <th scope="col" width="10%">Label</th>
-                                <th scope="col" class="bg-warning">Score</th>
+                                <th scope="col" class="bg-warning" width="10%">Score</th>
+                                <th scope="col" width="8%">Prev Rank</th>
                                 <th scope="col" width="10%">Status</th>
                             </tr>
                         </thead>
@@ -144,6 +145,9 @@
                                     </td>
                                     <td class="bg-warning text-white bg-opacity-50">
                                         <input type="number" step="0.01" name="players[{{ $player->id }}][score]" value="{{ $player->score }}" class="form-control bg-white bg-opacity-50">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="players[{{ $player->id }}][prev_rank]" value="{{ $player->prev_rank }}" class="form-control">
                                     </td>
                                     <td>
                                         @if ($player->status == 0)

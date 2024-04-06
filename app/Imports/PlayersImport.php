@@ -26,6 +26,7 @@ class PlayersImport implements ToModel, WithHeadingRow
             'label' => $row['label'],
             'game' => $row['game'],
             'league' => $row['league'],
+            'prev_rank' => $row['prev_rank'],
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ];

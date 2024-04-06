@@ -86,6 +86,7 @@ class PlayerController extends Controller
                     $player->role = $playerData['role'];
                     $player->label = $playerData['label'];
                     $player->score = $playerData['score'];
+                    $player->prev_rank = $playerData['prev_rank'];
                     
                     // Save the player record
                     $player->save();

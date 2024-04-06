@@ -234,7 +234,20 @@
                                                     @if ($player->score < -999)
                                                         --
                                                     @else
-                                                        #{{ ++$i }}
+                                                        
+
+                                                        <div class="d-flex">
+                                                            @if (($i+1) < $player->prev_rank)
+                                                                <i class='bx bx-chevrons-up text-success py-0 my-0' style="text-shadow: 2px 2px 4px rgba(0, 229, 11, 0.5);"></i>
+                                                            @elseif (($i+1) > $player->prev_rank)
+                                                                <i class='bx bx-chevrons-down text-danger my-0 py-0' style="text-shadow: 2px 2px 4px rgba(229, 0, 0, 0.5);"></i>
+                                                            @else
+                                                                <i class='bx bx-chevrons-right text-primary my-0 py-0' style="text-shadow: 2px 2px 4pxrgba(252, 227, 1, 0.5));"></i>
+                                                            @endif
+
+                                                            #{{ ++$i }}
+                                                        <div>
+
                                                     @endif
                                                 </td>
                                                 <td class="d-lg-table-cell align-middle h2 border-bottom py-3 py-lg-4">
