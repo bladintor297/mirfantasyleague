@@ -81,16 +81,12 @@ class TeamController extends Controller
             $team->status = isset($teamData['status']) ? 1 : 0;
             $team->label = $teamData['label'];
 
-            // Check if $team->status is 0 before fetching players
-            if ($team->status === 0) {
-                $players = Player::where('team', $teamId)->get();
+            $players = Player::where('team', $teamId)->get();
 
-                foreach ($players as $player) {
-                    $player->status = $request->input('status') ? 1 : 0;
-                    $player->label = $teamData['label'];
-                    $player->score = -1000;
-                    $player->save();
-                }
+            foreach ($players as $player){
+                $player->status = $request->input('status') ? 1 : 0;
+                $player->label = $request->input('label');
+                $player->save();
             }
 
             // Handle logo update if provided

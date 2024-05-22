@@ -127,7 +127,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="transfer_rule" class="form-label">Transfer Rule</label>
-                            <textarea class="form-control" id="transfer_rule" name="transfer_rule" rows="4">{{ $game->transfer_rule }}</textarea>
+                            <textarea class="form-control" id="transfer_rule" name="instructions" rows="4">{{ $game->transfer_rule }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="player_rule" class="form-label">Player Limit Rule</label>
@@ -135,7 +135,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="scoring" class="form-label">Scoring Rule</label>
-                            <textarea class="form-control" id="scoring" name="scoring_rule" rows="4">{{ $game->scoring }}</textarea>
+                            <textarea class="form-control" id="scoring" name="scoring" rows="4">{{ $game->scoring }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-success">Submit</button>
 

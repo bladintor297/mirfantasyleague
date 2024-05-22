@@ -90,7 +90,7 @@
                                     @foreach($players as $player)
                                         @if($player->id == $myteam->{'Reserve_'.$i})
                                             <!-- Player found, update the image source -->
-                                            <img src="{{ asset('public/assets/img/players/'.$player->id.'.png') }}" class="d-block mx-auto zindex-5" alt="Screen" id="Reserve_{{ $i }}Img">
+                                            <img src="{{ asset('assets/img/players/'.$player->id.'.png') }}" class="d-block mx-auto zindex-5" alt="Screen" id="Reserve_{{ $i }}Img">
                                             @php $playerFound = true;@endphp
                                             @break
                                         @endif
@@ -101,19 +101,7 @@
                                         <img src="{{ asset('assets/img/league/hero-selection/default-screen.png') }}" class="d-block mx-auto zindex-5" alt="Screen" id="Reserve_{{ $i }}Img">
                                     @endif
                                     
-                                    <h3 class="h6 text-center mt-3">Reserve 
-                                        @if ($i == 1)
-                                            EXP Laner
-                                        @elseif ($i == 2)
-                                            Jungler
-                                        @elseif ($i == 3)
-                                            Mid_Laner
-                                        @elseif ($i == 4)
-                                            Gold Laner
-                                        @else
-                                            Roamer
-                                        @endif
-                                    </h3>
+                                    <h3 class="h6 text-center mt-3">Reserve_{{ $i }}</h3>
                                 </a>
                             </div>
                         @endfor
@@ -181,7 +169,7 @@
 
             <div class="row">
                 <div class="col d-flex justify-content-center align-items-center">
-                    <a href="/captain/{{ $myteam->id }}" class="btn btn-primary shadow px-5 fw-bold rounded-pill  btn-sm{{ $count == $game->reserve_limit ? '' : ' disabled' }}" >Proceed </a>
+                    <a href="/captain/{{ $myteam->id }}" class="btn btn-primary shadow px-5 fw-bold rounded-pill  btn-sm{{ $count == $game->reserve_limit ? '' : ' disabled' }}" >Proceed {{ $count }} {{ $game->reserve_limit }}</a>
                 </div>
             </div>
 
@@ -228,14 +216,14 @@
                                                         <span class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50 rounded-3"></span>
                                                         <div class="position-relative zindex-2" >
                                                             <h3 class="h5 text-center mb-2 text-danger">Cannot be selected</h3>
-                                                            <span class="fs-sm text-white fst-italic fw-bold text-center opacity-75">Exceeded limit for import players</span>
+                                                            <span class="fs-sm text-white fst-italic fw-bold text-center opacity-75">Exceeded player limit for foreign countries</span>
                                                         </div>
                                                     </div>
                                                 @endif
                                             @endif
 
                                             <div class="position-relative">
-                                                <img src="{{ asset('public/assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
+                                                <img src="{{ asset('assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
                                             </div>
                                             <div class="card-body text-center p-3">
                                                 <h3 class="fs-lg fw-semibold pt-1 mb-2">{{ $player->name }}</h3>

@@ -15,6 +15,15 @@ class PlayersImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
+        $scoreArray = [
+            $row['score1'],
+            $row['score2'],
+            $row['score3'],
+            $row['score4'],
+            $row['score5'],
+            $row['score6'],
+        ];
+
         $data = [
             'id' => $row['id'],
             'name' => $row['name'],
@@ -22,9 +31,10 @@ class PlayersImport implements ToModel, WithHeadingRow
             'nationality' => $row['nationality'],
             'picture' => $row['picture'],
             'role' => $row['role'],
-            'score' => $row['score'],
+            'score' => json_encode($scoreArray),
             'label' => $row['label'],
             'game' => $row['game'],
+            'status' => $row['status'],
             'league' => $row['league'],
             'prev_rank' => $row['prev_rank'],
             'created_at' => date("Y-m-d H:i:s"),

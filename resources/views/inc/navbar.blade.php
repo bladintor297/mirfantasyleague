@@ -196,7 +196,7 @@
     // Loop through the navigation links and check if the URL matches
     for (var i = 0; i < navLinks.length; i++) {
         var link = navLinks[i];
-        var linkPath = link.getAttribute('href');
+        var linkPath = link.getAttribute('href').split('-')[0];;
 
         // Check if the current path contains the link path
         if (currentPath.indexOf(linkPath) === 0) {

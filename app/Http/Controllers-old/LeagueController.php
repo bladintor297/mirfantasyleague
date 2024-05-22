@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Game;
 use App\Models\League;
-use App\Models\MyTeam;
+use App\Models\Myteam;
 
 class LeagueController extends Controller
 {
@@ -38,7 +38,7 @@ class LeagueController extends Controller
         });
 
         return view ('league.league-card')->with([
-            'games' => $mergedGames->sortByDesc('game_id'),
+            'games' => $mergedGames,
             'entries' => $entries,
         ]);
     }

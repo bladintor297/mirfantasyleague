@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\PlayerScoreController;
 use App\Http\Controllers\HeroController;
 use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\GameController;
@@ -47,6 +48,7 @@ Route::view('/privacypolicy', 'privacypolicy')->name('privacypolicy');
 Route::resources([
     '/home' => HomeController::class,
     '/score' => ScoreController::class,
+    '/score-player' => PlayerScoreController::class,
     '/game' => GameController::class,
     '/prize' => PrizeController::class,
     '/test' => TestController::class,

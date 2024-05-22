@@ -33,7 +33,7 @@
     <section class="position-relative bg-white py-5" style="min-height:100vh">
         <!-- Page title -->
         <div class="mt-4 mb-lg-2 mb-2 pt-3">
-            <h1 class="display-1 text-center mb-0 text-warning header-parallax hero-title">Player Line-Up</h1>
+            <h1 class="display-1 text-center mb-0 text-warning header-parallax hero-title">Hero Line-Up</h1>
         </div>
         <div class="container mt-3 pt-md-2 pt-lg-4 pb-2 pb-md-4 pb-lg-5">
             
@@ -94,7 +94,7 @@
                                     @foreach($players as $player)
                                         @if($player->id == $myteam->{$position})
                                             <!-- Player found, update the image source -->
-                                            <img src="{{ asset('public/assets/img/players/'.$player->id.'.png') }}" class="d-block mx-auto zindex-5" alt="Screen" id="{{ $position }}Img">
+                                            <img src="{{ asset('assets/img/players/'.$player->id.'.png') }}" class="d-block mx-auto zindex-5" alt="Screen" id="{{ $position }}Img">
                                             @php $playerFound = true; $count++; @endphp
                                             @break
                                         @endif
@@ -193,7 +193,7 @@
                             <!-- Square image (default) -->
                             <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-4 mt-2">
 
-                                @foreach ($players->where('role', 0)->where('status', 1) as $player)
+                                @foreach ($players->where('role', 0) as $player)
                                     <!-- Item -->
                                     <div class="col">
                                         <div class="card card-hover border-0 bg-transparent">
@@ -223,7 +223,7 @@
                                             @endif
 
                                             <div class="position-relative">
-                                                <img src="{{ asset('public/assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
+                                                <img src="{{ asset('assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
                                             </div>
                                             <div class="card-body text-center p-3">
                                                 <h3 class="fs-lg fw-semibold pt-1 mb-2">{{ $player->name }}</h3>
@@ -244,13 +244,13 @@
                 <div class="modal-dialog  modal-xl">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <h1 class="modal-title display-5 my-0 py-0 text-center text-gaming text-warning " id="selectJunglerLabel">Choose your Jungler</h1>
+                            <h1 class="modal-title display-5 my-0 py-0 text-center text-gaming text-warning " id="selectJunglerLabel">#- Choose your -#</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <!-- Square image (default) -->
                             <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-4 mt-2 mt-lg-4">
-                                @foreach ($players->where('role', 1)->where('status', 1) as $player)
+                                @foreach ($players->where('role', 1) as $player)
                                     <!-- Item -->
                                     <div class="col">
                                         <div class="card card-hover border-0 bg-transparent">
@@ -280,7 +280,7 @@
                                             @endif
 
                                             <div class="position-relative">
-                                                <img src="{{ asset('public/assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
+                                                <img src="{{ asset('assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
                                             </div>
                                             <div class="card-body text-center p-3">
                                                 <h3 class="fs-lg fw-semibold pt-1 mb-2">{{ $player->name }}</h3>
@@ -299,13 +299,13 @@
                 <div class="modal-dialog  modal-xl">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <h1 class="modal-title display-5 my-0 py-0 text-center text-gaming text-warning " id="selectMidLanerLabel">Choose your Mid Laner</h1>
+                            <h1 class="modal-title display-5 my-0 py-0 text-center text-gaming text-warning " id="selectMidLanerLabel">#- Choose your -#</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <!-- Square image (default) -->
                             <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-4 mt-2 mt-lg-4">
-                                @foreach ($players->where('role', 2)->where('status', 1) as $player)
+                                @foreach ($players->where('role', 2) as $player)
                                     <!-- Item -->
                                     <div class="col">
                                         <div class="card card-hover border-0 bg-transparent">
@@ -335,7 +335,7 @@
                                             @endif
 
                                             <div class="position-relative">
-                                                <img src="{{ asset('public/assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
+                                                <img src="{{ asset('assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
                                             </div>
                                             <div class="card-body text-center p-3">
                                                 <h3 class="fs-lg fw-semibold pt-1 mb-2">{{ $player->name }}</h3>
@@ -354,14 +354,14 @@
                 <div class="modal-dialog  modal-xl">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <h1 class="modal-title display-5 my-0 py-0 text-center text-gaming text-warning " id="selectGoldLanerLabel">Choose your Gold Laner</h1>
+                            <h1 class="modal-title display-5 my-0 py-0 text-center text-gaming text-warning " id="selectGoldLanerLabel">#- Choose your -#</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             
                             <!-- Square image (default) -->
                             <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-4 mt-2 mt-lg-4">
-                                @foreach ($players->where('role', 3)->where('status', 1) as $player)
+                                @foreach ($players->where('role', 3) as $player)
                                     <!-- Item -->
                                     <div class="col">
                                         <div class="card card-hover border-0 bg-transparent">
@@ -391,7 +391,7 @@
                                             @endif
 
                                             <div class="position-relative">
-                                                <img src="{{ asset('public/assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
+                                                <img src="{{ asset('assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
                                             </div>
                                             <div class="card-body text-center p-3">
                                                 <h3 class="fs-lg fw-semibold pt-1 mb-2">{{ $player->name }}</h3>
@@ -410,13 +410,13 @@
                 <div class="modal-dialog  modal-xl">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <h1 class="modal-title display-5 my-0 py-0 text-center text-gaming text-warning " id="selectRoamerLabel">Choose your Roamer</h1>
+                            <h1 class="modal-title display-5 my-0 py-0 text-center text-gaming text-warning " id="selectRoamerLabel">#- Choose your -#</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <!-- Square image (default) -->
                             <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-4 mt-2 mt-lg-4">
-                                @foreach ($players->where('role', 4)->where('status', 1) as $player)
+                                @foreach ($players->where('role', 4) as $player)
                                     <!-- Item -->
                                     <div class="col">
                                         <div class="card card-hover border-0 bg-transparent">
@@ -446,7 +446,7 @@
                                             @endif
                                             
                                             <div class="position-relative">
-                                                <img src="{{ asset('public/assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
+                                                <img src="{{ asset('assets/img/players/'.$player->id.'.png') }}" class="modal-img" alt="{{ $player->name }}" data-player-id="{{ $player->id }}" style="width: 100%; height: auto; object-fit: cover;">
                                             </div>
                                             <div class="card-body text-center p-3">
                                                 <h3 class="fs-lg fw-semibold pt-1 mb-2">{{ $player->name }}</h3>

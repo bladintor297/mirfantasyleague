@@ -43,8 +43,8 @@
                                         
                                         <div class="swiper-wrapper mb-5 pb-3">
                                 
-                                            @foreach ($league['games']->sortByDesc('created_at') as $game)
-
+                                            @foreach ($league['games'] as $game)
+                                        
 
                                                 {{-- @if ($game->status !== 1) --}}
                                                     <!-- Item -->
@@ -75,13 +75,7 @@
                                                                 @else
                                                                     <a href="#" class="btn btn-sm btn-dark btn-shadow rounded-pill px-5 disabled">Event Ended</a>
                                                                 @endif
-
                                                             </div>
-                                                            @if (Auth::user()->role == 1)
-                                                                <div class="mb-2">
-                                                                    <span class="fs-sm fst-italic">Entries: {{ count($entries->where('game', $game->id)) }}</span>
-                                                                </div>
-                                                            @endif
                                                             
                                                         </div>
                                                     </div>

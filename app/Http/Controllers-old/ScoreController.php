@@ -8,7 +8,6 @@ use App\Models\Game;
 use App\Models\League;
 use App\Models\Player;
 use App\Models\Team;
-use App\Models\Adv;
 
 class ScoreController extends Controller
 {
@@ -21,21 +20,15 @@ class ScoreController extends Controller
         $teams = Team::get();
         $curLeague = League::orderBy('id', 'desc')->first();
         $curGame = Game::orderBy('id', 'desc')->first();
-        $curGameid = $curGame->id;
-
-        if ($curGame->status != 3)
-        $curGameid = $curGame->id-1;
-
         $totalScores = Score::selectRaw('*, (day1 + day2 + day3 + day4 + day5 + day6) as total_score')
                     ->join('users', 'users.id', '=', 'score.user_id')
-                    ->where('game_id', $curGameid)
+                    ->where('game_id', $curGame->id)
                     ->orderBy('total_score', 'desc')
                     ->get(['score.*', 'users.username', 'users.team_name', 'users.id AS userid', 'users.team_logo']);
         
         $totalScores = $totalScores->sortByDesc('total_score')->values();
 
         $playerScores = Player::where('game', $curGame->id) ->orderBy('score', 'desc')->get();
-        $advs = Adv::orderBy('id','desc')->get();
 
         return view ('score.score-board')->with([
             'totalScores'=>$totalScores,
@@ -43,7 +36,6 @@ class ScoreController extends Controller
             'league' => $curLeague,
             'playerScores'=>$playerScores,
             'teams' => $teams,
-            'advs' => $advs,
             'id' => 0
         ]);
     }
@@ -97,7 +89,6 @@ class ScoreController extends Controller
         $totalScores = $totalScores->sortByDesc('total_score')->values();
 
         $playerScores = Player::where('game', $curGame->id) ->orderBy('score', 'desc')->get();
-        $advs = Adv::orderBy('id','desc')->get();
 
         return view ('score.score-board')->with([
             'totalScores'=>$totalScores,
@@ -105,7 +96,6 @@ class ScoreController extends Controller
             'league' => $curLeague,
             'playerScores'=>$playerScores,
             'teams' => $teams,
-            'advs' => $advs,
             'id' => $id
         ]);
     }

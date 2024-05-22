@@ -71,22 +71,12 @@ class PlayerController extends Controller
     {
         $data = $request->all();
 
-
         if ($id == "updateAll") {
             // Loop through the submitted data and update the corresponding player records
             foreach ($data['players'] as $playerData) {
                 // return $playerData;
                 $player = Player::find($playerData['id']);
 
-                $scoreArray = [
-                    (float)$playerData['score1'],
-                    (float)$playerData['score2'],
-                    (float)$playerData['score3'],
-                    (float)$playerData['score4'],
-                    (float)$playerData['score5'],
-                    (float)$playerData['score6'],
-                ];
-                
                 if ($player) {
                     // Update player attributes
                     $player->name = $playerData['name'];
@@ -95,9 +85,7 @@ class PlayerController extends Controller
                     $player->picture = $playerData['picture'];
                     $player->role = $playerData['role'];
                     $player->label = $playerData['label'];
-                    $player->score = json_encode($scoreArray);
-                    $player->status = isset($playerData['status']) ? 1 : 0;
-                    $player->prev_rank = $playerData['prev_rank'];
+                    $player->score = $playerData['score'];
                     
                     // Save the player record
                     $player->save();

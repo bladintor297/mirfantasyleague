@@ -10,7 +10,7 @@ use App\Models\Player;
 use App\Models\Team;
 use App\Models\Adv;
 
-class ScoreController extends Controller
+class PlayerScoreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,24 +21,15 @@ class ScoreController extends Controller
         $teams = Team::get();
         $curLeague = League::orderBy('id', 'desc')->first();
         $curGame = Game::orderBy('id', 'desc')->first();
-        $curGameid = $curGame->id;
 
-        if ($curGame->status != 3)
-        $curGameid = $curGame->id-1;
-
-        $totalScores = Score::selectRaw('*, (day1 + day2 + day3 + day4 + day5 + day6) as total_score')
-                    ->join('users', 'users.id', '=', 'score.user_id')
-                    ->where('game_id', $curGameid)
+        $playerScores = Player::selectRaw('*, JSON_UNQUOTE(JSON_EXTRACT(score, "$[0]")) + JSON_UNQUOTE(JSON_EXTRACT(score, "$[1]")) + JSON_UNQUOTE(JSON_EXTRACT(score, "$[2]")) + JSON_UNQUOTE(JSON_EXTRACT(score, "$[3]")) + JSON_UNQUOTE(JSON_EXTRACT(score, "$[4]")) + JSON_UNQUOTE(JSON_EXTRACT(score, "$[5]")) as total_score')
+                    ->where('game', $curGame->id)
                     ->orderBy('total_score', 'desc')
-                    ->get(['score.*', 'users.username', 'users.team_name', 'users.id AS userid', 'users.team_logo']);
-        
-        $totalScores = $totalScores->sortByDesc('total_score')->values();
+                    ->get();
 
-        $playerScores = Player::where('game', $curGame->id) ->orderBy('score', 'desc')->get();
         $advs = Adv::orderBy('id','desc')->get();
 
-        return view ('score.score-board')->with([
-            'totalScores'=>$totalScores,
+        return view ('score.player-score')->with([
             'game'=>$curGame,
             'league' => $curLeague,
             'playerScores'=>$playerScores,
@@ -88,24 +79,22 @@ class ScoreController extends Controller
         $teams = Team::get();
         $curLeague = League::orderBy('id', 'desc')->first();
         $curGame = Game::orderBy('id', 'desc')->first();
-        $totalScores = Score::selectRaw('*, (day'.$id.') as total_score')
-                    ->join('users', 'users.id', '=', 'score.user_id')
-                    ->where('game_id', $curGame->id)
-                    ->orderBy('total_score', 'desc')
-                    ->get(['score.*', 'users.username', 'users.team_name', 'users.id AS userid', 'users.team_logo']);
         
-        $totalScores = $totalScores->sortByDesc('total_score')->values();
 
-        $playerScores = Player::where('game', $curGame->id) ->orderBy('score', 'desc')->get();
+        $playerScores = Player::selectRaw('*, JSON_UNQUOTE(JSON_EXTRACT(score, CONCAT("$[", ?, "]"))) as total_score', [$id-1])
+                    ->where('game', $curGame->id)
+                    ->get();
+                        
+        
+
         $advs = Adv::orderBy('id','desc')->get();
 
-        return view ('score.score-board')->with([
-            'totalScores'=>$totalScores,
+        return view ('score.player-score')->with([
             'game'=>$curGame,
             'league' => $curLeague,
-            'playerScores'=>$playerScores,
-            'teams' => $teams,
+            'playerScores'=>$playerScores->sortByDesc('total_score'),
             'advs' => $advs,
+            'teams' => $teams,
             'id' => $id
         ]);
     }

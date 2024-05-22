@@ -91,8 +91,7 @@
                                 <th scope="col" >Picture</th>
                                 <th scope="col" >Role</th>
                                 <th scope="col" width="10%">Label</th>
-                                <th scope="col" class="bg-warning" width="10%">Score</th>
-                                <th scope="col" width="8%">Prev Rank</th>
+                                <th scope="col" class="bg-warning">Score</th>
                                 <th scope="col" width="10%">Status</th>
                             </tr>
                         </thead>
@@ -144,26 +143,14 @@
                                         <input type="text" name="players[{{ $player->id }}][label]" value="{{ $player->label }}" class="form-control ">
                                     </td>
                                     <td class="bg-warning text-white bg-opacity-50">
-                                        <input type="number" step="0.01" name="players[{{ $player->id }}][score1]" value="{{ json_decode($player->score, true)[0] }}" class="form-control bg-white bg-opacity-50">
-                                        <input type="number" step="0.01" name="players[{{ $player->id }}][score2]" value="{{ json_decode($player->score, true)[1] }}" class="form-control bg-white bg-opacity-50">
-                                        <input type="number" step="0.01" name="players[{{ $player->id }}][score3]" value="{{ json_decode($player->score, true)[2] }}" class="form-control bg-white bg-opacity-50">
-                                        <input type="number" step="0.01" name="players[{{ $player->id }}][score4]" value="{{ json_decode($player->score, true)[3] }}" class="form-control bg-white bg-opacity-50">
-                                        <input type="number" step="0.01" name="players[{{ $player->id }}][score5]" value="{{ json_decode($player->score, true)[4] }}" class="form-control bg-white bg-opacity-50">
-                                        <input type="number" step="0.01" name="players[{{ $player->id }}][score6]" value="{{ json_decode($player->score, true)[5] }}" class="form-control bg-white bg-opacity-50">
+                                        <input type="number" step="0.01" name="players[{{ $player->id }}][score]" value="{{ $player->score }}" class="form-control bg-white bg-opacity-50">
                                     </td>
                                     <td>
-                                        <input type="number" name="players[{{ $player->id }}][prev_rank]" value="{{ $player->prev_rank }}" class="form-control">
-                                    </td>
-                                    <td class="justify-content-center">
-                                        
                                         @if ($player->status == 0)
                                             <span class="badge bg-danger">Eliminated</span>
                                         @else
                                             <span class="badge bg-success">Active</span>
                                         @endif
-                                        <div class="form-check form-switch mt-1">
-                                            <input class="form-check-input" type="checkbox" role="switch" value="1" name="players[{{ $player->id }}][status]" {{ $player->status ? 'checked' : '' }}>
-                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

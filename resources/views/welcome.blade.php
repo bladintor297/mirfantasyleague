@@ -25,11 +25,7 @@
         </div>
     </section>
 
-    @if (count($advs)>0)
-        <section class="py-2 bg-body">
-            @include('inc.adv')
-        </section>
-    @endif
+    @include('inc.adv')
 
     <!-- Hero -->
     <section class="position-relative pt-5">

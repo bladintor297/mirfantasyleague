@@ -31,7 +31,7 @@
                     <div class="swiper-slide">
                         <div class="image-container">
                             <a href="{{ $adv->hyperlink }}" class="stretched-link">
-                                <img src="{{ asset('assets/img/home/advertisement/'.$adv->poster) }}" alt="{{ $adv->adv_name }}"
+                                <img src="{{ asset('public/assets/img/home/advertisement/'.$adv->poster) }}" alt="{{ $adv->adv_name }}"
                                     class="rounded-3 p-1">
                             </a>
                         </div>

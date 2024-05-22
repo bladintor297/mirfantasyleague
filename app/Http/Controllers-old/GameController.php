@@ -96,9 +96,6 @@ class GameController extends Controller
 
 
                     $game->league_id  = $gameData['league_id'];
-
-                    $game->import_limit  = $gameData['import_limit'];
-
                     // Update Status
                     $status = $gameData['status'];
                     $game->status = $status;
@@ -146,7 +143,7 @@ class GameController extends Controller
             $game->instructions = $request->input('instructions');
             $game->player_rule = $request->input('player_rule');
             $game->transfer_rule = $request->input('transfer_rule');
-            $game->scoring = $request->input('scoring_rule');
+            $game->scoring = $request->input('scoring');
 
             $game->save();
         }
