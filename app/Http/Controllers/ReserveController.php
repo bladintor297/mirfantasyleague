@@ -56,12 +56,13 @@ class ReserveController extends Controller
             
             // Check for teams limit
             $allcolumns = ['EXPLaner', 'Jungler', 'MidLaner', 'GoldLaner', 'Roamer','Reserve_1', 'Reserve_2', 'Reserve_3', 'Reserve_4', 'Reserve_5'];
+            $rsvcolumns = ['Reserve_1', 'Reserve_2', 'Reserve_3', 'Reserve_4', 'Reserve_5'];
             $teamCounts = [];
             $countryCounts = ['Malaysia' => 0];
             $limit = $game->player_limit; // Change this to your desired limit
             $foreignPlayerReached = false;
 
-            // Iterate over each column in $myteam
+            // Check for players from same team
             foreach ($allcolumns as $column) {
                 $playerId = $myteam->$column; // Get the player ID from the current column
                 if ($playerId !== null) { // Check if the column has a player ID
@@ -72,7 +73,17 @@ class ReserveController extends Controller
                             $teamCounts[$teamId] = 0;
                         }
                         $teamCounts[$teamId]++;
+                    }
+                }
+            }
 
+            // Check for players from same country (import) 
+            // 23 May: Latest update is IL 2 means 2 for main, 2 for reserve.
+            foreach ($rsvcolumns as $column) {
+                $playerId = $myteam->$column; // Get the player ID from the current column
+                if ($playerId !== null) { // Check if the column has a player ID
+                    $player = $players->where('id', $playerId)->first(); // Find the player in the players collection
+                    if ($player !== null) { // Check if the player is found
                         $playerCountry = $player->nationality; // Get the country of the player
                         if ($playerCountry !== "Malaysia" && !isset($countryCounts[$playerCountry])) {
                             $countryCounts[$playerCountry] = 0;
