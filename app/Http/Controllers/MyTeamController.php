@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Player;
 use App\Models\Game;
+use App\Models\League;
 use App\Models\Adv;
 use App\Models\MyTeam;
 
@@ -17,15 +18,18 @@ class MyTeamController extends Controller
      */
     public function index()
     {
-        $myteam = MyTeam::where('user', Auth::id())->orderBy('id', 'desc')->first();
+        $game = Game::orderBy('id', 'desc')->first();
+        $league = League::find($game->league_id);
+
+        $myteam = MyTeam::where('user', Auth::id())->where('game', $game->id)->orderBy('id', 'desc')->first();
         $players = Player::where('game', $myteam->game)->get();
-        $game = Game::find($myteam->game);
 
         return view ('profile.my-team')->with([
             'myteam' => $myteam,
             'players' => $players,
-            'game' => $game
-        ]);
+            'game' => $game,
+            'league' => $league
+        ]); 
     }
 
     /**

@@ -146,6 +146,7 @@ class GameController extends Controller
             $game->instructions = $request->input('instructions');
             $game->player_rule = $request->input('player_rule');
             $game->transfer_rule = $request->input('transfer_rule');
+            $game->reserve_rule = $request->input('reserve_rule');
             $game->scoring = $request->input('scoring_rule');
 
             $game->save();

@@ -19,7 +19,7 @@
         <!-- Page title -->
         <div class="mt-4 mb-lg-2 mb-2 pt-3">
             <h1 class="h3 text-center mb-0 text-gaming d-grid ">
-                <span class="text-dark my-0 py-0">{{ $game->league->league_name }}: </span>
+                <span class="text-dark my-0 py-0">{{ $league->league_name }}: </span>
                 <span class="text-warning header-parallax hero-title my-0 py-0">{{ $game->name }}</span>
             </h1>
         </div>
@@ -143,6 +143,11 @@
 
    
             <hr class="mt-3"></div>
+            <div class="row">
+                <div class="col d-flex justify-content-center align-items-center">
+                    <a href="/hero/{{ $myteam->id }}/edit" class="btn btn-primary shadow px-5 fw-bold rounded-pill  btn-sm{{ $myteam->isCompleted == 0 ? '' : ' disabled' }}">Edit Team</a>
+                </div>
+            </div>
             <div class="row mt-md-3 mt-3">
                 <div class="col d-flex justify-content-center align-items-center">
                     <h3 class="h4 pb-1 mb-0 text-warning text-gaming">Step Step {{ $game->reserveIsOn ? '4' : '3' }}. Your team is completed</h3>

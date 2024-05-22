@@ -130,6 +130,10 @@
                             <textarea class="form-control" id="transfer_rule" name="transfer_rule" rows="4">{{ $game->transfer_rule }}</textarea>
                         </div>
                         <div class="mb-3">
+                            <label for="reserve_rule" class="form-label">Reserve Rule</label>
+                            <textarea class="form-control" id="transfer_rule" name="reserve_rule" rows="4">{{ $game->reserve_rule }}</textarea>
+                        </div>
+                        <div class="mb-3">
                             <label for="player_rule" class="form-label">Player Limit Rule</label>
                             <textarea class="form-control" id="player_rule" name="player_rule" rows="1">{{ $game->player_rule }}</textarea>
                         </div>
